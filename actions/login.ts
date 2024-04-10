@@ -15,7 +15,7 @@ import { sendVerificationEmail, sendTwoFactorTokenEmail } from "@/lib/mail";
 import { db } from "@/lib/db";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 
-export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl? : string | null) => {
+export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: string | null) => {
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {
@@ -42,35 +42,35 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl? : 
   }
 
   if (existingUser.isTwoFactorEnabled && existingUser.email) {
-    if(code) {
-      
+    if (code) {
+
       const twoFactorToken = await getTwoFactorTokenByEmail(
         existingUser.email
       );
 
-      if(!twoFactorToken) {
-        return {error: "Invalid code!"}
+      if (!twoFactorToken) {
+        return { error: "Invalid code!" }
       }
 
-      if(twoFactorToken.token !== code) {
-        return {error: "Invalid code!"}
+      if (twoFactorToken.token !== code) {
+        return { error: "Invalid code!" }
       }
 
       const hasExpired = new Date(twoFactorToken.expires) < new Date();
 
-      if(hasExpired) {
-        return {error: "Code expired!"}
+      if (hasExpired) {
+        return { error: "Code expired!" }
       }
 
       await db.twoFactorToken.delete({
-        where: {id: twoFactorToken.id}
+        where: { id: twoFactorToken.id }
       })
 
       const existingConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id);
 
-      if(existingConfirmation) {
+      if (existingConfirmation) {
         await db.twoFactorConfirmation.delete({
-          where: {id: existingConfirmation.id}
+          where: { id: existingConfirmation.id }
         })
       }
 
@@ -95,10 +95,6 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl? : 
       redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     });
   } catch (error) {
-
-    console.log("---------")
-    console.log(error)
-    console.log("---------")
 
     if (error instanceof AuthError) {
       switch (error.type) {
