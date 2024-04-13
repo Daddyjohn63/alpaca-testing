@@ -3,8 +3,7 @@ import { MainHeader } from "./_components/header";
 
 export default function Home() {
   return (
-    <main className="flex h-full flex-col">
-      <MainHeader />
+    <main>
       This site is under construction
     </main>
   );
