@@ -6,9 +6,7 @@ interface LogoutButtonProps {
     children?: React.ReactNode;
 }
 
-export const LogoutButton = ({
-    children
-}: LogoutButtonProps) => {
+export const LogoutButton = ({ children }: LogoutButtonProps) => {
     const onClick = () => {
         console.log("logout clicked")
         logout()
