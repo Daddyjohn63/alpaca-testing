@@ -1,7 +1,7 @@
 import BreadCrumb from "@/components/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SettingsForm } from "@/app/(protected)/dashboard/_components/settings-form";
+import { SettingsForm } from "@/components/dashboard/settings-form";
 import { Card } from "@/components/ui/card";
 
 const breadcrumbItems = [{ title: "Settings", link: "/dashboard/settings" }];
@@ -14,10 +14,9 @@ const SettingsPage = () => {
         <Heading
           title="Settings"
           description="Manage your account settings"
-        /> 
+        />
         <Card className="p-5 max-w-xl" >
-      <SettingsForm />
-
+          <SettingsForm />
         </Card>
       </div>
     </ScrollArea>
