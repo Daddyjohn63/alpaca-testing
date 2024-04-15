@@ -1,8 +1,4 @@
-interface ProtectedLayoutProps {
-  children: React.ReactNode;
-}
-
-const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
+const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   return <div>{children}</div>;
 };
 
