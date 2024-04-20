@@ -22,7 +22,7 @@ export async function MarketingHeader() {
                 <li key={i}>
                   <Link href={item.href}>
                     <Button variant="link" className="text-md">
-                      {item.label}
+                      {item.text}
                     </Button>
                   </Link>
                 </li>
