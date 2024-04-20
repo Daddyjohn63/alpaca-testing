@@ -1,17 +1,23 @@
-import { HeroFullSection } from "@/components/marketing/hero-full-section";
-import { HowToSection } from "@/components/marketing/how-to-section";
-import { IntroSection } from "@/components/marketing/intro-section";
-import { TestimonialSection1 } from "@/components/marketing/testimonial-section-1";
-import { VideoSection } from "@/components/marketing/video-section";
+import { BenefitsSection } from "@/components/marketing/sections/benefits-section";
+import { FeaturesSection } from "@/components/marketing/sections/features-section";
+import { HeroFullSection } from "@/components/marketing/sections/hero1-section";
+import { HowToSection } from "@/components/marketing/sections/how-to-section";
+import { IntroSection } from "@/components/marketing/sections/intro-section";
+import { PricingSection } from "@/components/marketing/sections/pricing-section";
+import { TestimonialSection1 } from "@/components/marketing/sections/testimonial1-section";
+import { VideoSection } from "@/components/marketing/sections/video-section";
 
 const Home = async () => {
   return (
-    <main>
+    <main className="mx-auto max-w-[1100px]">
       <HeroFullSection />
       <HowToSection className="py-3" />
-      <VideoSection />
-      <TestimonialSection1 />
-      <IntroSection />
+      <VideoSection className="pt-3" />
+      <TestimonialSection1 className="py-5" />
+      <IntroSection className="py-5" />
+      <BenefitsSection />
+      <FeaturesSection />
+      <PricingSection />
     </main>
   );
 }

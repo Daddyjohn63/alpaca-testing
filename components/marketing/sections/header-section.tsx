@@ -1,7 +1,7 @@
-import { Logo } from "../logo"
-import { Button } from "../ui/button";
+import { Logo } from "@/components/logo"
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { MobileNavBtn } from "./mobile-nav-btn";
+import { MobileNavBtn } from "@/components/marketing/mobile-nav-btn";
 import { marketingNavItems } from "@/constants/nav-routes";
 import { currentUser } from "@/lib/auth";
 

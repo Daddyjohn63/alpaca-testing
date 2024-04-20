@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils"
+
 const testimonials = [
   {
     name: "John Smith",
@@ -22,11 +24,11 @@ const testimonials = [
   },
 ]
 
-export function TestimonialSection1() {
+export function TestimonialSection1({className}: {className?:string}) {
   return (
-    <section id="hero-testimonials-section" className="py-10 bg-background">
+    <section id="hero-testimonials-section" className={cn(className)}>
       <div className="container">
-        <ul className="sm:grid sm:grid-cols-2 md:grid-cols-3 gap-12">
+        <ul className="sm:grid md:grid-cols-3 md:gap-10">
           {!!testimonials && testimonials.map((testimonial, i) => {
             return (
               <li key={i} className="flex gap-3 my-5 sm:my-3">
