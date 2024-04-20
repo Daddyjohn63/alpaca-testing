@@ -5,8 +5,8 @@ export function IntroSection({className}: {className?: string}) {
   return (
   
       <section id="intro-section" className={cn(className)}>
-        <div className="container grid grid-cols-2">
-          <div><Image alt="intro-img" src="/alpaca-intro-img.jpg" width={480} height={580} /></div>
+        <div className="container sm:grid sm:grid-cols-2">
+          <div className="mb-5 sm:mb-0"><Image alt="intro-img" src="/alpaca-intro-img.jpg" width={480} height={580} /></div>
         <div className="flex items-center">
           <div className="space-y-3">
             <h2 className="text-3xl font-black">Why Use AlpacaStack</h2>
