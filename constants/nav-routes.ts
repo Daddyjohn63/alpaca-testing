@@ -1,18 +1,41 @@
+//Header & Mobile Header Navigation
 export const marketingNavItems = [
   {
-    label: "Pricing",
+    text: "Pricing",
     href: "#pricing",
   },
   {
-    label: "Demo",
+    text: "Demo",
     href: "#demo",
   },
   {
-    label: "Reviews",
+    text: "Reviews",
     href: "#reviews",
   },
   {
-    label: "Blog",
+    text: "Blog",
     href: "/blog",
   },
 ];
+
+//FOOTER Component Navigation
+export const interestingNavItems = [
+{
+    text: "Terms & Conditions",
+    href: "/"
+  },
+{
+    text: "Privacy Policy",
+    href: "/"
+  }
+]
+export const boringNavItems = [
+{
+    text: "Terms & Conditions",
+    href: "/"
+  },
+{
+    text: "Privacy Policy",
+    href: "/"
+  }
+]
