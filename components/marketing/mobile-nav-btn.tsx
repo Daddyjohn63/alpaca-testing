@@ -19,7 +19,7 @@ export function MobileNavBtn() {
       <SheetTrigger asChild>
         <Button><MenuIcon /></Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="bg-background">
         <SheetHeader>
           <Logo size="xs" />
         </SheetHeader>
