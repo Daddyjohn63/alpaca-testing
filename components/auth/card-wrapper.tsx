@@ -29,22 +29,31 @@ export const CardWrapper = ({
   showSocial,
 }: CardWrapperProps) => {
   return (
-    <Card className="w-[400px] shadow-md">
-    <div className="mt-5 flex justify-center">
-      <Logo size="sm"/>
-    </div>
-      <CardHeader>
-        <Header title={title} subtitle={subtitle} />
-        <CardContent className="p-2">{children}</CardContent>
-        {showSocial && (
-          <CardFooter>
-            <Social />
+    <div>
+      <div className="mb-8 flex justify-center">
+        <Logo size="sm"/>
+      </div>
+      <Card className="w-[400px] shadow-md">
+        <CardHeader>
+          <Header title={title} subtitle={subtitle} />
+          <CardContent>{children}</CardContent>
+          {showSocial && (
+            <div>
+              <div className="flex items-center justify-center p-6 pt-0">
+                <div className="flex-grow border-t border-muted-foreground"></div>
+                <span className="px-4 text-muted-foreground">or</span>
+                <div className="flex-grow border-t border-muted-foreground"></div>
+              </div>
+              <CardFooter>
+                <Social />
+              </CardFooter>
+            </div>
+          )}
+          <CardFooter className="pb-0">
+            <BackButton label={backButtonLabel} href={backButtonHref}></BackButton>
           </CardFooter>
-        )}
-        <CardFooter className="pb-0">
-          <BackButton label={backButtonLabel} href={backButtonHref}></BackButton>
-        </CardFooter>
-      </CardHeader>
-    </Card>
+        </CardHeader>
+      </Card>
+    </div>
   );
 };
