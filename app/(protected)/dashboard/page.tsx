@@ -10,10 +10,9 @@ export default async function DashboardHome() {
 
   const res = await db.user.findMany()
 
+  let alert = "No Database"
   if(res) {
-    console.log("Database works")
-  }else {
-    console.log("No Database")
+    alert = "Database Connected"
   }
 
   return (
@@ -25,7 +24,7 @@ export default async function DashboardHome() {
           description="Manage your account settings"
         />
         <div>
-          
+          {alert}
         </div>
       </div>
     </div>
