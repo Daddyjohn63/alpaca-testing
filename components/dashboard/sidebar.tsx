@@ -4,13 +4,14 @@ import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
 import { NavItems } from "@/types";
+import { UpgradeCTA } from "@/components/dashboard/upgrade-cta";
 
 export function Sidebar({navItems}: {navItems: NavItems[]}) {
 
   const pathname = usePathname()
 
   return (
-    <div>
+    <aside className="flex flex-col justify-between h-full gap-5">
       <ul className="space-y-1">
         {!!navItems && navItems.map((item, i) => {
 
@@ -22,9 +23,12 @@ export function Sidebar({navItems}: {navItems: NavItems[]}) {
                  <Icon /> {item.text}
                 </Link>
             </li>
-          )
-        })}
+          ) 
+         })}
       </ul>
-    </div>
+      <div>
+        <UpgradeCTA />
+      </div>
+    </aside>
   )
 }

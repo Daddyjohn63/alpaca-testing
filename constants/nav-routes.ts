@@ -1,5 +1,21 @@
-import { Icons } from "@/components/icons";
 import { NavItems } from "@/types";
+
+//User Nav component navigation items
+export const userNavItems: NavItems[] = [
+    {
+        text: "Dashboard",
+        href: "/dashboard"
+    },
+    {
+        text: "Profile",
+        href: "/dashboard/profile"
+    },
+    {
+        text: "Settings",
+        href: "/dashboard/settings"
+    }
+]
+
 //MARKETING
 //Header & Mobile Header Navigation
 export const marketingNavItems: NavItems[] = [
@@ -44,21 +60,6 @@ export const boringNavItems: NavItems[] = [
 ]
 
 // DASHBOARD
-//User Nav component navigation items
-export const userNavItems: NavItems[] = [
-    {
-        text: "Dashboard",
-        href: "/dashboard"
-    },
-    {
-        text: "Profile",
-        href: "/dashboard/profile"
-    },
-    {
-        text: "Settings",
-        href: "/dashboard/settings"
-    }
-]
 
 export const dashboardNavItems: NavItems[] = [
     {
@@ -68,12 +69,31 @@ export const dashboardNavItems: NavItems[] = [
     },
     {
         icon: "user",
-        text: "Profile",
-        href: "/dashboard/profile",
+        text: "Something",
+        href: "/dashboard/something",
     },
     {
         icon: "cog",
         text: "Settings",
         href: "/dashboard/settings",
+    },
+];
+
+// ADMIN
+export const adminNavItems: NavItems[] = [
+    {
+        icon: "home",
+        text: "Dashboard",
+        href: "/dashboard",
+    },
+    {
+        icon: "dashboard",
+        text: "Posts",
+        href: "/admin/posts",
+    },
+    {
+        icon: "dashboard",
+        text: "Categories",
+        href: "/admin/categories",
     },
 ];

@@ -34,8 +34,8 @@ type Variants = {
 }
 
 const variants: Variants = {
-  light: "logo_horizontal_light.svg",
-  dark: "logo_horizontal_dark.svg"
+  light: "/logo_horizontal_light.svg",
+  dark: "/logo_horizontal_dark.svg"
 }
 
 export const Logo = (props: LogoProps) => {
