@@ -38,8 +38,8 @@ body,
     --foreground: 0 0% 100%;
     --card: 0 0% 13%;
     --card-foreground: 0 0% 83%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 208 23% 33%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
     --primary: 151 93% 47%;
     --primary-foreground: 151 81% 16%;
     --secondary: 240 3.7% 15.9%;

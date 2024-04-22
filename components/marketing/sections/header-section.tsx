@@ -1,7 +1,7 @@
 import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { MobileNavBtn } from "@/components/marketing/mobile-nav-btn";
+import { MobileNavBtn } from "@/components/mobile-nav-btn";
 import { marketingNavItems } from "@/constants/nav-routes";
 import { currentUser } from "@/lib/auth";
 
@@ -12,6 +12,9 @@ export async function MarketingHeader() {
   return (
     <header className="py-5">
       <div className="container flex justify-between items-center">
+        <div className="md:hidden">
+          <MobileNavBtn navItemsArray={marketingNavItems}/>
+        </div>
         <div>
           <Logo />
         </div>
@@ -35,15 +38,29 @@ export async function MarketingHeader() {
                 </Link>
               )}
               {!!user && (
-                <Link href="/dashboard">
-                  <Button className="text-md">Dashboard</Button>
-                </Link>
+                <div>
+                  <Button asChild>
+                    <Link href="/dashboard">Dashboard</Link>
+                  </Button>
+                </div>
               )}
             </li>
           </ul>
         </nav>
         <div className="md:hidden">
-          <MobileNavBtn />
+              {!user && (
+                <Link href="/login">
+                  <Button className="text-md">Sign In</Button>
+                </Link>
+              )}
+              {!!user && (
+                <div>
+                  <Button asChild>
+                    <Link href="/dashboard">Dashboard</Link>
+                  </Button>
+                </div>
+              )}
+
         </div>
       </div>
     </header>

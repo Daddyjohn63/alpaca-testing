@@ -1,4 +1,5 @@
 import {
+  Home,
   AlertTriangle,
   ArrowRight,
   Check,
@@ -36,6 +37,7 @@ import {
 export type Icon = LucideIcon;
 
 export const Icons = {
+  home: Home,
   dashboard: LayoutDashboardIcon,
   logo: Command,
   login: LogIn,

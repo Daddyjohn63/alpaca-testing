@@ -8,18 +8,20 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Logo } from "../logo";
-import { marketingNavItems } from "@/constants/nav-routes";
+import { Logo } from "@/components/logo";
+import { NavItems } from "@/types";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
+export function MobileNavBtn({navItemsArray}: {navItemsArray: NavItems[]}) {
 
-export function MobileNavBtn() {
+  const user = useCurrentUser()
 
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button><MenuIcon /></Button>
+        <Button className="px-2"><MenuIcon /></Button>
       </SheetTrigger>
-      <SheetContent className="bg-background">
+      <SheetContent className="bg-background" side="left">
         <SheetHeader>
           <Logo size="xs" />
         </SheetHeader>
@@ -27,11 +29,18 @@ export function MobileNavBtn() {
           <nav id="mobile-navigation">
             <ul>
               <li>
-                <Link href="/login">
-                  <Button className="text-md w-full mb-5">Sign In</Button>
-                </Link>
+               {!user && (
+                  <Link href="/login">
+                    <Button className="text-md w-full mb-5">Sign In</Button>
+                  </Link>
+               )} 
+                {!!user && (
+                  <Link href="/dashboard">
+                    <Button className="text-md w-full mb-5">Dashboard</Button>
+                  </Link>
+                )}
               </li>
-              {!!marketingNavItems && marketingNavItems.map((item, i) => {
+              {!!navItemsArray && navItemsArray.map((item, i) => {
                 return (
                   <li key={i}>
                     <Link href={item.href}>

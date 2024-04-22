@@ -1,10 +1,13 @@
 'use client'
+
 import Link from "next/link"
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 type LogoProps = {
   size?: string;
   variant?: string;
+  className?: string;
 }
 
 type Size = {
@@ -37,19 +40,18 @@ const variants: Variants = {
 
 export const Logo = (props: LogoProps) => {
 
-  const { size = "sm", variant = "light" } = props
+  const { size = "sm", variant = "light", className } = props
 
   const { width, height } = sizes[size] || sizes.sm
   const logo_variant = variants[variant] || variants.light
 
   return (
-    <>
       <Link
         href={"/"}
         target="_blank"
+      className={cn(className)}
       >
         <Image priority alt="Logo" src={logo_variant} width={width} height={height} />
       </Link>
-    </>
   )
 }
