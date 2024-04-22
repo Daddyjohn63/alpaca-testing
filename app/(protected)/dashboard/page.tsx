@@ -1,4 +1,4 @@
-import BreadCrumb from "@/components/breadcrumb";
+import BreadCrumb from "@/components/dashboard/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { db } from "@/lib/db";
 

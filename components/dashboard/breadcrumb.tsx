@@ -12,7 +12,7 @@ type BreadCrumbPropsType = {
   items: BreadCrumbType[];
 };
 
-export default function BreadCrumb({ items }: BreadCrumbPropsType) {
+export default function DashboardBreadCrumb({ items }: BreadCrumbPropsType) {
   return (
     <div className="mb-4 flex items-center space-x-1 text-sm text-muted-foreground">
       <Link

@@ -7,10 +7,6 @@ export const userNavItems: NavItems[] = [
         href: "/dashboard"
     },
     {
-        text: "Profile",
-        href: "/dashboard/profile"
-    },
-    {
         text: "Settings",
         href: "/dashboard/settings"
     }
