@@ -36,15 +36,15 @@ export const CardWrapper = ({
       <Card className="w-[400px] shadow-md">
         <CardHeader>
           <Header title={title} subtitle={subtitle} />
-          <CardContent>{children}</CardContent>
+          <CardContent className="p-3">{children}</CardContent>
           {showSocial && (
             <div>
-              <div className="flex items-center justify-center p-6 pt-0">
+              <div className="flex items-center justify-center p-3 pt-0">
                 <div className="flex-grow border-t border-muted-foreground"></div>
                 <span className="px-4 text-muted-foreground">or</span>
                 <div className="flex-grow border-t border-muted-foreground"></div>
               </div>
-              <CardFooter>
+              <CardFooter className="p-4">
                 <Social />
               </CardFooter>
             </div>

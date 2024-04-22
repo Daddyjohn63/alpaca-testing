@@ -48,7 +48,7 @@ export const RegisterForm = () => {
   return (
     <CardWrapper
       title="Account Registration"
-      subtitle="Welcome. :) Yep, is the form to register for a new account. Exciting!"
+      subtitle="This is where the journey begins!"
       backButtonLabel="Already have an account? Sign in here!"
       backButtonHref="/login"
       showSocial
@@ -108,12 +108,13 @@ export const RegisterForm = () => {
               </FormItem>
             )}
           />
-
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button type="submit" disabled={isPending} className="w-full">
-            Create an account
-          </Button>
+          <div className="pt-3">
+            <FormError message={error} />
+            <FormSuccess message={success} />
+            <Button type="submit" disabled={isPending} className="w-full">
+              Create an account
+            </Button>
+          </div>
         </form>
       </Form>
     </CardWrapper>
