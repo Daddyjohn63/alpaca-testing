@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { AlertModal } from "@/components/alert-modal";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +12,8 @@ import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { type Post } from "@/types";
+import { useToast } from "@/components/ui/use-toast";
+import { deletePost } from "@/actions/delete-post";
 
 interface CellActionProps {
   data: Post;
@@ -20,11 +23,48 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const {toast} = useToast()
 
-  const onConfirm = async () => {};
+  const onConfirm = async () => {
+  
+    deletePost(data.id)
+      .then((res) => {
+        setOpen(false);
+        if(res.error) {
+          toast({
+            title: "Error:",
+            description: res.error,
+            variant: 'destructive'
+          })
+        }
+        if(res.success) {
+          toast({
+            title: "Success",
+            description: res.success,
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000);
+        }
+    }).catch(() => {
+        setOpen(false)
+        toast({
+          title: "Error",
+          description: "Something went wrong",
+          variant: 'destructive'
+        })
+
+    })
+  };
 
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={onConfirm}
+        loading={loading}
+      />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
@@ -36,7 +76,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/user/${data.id}`)}
+            onClick={() => router.push(`/admin/posts/${data.id}`)}
           >
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

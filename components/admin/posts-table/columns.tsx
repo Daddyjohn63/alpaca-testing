@@ -28,11 +28,14 @@ export const columns: ColumnDef<Post>[] = [
   {
     accessorKey: "title",
     header: "Title",
-    cell: ({row}) => (
-      <Link href="/admin/posts/3443" className="font-bold text-primary">
-        {row.getValue("title")}
-      </Link>
-    )
+    cell: ({row}) => {
+
+      return (
+        <Link href={`/admin/posts/${row.original.id}`} className="font-bold text-primary">
+          {row.getValue("title")}
+        </Link>
+      )
+    }
   },
   {
     accessorKey: "author",
