@@ -14,7 +14,12 @@ export function AdminSidebar() {
   return (
     <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-72">
 
+      <div>
       <Logo size="xs" className="hidden md:block"/>
+      <div className="text-center">
+        <span className="bg-destructive rounded-sm px-2 py-1 text-xs">Admin Dashboard</span>
+      </div>
+      </div>
       <div className="flex flex-col justify-between h-full gap-5">
       <ul className="space-y-1">
         {!!adminNavItems && adminNavItems.map((item, i) => {
