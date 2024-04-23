@@ -5,3 +5,12 @@ export type NavItems = {
   text: string;
   href: string;
 }
+
+export type Post = {
+  id: number;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  published: string;
+  author: string;
+}
