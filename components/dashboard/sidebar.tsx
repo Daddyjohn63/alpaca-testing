@@ -5,15 +5,20 @@ import { usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
 import { NavItems } from "@/types";
 import { UpgradeCTA } from "@/components/dashboard/upgrade-cta";
+import { Logo } from "@/components/logo";
+import { dashboardNavItems } from "@/constants/nav-routes";
 
-export function DashboardSidebar({navItems}: {navItems: NavItems[]}) {
+export function DashboardSidebar() {
 
   const pathname = usePathname()
 
   return (
-    <aside className="flex flex-col justify-between h-full gap-5">
+    <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-72">
+      <div>
+      <Logo size="xs" className="hidden md:block"/>
+      </div>
       <ul className="space-y-1">
-        {!!navItems && navItems.map((item, i) => {
+        {!!dashboardNavItems && dashboardNavItems.map((item, i) => {
 
           const Icon = Icons[item.icon || "dashboard"]
 
