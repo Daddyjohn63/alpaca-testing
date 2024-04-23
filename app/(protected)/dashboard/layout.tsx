@@ -1,4 +1,4 @@
-import { Sidebar } from "@/components/dashboard/sidebar";
+import { DashboardSidebar } from "@/components/dashboard/sidebar";
 import { DashboardHeader } from "@/components/dashboard/sections/header-section";
 import { Logo } from "@/components/logo";
 import { dashboardNavItems } from "@/constants/nav-routes";
@@ -10,7 +10,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode; }) => {
         <div>
           <Logo size="xs" />
         </div>
-        <Sidebar navItems={dashboardNavItems} />
+        <DashboardSidebar navItems={dashboardNavItems} />
       </div>
       <div className="flex flex-col">
         <DashboardHeader />

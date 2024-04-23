@@ -80,16 +80,21 @@ export const adminNavItems: NavItems[] = [
     {
         icon: "home",
         text: "Dashboard",
-        href: "/dashboard",
+        href: "/admin22",
     },
     {
-        icon: "dashboard",
+        icon: "post",
         text: "Posts",
         href: "/admin/posts",
     },
     {
-        icon: "dashboard",
+        icon: "category",
         text: "Categories",
         href: "/admin/categories",
+    },
+    {
+        icon: "user",
+        text: "Users",
+        href: "/admin/users",
     },
 ];

@@ -6,7 +6,7 @@ import { Icons } from "@/components/icons";
 import { NavItems } from "@/types";
 import { UpgradeCTA } from "@/components/dashboard/upgrade-cta";
 
-export function Sidebar({navItems}: {navItems: NavItems[]}) {
+export function DashboardSidebar({navItems}: {navItems: NavItems[]}) {
 
   const pathname = usePathname()
 

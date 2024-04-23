@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
 import { NavItems } from "@/types";
 
-export function Sidebar({navItems}: {navItems: NavItems[]}) {
+export function AdminSidebar({navItems}: {navItems: NavItems[]}) {
 
   const pathname = usePathname()
 
