@@ -185,7 +185,7 @@ export function DataTable<TData, TValue>({
   }, [searchValue]);
 
   return (
-    <div>
+    <>
       <Input
         placeholder={`Search ${searchKey}...`}
         value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
@@ -323,6 +323,6 @@ export function DataTable<TData, TValue>({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

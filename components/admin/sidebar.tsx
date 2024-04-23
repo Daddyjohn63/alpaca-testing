@@ -3,16 +3,21 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
-import { NavItems } from "@/types";
+import { adminNavItems } from "@/constants/nav-routes";
+import { Logo } from "../logo";
 
-export function AdminSidebar({navItems}: {navItems: NavItems[]}) {
+
+export function AdminSidebar() {
 
   const pathname = usePathname()
 
   return (
-    <aside className="flex flex-col justify-between h-full gap-5">
+    <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-72">
+
+      <Logo size="xs" className="hidden md:block"/>
+      <div className="flex flex-col justify-between h-full gap-5">
       <ul className="space-y-1">
-        {!!navItems && navItems.map((item, i) => {
+        {!!adminNavItems && adminNavItems.map((item, i) => {
 
           const Icon = Icons[item.icon || "dashboard"]
 
@@ -25,6 +30,7 @@ export function AdminSidebar({navItems}: {navItems: NavItems[]}) {
           ) 
          })}
       </ul>
+      </div>
     </aside>
   )
 }
