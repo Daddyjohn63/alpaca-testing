@@ -48,7 +48,7 @@ export function UserNav() {
             {!!userNavItems && userNavItems.map((item, i) => {
               return (
                 <Link href={item.href} key={i}>
-                <DropdownMenuItem> 
+                  <DropdownMenuItem> 
                     {item.text}
                   </DropdownMenuItem>
                   </Link>
@@ -59,9 +59,11 @@ export function UserNav() {
           {user.role === "ADMIN" && ( 
             <>
               <DropdownMenuSeparator />
+              <Link href="/admin">
               <DropdownMenuItem className="bg-destructive">
-                <Link href="/admin">Admin</Link>
+                  Admin
               </DropdownMenuItem>
+              </Link>
             </>
           )}
           <DropdownMenuSeparator />
