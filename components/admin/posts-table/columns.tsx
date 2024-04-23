@@ -31,9 +31,11 @@ export const columns: ColumnDef<Post>[] = [
     cell: ({row}) => {
 
       return (
+        <div className="w-[300px]">
         <Link href={`/admin/posts/${row.original.id}`} className="font-bold text-primary">
           {row.getValue("title")}
         </Link>
+        </div>
       )
     }
   },

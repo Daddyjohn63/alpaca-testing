@@ -80,7 +80,7 @@ export const adminNavItems: NavItems[] = [
     {
         icon: "home",
         text: "Dashboard",
-        href: "/admin22",
+        href: "/admin",
     },
     {
         icon: "post",

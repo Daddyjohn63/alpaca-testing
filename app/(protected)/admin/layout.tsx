@@ -1,5 +1,5 @@
 import { AdminSidebar } from "@/components/admin/sidebar";
-import { DashboardHeader } from "@/components/dashboard/sections/header-section";
+import { AdminHeader } from "@/components/admin/sections/header-section";
 import { Logo } from "@/components/logo";
 import { adminNavItems } from "@/constants/nav-routes";
 import { currentRole } from "@/lib/auth";
@@ -26,7 +26,7 @@ const AdminLayout = async ({ children }: { children: React.ReactNode; }) => {
         <AdminSidebar navItems={adminNavItems} />
       </div>
       <div className="flex flex-col">
-        <DashboardHeader />
+        <AdminHeader />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-4">
           {children}
         </main>

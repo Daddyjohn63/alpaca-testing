@@ -34,11 +34,6 @@ export function MobileNavBtn({navItemsArray}: {navItemsArray: NavItems[]}) {
                     <Button className="text-md w-full mb-5">Sign In</Button>
                   </Link>
                )} 
-                {!!user && (
-                  <Link href="/dashboard">
-                    <Button className="text-md w-full mb-5">Dashboard</Button>
-                  </Link>
-                )}
               </li>
               {!!navItemsArray && navItemsArray.map((item, i) => {
                 return (

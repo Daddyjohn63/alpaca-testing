@@ -1,7 +1,7 @@
 import { Logo } from "@/components/logo"
 import { MobileNavBtn } from "@/components/mobile-nav-btn";
 import { UserNav } from "@/components/user-nav";
-import { dashboardNavItems } from "@/constants/nav-routes";
+import { adminNavItems } from "@/constants/nav-routes";
 
 export async function AdminHeader() {
 
@@ -9,7 +9,7 @@ export async function AdminHeader() {
     <header className="py-3 bg-muted border-b border-border">
       <div className="container md:max-w-full flex justify-between items-center">
         <div className="md:hidden">
-          <MobileNavBtn navItemsArray={dashboardNavItems} />
+          <MobileNavBtn navItemsArray={adminNavItems} />
         </div>
         <div>
           <Logo className="md:hidden" size="xs" />
