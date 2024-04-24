@@ -7,7 +7,6 @@ import { db } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { formatDateVerbose } from "@/lib/utils";
-import { type Post } from "@/types";
 
 const breadcrumbItems = [{ title: "Posts", link: "/admin/posts" }];
 
@@ -33,12 +32,6 @@ const PostsPage = async ({ searchParams }: paramsProps) => {
   const pageLimit = Number(searchParams.limit) || 10;
   const title = searchParams.search || null;
   const offset = (page - 1) * pageLimit;
-
-  // const res = await fetch(
-  //   `https://api.slingacademy.com/v1/sample-data/users?offset=${offset}&limit=${pageLimit}` +
-  //     (country ? `&search=${country}` : ""),
-  // );
-
 
   let whereClause: WhereClause = {
     authorId: user.id
@@ -81,7 +74,7 @@ const PostsPage = async ({ searchParams }: paramsProps) => {
 
   const formattedData = data.map((item) => {
 
-    const data: Post = {
+    const data = {
       id: item.id,
       title: item.title,
       createdAt: formatDateVerbose(item.createdAt.toLocaleDateString()),

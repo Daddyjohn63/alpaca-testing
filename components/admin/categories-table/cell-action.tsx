@@ -11,12 +11,12 @@ import {
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import { type TablePost } from "@/types";
+import { type TableCategories } from "@/types";
 import { useToast } from "@/components/ui/use-toast";
-import { deletePost } from "@/actions/delete-post";
+import { deleteCategory } from "@/actions/delete-category";
 
 interface CellActionProps {
-  data: TablePost;
+  data: TableCategories;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -27,7 +27,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onConfirm = async () => {
   
-    deletePost(data.id)
+    deleteCategory(data.id)
       .then((res) => {
         setOpen(false);
         if(res.error) {
@@ -76,7 +76,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
           <DropdownMenuItem
-            onClick={() => router.push(`/admin/posts/${data.id}`)}
+            onClick={() => router.push(`/admin/categories/${data.id}`)}
           >
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

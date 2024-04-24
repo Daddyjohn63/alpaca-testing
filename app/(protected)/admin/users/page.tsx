@@ -1,6 +1,7 @@
 import BreadCrumb from "@/components/admin/breadcrumb";
-const breadcrumbItems = [{ title: "Posts", link: "/admin/posts" }];
 import { Heading } from "@/components/ui/heading";
+
+const breadcrumbItems = [{ title: "Users", link: "/admin/users" }];
 
 const UsersPage = () => {
   return (
@@ -8,8 +9,8 @@ const UsersPage = () => {
       <div>
         <BreadCrumb items={breadcrumbItems} />
         <Heading
-          title="Posts"
-          description="Manage blog posts here"
+          title="Users"
+          description="Manage users here"
         /> 
       </div>
     </div>

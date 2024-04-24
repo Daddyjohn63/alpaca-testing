@@ -2,12 +2,13 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
-import { type TablePost } from "@/types";
+import { type TableCategories } from "@/types";
 import Link from "next/link";
 
-export const columns: ColumnDef<TablePost>[] = [
+export const columns: ColumnDef<TableCategories>[] = [
   {
     id: "select",
+    maxSize: 4, //Number is %. Line 212 in data-table. I couldn't get pixels to format correctly. 
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -26,35 +27,19 @@ export const columns: ColumnDef<TablePost>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "title",
-    header: "Title",
+    accessorKey: "name",
+    size: 100,
+    header: "Name",
     cell: ({row}) => {
 
       return (
-        <div className="min-w-[200px]">
-        <Link href={`/admin/posts/${row.original.id}`} className="font-bold text-primary">
-          {row.getValue("title")}
+        <div>
+        <Link href={`/admin/categories/${row.original.id}`} className="font-bold text-primary">
+          {row.getValue("name")}
         </Link>
         </div>
       )
     }
-  },
-  {
-    accessorKey: "author",
-    header: "Author",
-    cell: ({row}) => (<div className="min-w-[100px]">{row.getValue("author")}</div>)
-  },
-  {
-    accessorKey: "published",
-    header: "Published",
-  },
-  {
-    accessorKey: "createdAt",
-    header: "Created",
-  },
-  {
-    accessorKey: "updatedAt",
-    header: "Updated",
   },
   {
     id: "actions",

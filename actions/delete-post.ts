@@ -1,12 +1,12 @@
 'use server'
 import { db } from "@/lib/db"
 
-export const deletePost = async (postId: number) => {
+export const deletePost = async (id: number) => {
 
   try {
     await db.post.delete({
       where: {
-        id: postId,
+        id,
       }
     })
     return {success: "Post had been successfully deleted!"}
