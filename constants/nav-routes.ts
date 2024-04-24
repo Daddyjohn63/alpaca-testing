@@ -17,6 +17,26 @@ export const userNavItems: NavItems[] = [
 export const marketingNavItems: NavItems[] = [
     {
         text: "Pricing",
+        href: "/#pricing-section",
+    },
+    {
+        text: "Demo",
+        href: "#demo",
+    },
+    {
+        text: "Reviews",
+        href: "/#reviews",
+    },
+    {
+        text: "Blog",
+        href: "/blog",
+    },
+];
+
+//FOOTER Component Navigation
+export const interestingNavItems: NavItems[] = [
+    {
+        text: "Pricing",
         href: "#pricing",
     },
     {
@@ -31,18 +51,6 @@ export const marketingNavItems: NavItems[] = [
         text: "Blog",
         href: "/blog",
     },
-];
-
-//FOOTER Component Navigation
-export const interestingNavItems: NavItems[] = [
-    {
-        text: "Terms & Conditions",
-        href: "/"
-    },
-    {
-        text: "Privacy Policy",
-        href: "/"
-    }
 ]
 export const boringNavItems: NavItems[] = [
     {
@@ -56,7 +64,6 @@ export const boringNavItems: NavItems[] = [
 ]
 
 // DASHBOARD
-
 export const dashboardNavItems: NavItems[] = [
     {
         icon: "home",

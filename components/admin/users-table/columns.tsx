@@ -5,7 +5,6 @@ import { CellAction } from "./cell-action";
 import { type TableUsers } from "@/types";
 import { formatDateVerbose } from "@/lib/utils";
 
-
 export const columns: ColumnDef<TableUsers>[] = [
   {
     id: "select",
@@ -25,6 +24,23 @@ export const columns: ColumnDef<TableUsers>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    accessorKey: "image",
+    header: "Image",
+    cell: ({row}) => {
+      const imageUrl = row.getValue("image")
+      return (
+        <div>
+          {!!imageUrl && (
+            <img alt="User Image" src={`${imageUrl}`} className="w-10 h-10 border-2 border-foreground rounded-full"/>
+          )}
+          {!imageUrl && (
+            <div className="w-10 h-10 border-2 border-muted-foreground bg-muted rounded-full"></div>
+          )}
+        </div>
+      )
+    }
   },
   {
     accessorKey: "name",

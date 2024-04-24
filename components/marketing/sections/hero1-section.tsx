@@ -1,4 +1,3 @@
-import { YoutubeEmbed } from "@/components/youtube-embed";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Caveat } from "next/font/google";

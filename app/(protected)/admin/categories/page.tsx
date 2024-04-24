@@ -54,7 +54,7 @@ const CategoriesPage = async ({searchParams}: ParamsProps) => {
         /> 
       </div>
         <DataTable
-          searchKey="categories"
+          searchKey="name"
           pageNo={page}
           columns={columns}
           totalUsers={count}

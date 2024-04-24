@@ -16,6 +16,7 @@ export function DashboardSidebar() {
       <div>
       <Logo size="xs" className="hidden md:block"/>
       </div>
+      <div className="flex flex-col gap-5 justify-between h-screen">
       <ul className="space-y-1">
         {!!dashboardNavItems && dashboardNavItems.map((item, i) => {
 
@@ -30,7 +31,6 @@ export function DashboardSidebar() {
           ) 
          })}
       </ul>
-      <div>
         <UpgradeCTA />
       </div>
     </aside>

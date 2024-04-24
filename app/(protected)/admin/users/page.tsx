@@ -39,15 +39,15 @@ const UsersPage = async ({searchParams}: ParamsProps) => {
   }
 
   const data = await db.user.findMany(query)
+  const count = await db.user.count()
 
-  const count = await db.category.count()
   const pageCount = Math.ceil(count / pageLimit);
   return (
     <div className="h-full">
       <div>
         <BreadCrumb items={breadcrumbItems} />
         <Heading
-          title="Users"
+          title={`Users (${count})`}
           description="Manage users here"
         /> 
       </div>
