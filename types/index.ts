@@ -18,3 +18,7 @@ export type TableCategories = {
   id: number;
   name: string;
 }
+export type TableUsers = {
+  id: string;
+  name: string | null;
+}
