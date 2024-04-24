@@ -27,12 +27,12 @@ const AdminDashboardPage = async () => {
         /> 
       </div>
       <div className="max-w-5xl">
-        <div className="grid grid-cols-4 gap-8">
-        <Card className="aspect-square p-5 flex flex-col gap-5 justify-center items-center text-center">
+        <div className="flex flex-wrap gap-8">
+        <Card className="aspect-square w-52 p-5 flex flex-col gap-5 justify-center items-center text-center">
             <span className="text-5xl font-bold">{userCount}</span>
             <h5 className="text-xl">Users Total</h5>
           </Card>
-        <Card className="aspect-square p-5 flex flex-col gap-5 justify-center items-center text-center">
+        <Card className="aspect-square w-52 p-5 flex flex-col gap-5 justify-center items-center text-center">
             <span className="text-5xl font-bold">{recentUserCount}</span>
             <h5 className="text-xl">New users in the last 24 hours</h5>
           </Card>

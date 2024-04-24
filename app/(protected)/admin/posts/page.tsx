@@ -7,6 +7,7 @@ import { db } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { formatDateVerbose } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const breadcrumbItems = [{ title: "Posts", link: "/admin/posts" }];
 
@@ -90,7 +91,7 @@ const PostsPage = async ({ searchParams }: paramsProps) => {
   const pageCount = Math.ceil(count / pageLimit);
 
   return (
-      <div className="h-screen overflow-y-auto">
+      <div>
         <BreadCrumb items={breadcrumbItems} />
         <Heading
           title={`Posts (${count})`}

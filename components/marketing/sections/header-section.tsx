@@ -11,12 +11,12 @@ export async function MarketingHeader() {
 
   return (
     <header className="py-5">
-      <div className="container flex justify-between items-center">
+      <div className="container flex gap-3 justify-between items-center">
         <div className="md:hidden">
           <MobileNavBtn navItemsArray={marketingNavItems}/>
         </div>
         <div>
-          <Logo />
+          <Logo size="xs" />
         </div>
         <nav id="desktop-navigation" className="hidden md:block">
           <ul className="flex">
