@@ -31,7 +31,7 @@ export const columns: ColumnDef<Post>[] = [
     cell: ({row}) => {
 
       return (
-        <div className="w-[300px]">
+        <div className="min-w-[200px]">
         <Link href={`/admin/posts/${row.original.id}`} className="font-bold text-primary">
           {row.getValue("title")}
         </Link>
@@ -42,6 +42,7 @@ export const columns: ColumnDef<Post>[] = [
   {
     accessorKey: "author",
     header: "Author",
+    cell: ({row}) => (<div className="min-w-[100px]">{row.getValue("author")}</div>)
   },
   {
     accessorKey: "published",

@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
-import { NavItems } from "@/types";
 import { UpgradeCTA } from "@/components/dashboard/upgrade-cta";
 import { Logo } from "@/components/logo";
 import { dashboardNavItems } from "@/constants/nav-routes";

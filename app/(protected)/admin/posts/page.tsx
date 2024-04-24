@@ -64,6 +64,9 @@ const PostsPage = async ({ searchParams }: paramsProps) => {
         },
     },
     },
+    orderBy: {
+      createdAt: 'desc' as any
+    },
     take: pageLimit,
     skip: offset,
   }
