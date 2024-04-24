@@ -69,3 +69,8 @@ export const SettingsSchema = z.object({
     message: "Password is required",
     path: ["password"]
 })
+
+export const AddPostSchema = z.object({
+  title: z.string().min(3),
+  content: z.string().min(3),
+})

@@ -5,7 +5,7 @@ import { Heading } from "@/components/ui/heading";
 const UsersPage = () => {
   return (
     <div className="h-full">
-      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <div>
         <BreadCrumb items={breadcrumbItems} />
         <Heading
           title="Posts"

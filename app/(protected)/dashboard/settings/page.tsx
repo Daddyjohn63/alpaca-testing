@@ -7,8 +7,7 @@ const breadcrumbItems = [{ title: "Settings", link: "/dashboard/settings" }];
 
 const SettingsPage = () => {
   return (
-    <div className="h-full">
-      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <div>
         <BreadCrumb items={breadcrumbItems} />
         <Heading
           title="Settings"
@@ -18,7 +17,6 @@ const SettingsPage = () => {
           <SettingsForm />
         </Card>
       </div>
-    </div>
   );
 }
 export default SettingsPage

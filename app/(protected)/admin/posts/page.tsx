@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import BreadCrumb from "@/components/admin/breadcrumb";
 import { DataTable } from "@/components/admin/posts-table/data-table";
@@ -96,7 +97,7 @@ const PostsPage = async ({ searchParams }: paramsProps) => {
   const pageCount = Math.ceil(count / pageLimit);
 
   return (
-      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <div>
         <BreadCrumb items={breadcrumbItems} />
         <Heading
           title={`Posts (${count})`}

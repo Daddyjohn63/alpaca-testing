@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import {
   ColumnDef,
   PaginationState,
@@ -31,7 +32,7 @@ import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, Edit } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
@@ -186,6 +187,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
+      <div className="flex justify-between gap-5 mb-5">
       <Input
         placeholder={`Search ${searchKey}...`}
         value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
@@ -194,6 +196,12 @@ export function DataTable<TData, TValue>({
         }
         className="w-full md:max-w-sm"
       />
+        <Link href="/admin/posts/add-post">
+          <Button className="gap-2">
+            <Edit size={20} />Add Posts
+          </Button>
+        </Link>
+      </div>
       <div>
         <Table className="relative">
           <TableHeader>
@@ -205,9 +213,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                     </TableHead>
                   );
                 })}
@@ -232,15 +240,15 @@ export function DataTable<TData, TValue>({
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
           </TableBody>
         </Table>
       </div>

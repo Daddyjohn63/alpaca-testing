@@ -1,7 +1,5 @@
 import { DashboardSidebar } from "@/components/dashboard/sidebar";
 import { DashboardHeader } from "@/components/dashboard/sections/header-section";
-import { Logo } from "@/components/logo";
-import { dashboardNavItems } from "@/constants/nav-routes";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode; }) => {
   return (
@@ -10,7 +8,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode; }) => {
         <DashboardSidebar />
         <main className="w-full">
           <DashboardHeader />
-          {children}
+          <div className="flex-1 space-y-4 p-4 md:p-10 pt-8">
+            {children}
+          </div>
         </main>
       </div>
     </>
