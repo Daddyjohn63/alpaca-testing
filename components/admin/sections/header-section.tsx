@@ -12,7 +12,7 @@ export async function AdminHeader() {
           <MobileNavBtn navItemsArray={adminNavItems} />
         </div>
         <div>
-          <Logo className="md:hidden" size="xs" />
+          <Logo className="md:hidden" size="md" />
         </div>
         <div>
           <UserNav />

@@ -37,7 +37,7 @@ export const marketingNavItems: NavItems[] = [
 export const interestingNavItems: NavItems[] = [
     {
         text: "Pricing",
-        href: "#pricing",
+        href: "/#pricing-section",
     },
     {
         text: "Demo",

@@ -25,9 +25,9 @@ export function MobileNavBtn({navItemsArray}: {navItemsArray: NavItems[]}) {
       <SheetTrigger asChild>
         <Button className="px-2"><MenuIcon /></Button>
       </SheetTrigger>
-      <SheetContent className="bg-background" side="left">
+      <SheetContent className="bg-background" side="left" onCloseAutoFocus={event => event.preventDefault()}>
         <SheetHeader>
-          <Logo size="xs" />
+          <Logo size="md" />
         </SheetHeader>
         <div className="py-5">
           <nav id="mobile-navigation">

@@ -20,8 +20,8 @@ const Home = async () => {
       <TestimonialSection1 className="py-5" />
       <IntroSection className="py-10 pb-20" />
       <BenefitsSection className="pt-5 pb-28" />
-      <FeaturesSection className="py-28 bg-[#212121]" />
-      <PricingSection className="py-28" />
+      <FeaturesSection className="py-16 bg-[#212121]" />
+      <PricingSection className="py-16" />
     </main>
   );
 }

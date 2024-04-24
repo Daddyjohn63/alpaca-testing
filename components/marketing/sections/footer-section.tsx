@@ -42,7 +42,7 @@ export function MarketingFooter() {
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between gap-10 mb-16">
         <div className="space-y-3 md:max-w-[300px]">
-          <Logo size="xs" />
+          <Logo size="sm" />
           <p className="text-sm leading-6">Alpaca Stack is designed to get you started blazingly fast, allowing you to zero in on what truly matters: building your product and accelerating your path to profits.</p>
         </div>
         <div>

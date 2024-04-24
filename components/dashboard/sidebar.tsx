@@ -14,7 +14,7 @@ export function DashboardSidebar() {
   return (
     <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-72">
       <div>
-      <Logo size="xs" className="hidden md:block"/>
+      <Logo size="sm" className="hidden md:block"/>
       </div>
       <div className="flex flex-col gap-5 justify-between h-screen">
       <ul className="space-y-1">

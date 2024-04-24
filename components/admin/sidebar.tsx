@@ -15,7 +15,7 @@ export function AdminSidebar() {
     <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-72">
 
       <div>
-      <Logo size="xs" className="hidden md:block"/>
+      <Logo size="sm" className="hidden md:block"/>
       <div className="text-center">
         <span className="bg-destructive rounded-sm px-2 py-1 text-xs">Admin Dashboard</span>
       </div>

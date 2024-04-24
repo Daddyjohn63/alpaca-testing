@@ -16,7 +16,7 @@ export async function MarketingHeader() {
           <MobileNavBtn navItemsArray={marketingNavItems}/>
         </div>
         <div>
-          <Logo size="xs" />
+          <Logo size="sm" />
         </div>
         <nav id="desktop-navigation" className="hidden md:block">
           <ul className="flex">

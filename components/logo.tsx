@@ -20,13 +20,11 @@ type Sizes = {
 }
 
 const sizes: Sizes = {
-  xxs: { width: 150, height: 20 },
-  xs: { width: 200, height: 30 },
-  sm: { width: 255, height: 50 },
-  md: { width: 80, height: 80 },
-  lg: { width: 150, height: 150 },
-  xl: { width: 200, height: 200 },
-  xxl: { width: 300, height: 300 },
+  xs: { width: 150, height: 29 },
+  sm: { width: 200, height: 39 },
+  md: { width: 255, height: 50 },
+  lg: { width: 300, height: 58 },
+  xl: { width: 350, height: 68 },
 }
 
 type Variants = {
@@ -48,8 +46,7 @@ export const Logo = (props: LogoProps) => {
   return (
       <Link
         href={"/"}
-        target="_blank"
-      className={cn(className)}
+        className={cn(className)}
       >
         <Image priority alt="Logo" src={logo_variant} width={width} height={height} />
       </Link>
