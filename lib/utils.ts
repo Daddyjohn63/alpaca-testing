@@ -24,3 +24,8 @@ export function formatDateVerbose(dateString: string) {
     return `${month}/${day}/${year}`;
 }
 
+export function getYearStringFromDate(date: Date): string {
+   const year = date.getFullYear().toString();
+    return year 
+}
+

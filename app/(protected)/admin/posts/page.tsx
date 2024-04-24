@@ -90,7 +90,7 @@ const PostsPage = async ({ searchParams }: paramsProps) => {
   const pageCount = Math.ceil(count / pageLimit);
 
   return (
-      <div>
+      <div className="h-screen overflow-y-auto">
         <BreadCrumb items={breadcrumbItems} />
         <Heading
           title={`Posts (${count})`}

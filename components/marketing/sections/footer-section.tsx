@@ -1,7 +1,7 @@
 import { Logo } from "@/components/logo"
 import Link from "next/link"
 import { interestingNavItems, boringNavItems} from "@/constants/nav-routes"
-
+import { getYearStringFromDate } from "@/lib/utils"
 
 type LinkObj = {
   text: string;
@@ -35,15 +35,15 @@ return (
 
 export function MarketingFooter() {
 
-  const currentYear = "2024"
+  const currentYear = getYearStringFromDate(new Date())
 
   return (
-    <section className="bg-muted pt-16 pb-5">
+    <section className="bg-muted pt-14 pb-5">
       <div className="container">
-        <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
+        <div className="flex flex-col md:flex-row justify-between gap-10 mb-16">
         <div className="space-y-3 md:max-w-[300px]">
           <Logo size="xs" />
-          <p className="text-sm">Alpaca Stack is designed to get you started blazingly fast, allowing you to zero in on what truly matters: building your product and accelerating your path to profits.</p>
+          <p className="text-sm leading-6">Alpaca Stack is designed to get you started blazingly fast, allowing you to zero in on what truly matters: building your product and accelerating your path to profits.</p>
         </div>
         <div>
           <ul className="flex flex-col md:flex-row gap-5 md:gap-10">
@@ -57,7 +57,7 @@ export function MarketingFooter() {
         </div>
       </div>
         <div className="text-center">
-          <p className="text-xs text-muted-foreground">Copyright © {currentYear} [Your Company Name]. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">Copyright © {currentYear} AlpacaStack.com. All rights reserved.</p>
         </div>
     </div>
     </section>
