@@ -99,6 +99,7 @@ const proFeatures = [
 export function PricingSection({className}: {className?: string}) {
   return (
   <section id="pricing-section" className={cn(className)}>
+      <div className="container">
       <SectionTitle 
       title="Choose Your Plan"
       subtitle="Select a package that fits your needs and budget"
@@ -130,6 +131,7 @@ export function PricingSection({className}: {className?: string}) {
         <div>
         </div>
       </div>
+    </div>
     </section>
   )
 }

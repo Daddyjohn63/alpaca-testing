@@ -18,7 +18,7 @@ const AdminLayout = async ({ children }: { children: React.ReactNode; }) => {
         <AdminSidebar />
         <main className="w-full overflow-y-scroll">
           <AdminHeader />
-          <div className="flex-1 space-y-4 p-4 md:p-10 pt-8">
+          <div className="flex-1 space-y-4 p-8 md:p-10 pt-8">
             {children}
           </div>
         </main>

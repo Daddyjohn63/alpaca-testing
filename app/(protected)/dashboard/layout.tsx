@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode; }) => {
         <DashboardSidebar />
         <main className="w-full overflow-y-scroll">
           <DashboardHeader />
-          <div className="flex-1 space-y-4 p-4 md:p-10 pt-8">
+          <div className="flex-1 space-y-4 p-8 md:p-10 pt-8">
             {children}
           </div>
         </main>

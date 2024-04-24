@@ -8,6 +8,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTrigger,
+  SheetClose
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo";
@@ -44,9 +45,11 @@ export function MobileNavBtn({navItemsArray}: {navItemsArray: NavItems[]}) {
 
                 return (
                   <li key={i}>
+                    <SheetClose asChild>
                     <Link href={item.href} className={`${pathname === item.href ? "bg-muted" : ""} hover:bg-primary hover:text-primary-foreground p-3 rounded-sm flex gap-2 items-center`}>
                       {item.icon && <Icon />} {item.text}
                     </Link>
+                  </SheetClose>
                   </li>
                 )
               })}
