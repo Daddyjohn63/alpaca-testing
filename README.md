@@ -43,10 +43,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 ## Setup Tutorial
-
-- Email Notification: Resend: https://resend.com/
-    - Create Account
-    - Create API Key
-    - Add .com Domain.
-
     
