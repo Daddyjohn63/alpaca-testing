@@ -1,13 +1,67 @@
-import { HeroPageSection } from "@/components/marketing/sections/hero-page-section"
+import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
+import { Card } from "@/components/ui/card"
+import { db } from "@/lib/db"
+import Link from "next/link"
+import { PaginationControls } from "@/components/pagination-controls"
 
-const BlogPage = () => {
+type ParamsProps = {
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+};
+
+
+const BlogPage = async({searchParams}: ParamsProps) => {
+
+  const page = Number(searchParams.page) || 1;
+  const take = Number(searchParams.limit) || 10;
+  const skip = (page - 1) * take
+
+  const data = await db.post.findMany({
+    take: take,
+    skip: skip,
+  })
+
   return (
-  <div>
-      <HeroPageSection />
-      <div className="container py-10">
-        blog post grid here
-      </div>
+    <div>
+      <PageHeroSection title="Blog" subtitle="Checkout our amazing articles" />
+      <section className="pt-14 pb-20">
+        <div className="container">
+          <div className="grid grid-cols-3 gap-x-10 gap-y-14">
+            {data && data.map((post) => {
+
+              return (
+                <div key={post.id} className="space-y-4">
+                  <Link href="/blog/1">
+                    <div className="w-full aspect-video rounded-md bg-muted border-2 border-transparent hover:border-primary">
+                    </div>
+                  </Link>
+                  <div className="space-y-1">
+                    <Link href="/blog/1">
+                      <h3 className="font-bold text-lg leading-6 hover:text-primary">{post.title}</h3>
+                    </Link>
+                    <p className="text-sm text-foreground">excerpt here</p>
+                    <div className="pt-2">
+                    {/*
+                      <p className="text-xs text-muted-foreground">Aug 24th, 2024</p>
+                    */}
+                    <ul className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                      <li>#marketing</li>
+                      <li>#sales</li>
+                    </ul>
+                  </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <div className="pt-10">
+          <PaginationControls />
+        </div>
+      </section>
     </div>
+
   )
 }
 export default BlogPage

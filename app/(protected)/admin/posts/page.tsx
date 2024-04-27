@@ -11,7 +11,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 const breadcrumbItems = [{ title: "Posts", link: "/admin/posts" }];
 
-type paramsProps = {
+type ParamsProps = {
   searchParams: {
     [key: string]: string | string[] | undefined;
   };
@@ -22,7 +22,7 @@ type WhereClause = {
   title?: any,
 }
 
-const PostsPage = async ({ searchParams }: paramsProps) => {
+const PostsPage = async ({ searchParams }: ParamsProps) => {
 
   const user = await currentUser()
   if(!user) {
