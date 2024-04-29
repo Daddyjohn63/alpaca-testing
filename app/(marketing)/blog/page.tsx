@@ -34,7 +34,7 @@ const BlogPage = async({searchParams}: ParamsProps) => {
       <PageHeroSection title="Blog" subtitle="Checkout our amazing articles" />
       <section className="pt-14 pb-20">
         <div className="container">
-          <div className="grid grid-cols-3 gap-x-10 gap-y-14">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-14">
             {data && data.map((post) => {
 
               return (
