@@ -14,13 +14,20 @@ type ParamsProps = {
 const BlogPage = async({searchParams}: ParamsProps) => {
 
   const page = Number(searchParams.page) || 1;
-  const take = Number(searchParams.limit) || 10;
+  const take = Number(searchParams.take) || 9;
   const skip = (page - 1) * take
 
   const data = await db.post.findMany({
     take: take,
     skip: skip,
+    orderBy: {
+      createdAt: 'asc'
+    },
   })
+
+  const count = await db.post.count()
+  const totalPages = Math.ceil(count / take);
+
 
   return (
     <div>
@@ -57,7 +64,7 @@ const BlogPage = async({searchParams}: ParamsProps) => {
           </div>
         </div>
         <div className="pt-10">
-          <PaginationControls />
+          <PaginationControls totalPages={totalPages} page={page}/>
         </div>
       </section>
     </div>
