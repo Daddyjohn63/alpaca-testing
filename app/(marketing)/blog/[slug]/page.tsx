@@ -1,8 +1,7 @@
 import { db } from "@/lib/db"
 import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
-import { addSlug } from "@/scripts/database"
 import { notFound } from "next/navigation";
-import { DangerousHtmlComponent } from "@/components/dangerouslySetInnerHTML";
+import { SidebarCta } from "@/components/marketing/sidebar-cta";
 type Params = {
   slug: string;
 }
@@ -17,7 +16,7 @@ const PostPage = async({params}: {params: Params}) => {
       slug: slug
     }
   })
-  
+
   if(!data) {
     return notFound()
   }
@@ -27,10 +26,10 @@ const PostPage = async({params}: {params: Params}) => {
       <PageHeroSection title={data.title} />
       <div id="blog-content" className="container flex flex-row py-10 divide-x">
         <article className="w-full pr-10">
-          <DangerousHtmlComponent htmlContent={data.content} />
+          <div dangerouslySetInnerHTML={{ __html: data.content }} />
         </article>
         <aside className="w-[340px] pl-10">
-          This is sidebuuu
+          <SidebarCta />
         </aside>
       </div>
     </div>
