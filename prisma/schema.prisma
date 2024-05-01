@@ -88,6 +88,7 @@ model TwoFactorConfirmation {
 model Post {
   id         Int      @id @default(autoincrement())
   title      String
+  slug       String? @unique
   content    String
   imagePath  String?
   createdAt  DateTime @default(now())
@@ -100,6 +101,6 @@ model Post {
 
 model Category {
   id    Int    @id @default(autoincrement())
-    name  String @unique
-    posts Post[]
+  name  String @unique
+  posts Post[]
 }

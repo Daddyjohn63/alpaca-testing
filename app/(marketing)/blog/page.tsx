@@ -28,7 +28,6 @@ const BlogPage = async({searchParams}: ParamsProps) => {
   const count = await db.post.count()
   const totalPages = Math.ceil(count / take);
 
-
   return (
     <div>
       <PageHeroSection title="Blog" subtitle="Checkout our amazing articles" />
@@ -39,12 +38,12 @@ const BlogPage = async({searchParams}: ParamsProps) => {
 
               return (
                 <div key={post.id} className="space-y-4">
-                  <Link href="/blog/1">
+                  <Link href={`blog/${post.slug}`}>
                     <div className="w-full aspect-video rounded-md bg-muted border-2 border-transparent hover:border-primary">
                     </div>
                   </Link>
                   <div className="space-y-1">
-                    <Link href="/blog/1">
+                    <Link href={`blog/${post.slug}`}>
                       <h3 className="font-bold text-lg leading-6 hover:text-primary">{post.title}</h3>
                     </Link>
                     <p className="text-sm text-foreground">excerpt here</p>

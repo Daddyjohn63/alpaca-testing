@@ -19,8 +19,7 @@ type PaginationProps = {
 
 }
 
-
-export function PaginationControls(props: any) {
+export function PaginationControls(props: PaginationProps) {
 
   const {page, totalPages} = props;
 
