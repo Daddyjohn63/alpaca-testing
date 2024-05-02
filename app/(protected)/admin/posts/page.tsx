@@ -52,7 +52,7 @@ const PostsPage = async ({ searchParams }: ParamsProps) => {
       title: true,
       createdAt: true,
       updatedAt: true,
-      published: true,
+      status: true,
       author: {
         select: {
           name: true,
@@ -80,7 +80,7 @@ const PostsPage = async ({ searchParams }: ParamsProps) => {
       title: item.title,
       createdAt: formatDateVerbose(item.createdAt.toLocaleDateString()),
       updatedAt: formatDateVerbose(item.updatedAt.toLocaleDateString()),
-      published: item.published === true ? "Published" : "Draft",
+      status: item.status,
       author: item.author.name || "User",
     }
 

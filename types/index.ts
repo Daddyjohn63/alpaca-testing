@@ -7,11 +7,11 @@ export type NavItems = {
 }
 
 export type TablePost = {
-  id: number;
+  id: string;
   title: string;
   createdAt: string;
   updatedAt: string;
-  published: string;
+  status: string;
   author: string;
 }
 export type TableCategories = {

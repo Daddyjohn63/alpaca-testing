@@ -21,7 +21,7 @@ const BlogPage = async({searchParams}: ParamsProps) => {
     take: take,
     skip: skip,
     orderBy: {
-      createdAt: 'asc'
+      createdAt: 'desc'
     },
   })
 

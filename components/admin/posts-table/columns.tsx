@@ -45,8 +45,8 @@ export const columns: ColumnDef<TablePost>[] = [
     cell: ({row}) => (<div className="min-w-[100px]">{row.getValue("author")}</div>)
   },
   {
-    accessorKey: "published",
-    header: "Published",
+    accessorKey: "status",
+    header: "Status",
   },
   {
     accessorKey: "createdAt",

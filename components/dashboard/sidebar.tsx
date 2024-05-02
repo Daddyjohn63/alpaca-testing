@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
+import { SidebarCTA } from "../marketing/blog-cta";
 import { UpgradeCTA } from "@/components/dashboard/upgrade-cta";
 import { Logo } from "@/components/logo";
 import { dashboardNavItems } from "@/constants/nav-routes";
@@ -31,7 +32,12 @@ export function DashboardSidebar() {
           ) 
          })}
       </ul>
-        <UpgradeCTA />
+          <SidebarCTA 
+            image="cta-img.jpg"
+            title="Upgrade Right Now!" 
+            description="Upgrade to a premium account and get full access to all features."
+            btnText="Upgrade Now!" 
+            btnHref="https://google.com"/>
       </div>
     </aside>
   )

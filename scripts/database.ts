@@ -14,8 +14,6 @@ export const addSlug = async () => {
 
     const slug = changeCase.kebabCase(post.title)
    
-    console.log(slug)
-
     await db.post.update({
       where: {
         id: post.id

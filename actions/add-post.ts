@@ -3,8 +3,11 @@ import { db } from "@/lib/db"
 import { currentUser } from "@/lib/auth"
 
 type Props = {
-  title: string,
-  content: string,
+  title: string;
+  content: string;
+  slug: string;
+  category: string,
+  status: string,
 }
 export const addPost = async (values: Props) => {
 
@@ -13,19 +16,44 @@ export const addPost = async (values: Props) => {
     return {error: "Unauthenticated User"}
   }
   
-  const {title, content} = values
+  const {title, slug, content, status, category} = values
+
 
   try {
-    await db.post.create({
-      data: {
-        title,
-        content,
-        authorId: user.id,
+
+    //Check for duplicate posts
+    const postCount = await db.post.count({
+      where: {
+        title: title
       }
     })
-    return {success: "Post had been successfully added!"}
+
+    // Add inremental number to slug post if duplicates found
+    let updatedSlug = slug;
+    if(postCount > 0) {
+      const nextPostNum = postCount + 1; 
+      updatedSlug = slug + '-' + nextPostNum.toString() 
+    }
+
+    // Add post
+    const data = await db.post.create({
+      data: {
+        title,
+        slug: updatedSlug,
+        content,
+        authorId: user.id,
+        status,
+        categoryId: category,
+      },
+      select: {
+        slug: true,
+      }
+    })
+
+    return {success: "Post had been successfully added!", data}
   }
-  catch {
+  catch(e) {
+    console.log(e)
     return {error: "Post was not added, something went wrong"}
   }
 }

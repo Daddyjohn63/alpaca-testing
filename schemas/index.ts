@@ -71,6 +71,9 @@ export const SettingsSchema = z.object({
 })
 
 export const AddPostSchema = z.object({
-  title: z.string().min(3),
-  content: z.string().min(3),
+  title: z.string().min(1),
+  slug: z.string().min(1),
+  status: z.string().min(1),
+category: z.string().min(1),
+    image: z.string()
 })
