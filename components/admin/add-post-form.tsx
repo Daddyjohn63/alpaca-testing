@@ -102,34 +102,33 @@ export const AddPostForm = (props: AddPostFormProps) => {
       image: values.image,
     }
 
-    console.log(payload);
 
-    // startTransition(() => {
-    //   addPost(payload)
-    //     .then((data) => {
-    //       if (data.error) {
-    //         setError(data.error);
-    //       }
-    //
-    //       if (data.success) {
-    //         update();
-    //         setSuccess(data.success);
-    //         if(data.data.slug) {
-    //           const updatedSlug = data.data.slug
-    //           form.setValue("slug", updatedSlug)
-    //         }
-    //       }
-    //     })
-    //     .catch(() => setError("Something went wrong!"));
-    // });
+    startTransition(() => {
+      addPost(payload)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+          }
+
+          if (data.success) {
+            update();
+            setSuccess(data.success);
+            if(data.data.slug) {
+              const updatedSlug = data.data.slug
+              form.setValue("slug", updatedSlug)
+            }
+          }
+        })
+        .catch(() => setError("Something went wrong!"));
+    });
 
   };
 
   return (
     <Form {...form}>
       <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-row gap-8 max-w-5xl">
-          <div className="w-full">
+        <div className="flex flex-col-reverse md:flex-row gap-8 max-w-5xl">
+          <div className="lg:w-full">
             <Card className="p-5" >
               <div className="mb-5">
               <FormError message={error} />
@@ -177,7 +176,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
               </div>
             </Card>
           </div>
-          <div className="w-[350px] space-y-5">
+          <div className="md:w-[350px] space-y-5">
             <Button disabled={isPending} type="submit" className="w-full py-7">
               Submit Post
             </Button>

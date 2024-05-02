@@ -16,39 +16,40 @@ export const addPost = async (values: Props) => {
     return {error: "Unauthenticated User"}
   }
   
-  const {title, slug, content, status, category} = values
+  const {title, slug, image, content, status, category} = values
 
+  console.log(image)
 
   try {
-
-    //Check for duplicate posts
-    const postCount = await db.post.count({
-      where: {
-        title: title
-      }
-    })
-
-    // Add inremental number to slug post if duplicates found
-    let updatedSlug = slug;
-    if(postCount > 0) {
-      const nextPostNum = postCount + 1; 
-      updatedSlug = slug + '-' + nextPostNum.toString() 
-    }
-
-    // Add post
-    const data = await db.post.create({
-      data: {
-        title,
-        slug: updatedSlug,
-        content,
-        authorId: user.id,
-        status,
-        categoryId: category,
-      },
-      select: {
-        slug: true,
-      }
-    })
+  //
+  //   //Check for duplicate posts
+  //   const postCount = await db.post.count({
+  //     where: {
+  //       title: title
+  //     }
+  //   })
+  //
+  //   // Add inremental number to slug post if duplicates found
+  //   let updatedSlug = slug;
+  //   if(postCount > 0) {
+  //     const nextPostNum = postCount + 1; 
+  //     updatedSlug = slug + '-' + nextPostNum.toString() 
+  //   }
+  //
+  //   // Add post
+  //   const data = await db.post.create({
+  //     data: {
+  //       title,
+  //       slug: updatedSlug,
+  //       content,
+  //       authorId: user.id,
+  //       status,
+  //       categoryId: category,
+  //     },
+  //     select: {
+  //       slug: true,
+  //     }
+  //   })
 
     return {success: "Post had been successfully added!", data}
   }
