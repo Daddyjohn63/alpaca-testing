@@ -2,6 +2,7 @@ import { PageHeroSection } from "@/components/marketing/sections/page-hero-secti
 import { Card } from "@/components/ui/card"
 import { db } from "@/lib/db"
 import Link from "next/link"
+import Image from "next/image"
 import { PaginationControls } from "@/components/pagination-controls"
 
 type ParamsProps = {
@@ -9,7 +10,6 @@ type ParamsProps = {
     [key: string]: string | string[] | undefined;
   };
 };
-
 
 const BlogPage = async({searchParams}: ParamsProps) => {
 
@@ -40,6 +40,10 @@ const BlogPage = async({searchParams}: ParamsProps) => {
                 <div key={post.id} className="space-y-4">
                   <Link href={`blog/${post.slug}`}>
                     <div className="w-full aspect-video rounded-md bg-muted border-2 border-transparent hover:border-primary">
+                            <img
+                              src="https://f005.backblazeb2.com/file/alpacastack-post-images/testing.jpg"
+                              className="w-full"
+                            />
                     </div>
                   </Link>
                   <div className="space-y-1">

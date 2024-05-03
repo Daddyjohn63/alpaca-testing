@@ -38,6 +38,7 @@ type AddPostFormProps = {
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   //FileList is immutable, so we need to create a new one
+
   const dataTransfer = new DataTransfer();
 
   // Add newly updaloded images
@@ -45,7 +46,7 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
       dataTransfer.items.add(image as File)
   );
 
-  const files = dataTransfer.files;
+  const files = dataTransfer.files[0];
   const displayUrl = URL.createObjectURL(event.target.files![0])
 
   return {files, displayUrl };
@@ -69,7 +70,6 @@ export const AddPostForm = (props: AddPostFormProps) => {
       slug: '',
       status: '',
       category: '',
-      image: '',
     },
   });
 
@@ -90,37 +90,55 @@ export const AddPostForm = (props: AddPostFormProps) => {
   }, [watchTitle]);
 
 
-  const onSubmit = (values: z.infer<typeof AddPostSchema>) => {
+  const onSubmit = async (values: z.infer<typeof AddPostSchema>) => {
 
+    const fileData = new FormData()
+    fileData.set('file', values.image)
 
-    const payload = {
-      title: values.title,
-      slug: slugValue,
-      status: values.status,
-      category: values.category,
-      content: formContent,
-      image: values.image,
+    try {
+
+    const res = await fetch('/api/upload-post-image', {
+      method: 'POST',
+      body: fileData
+    })
+
+    if(!res.ok) throw new Error(await res.text())
+
+    } catch(e) {
+      console.error(e)
     }
 
 
-    startTransition(() => {
-      addPost(payload)
-        .then((data) => {
-          if (data.error) {
-            setError(data.error);
-          }
 
-          if (data.success) {
-            update();
-            setSuccess(data.success);
-            if(data.data.slug) {
-              const updatedSlug = data.data.slug
-              form.setValue("slug", updatedSlug)
-            }
-          }
-        })
-        .catch(() => setError("Something went wrong!"));
-    });
+
+    // const payload = {
+    //   title: values.title,
+    //   slug: slugValue,
+    //   status: values.status,
+    //   category: values.category,
+    //   content: formContent,
+    //
+    // }
+
+
+    // startTransition(() => {
+    //   addPost(payload)
+    //     .then((data) => {
+    //       if (data.error) {
+    //         setError(data.error);
+    //       }
+    //
+    //       if (data.success) {
+    //         update();
+    //         setSuccess(data.success);
+    //         if(data.data.slug) {
+    //           const updatedSlug = data.data.slug
+    //           form.setValue("slug", updatedSlug)
+    //         }
+    //       }
+    //     })
+    //     .catch(() => setError("Something went wrong!"));
+    // });
 
   };
 
@@ -248,6 +266,9 @@ export const AddPostForm = (props: AddPostFormProps) => {
                     className="file:bg-muted-foreground file:rounded-sm file:mr-4 bg-muted border-border text-foreground pt-[6px]"
                     {...rest}
                     onChange={(event) => {
+                      if(!event.target.files || event.target.files.length <= 0) {
+                        return
+                      }
                       const {files, displayUrl} = getImageData(event)
                       setImagePreview(displayUrl);
                       onChange(files)

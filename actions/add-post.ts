@@ -18,7 +18,6 @@ export const addPost = async (values: Props) => {
   
   const {title, slug, image, content, status, category} = values
 
-  console.log(image)
 
   try {
   //
