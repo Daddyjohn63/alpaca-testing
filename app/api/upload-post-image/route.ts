@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4} from "uuid"; 
 import { S3Client, CreateBucketCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+
+
 // Create an S3 client
-//
 // You must copy the endpoint from your B2 bucket details
 // and set the region to match.
 const s3 = new S3Client({
@@ -14,35 +15,38 @@ const s3 = new S3Client({
   }
 });
 
-
 export async function POST(req: NextRequest) {
 
   const data = await req.formData()
-
   const file: File | null = data.get('file') as unknown as File
 
   if(!file) {
-    return NextResponse.json({success: false})
+    return NextResponse.json({error: "No file to process!"})
   }
-
-  const bytes = await file.arrayBuffer()
-  const buffer = Buffer.from(bytes)
-
   try {
 
-  const bucketName = '';
+    // Make filename unique
+    const filename = file.name;
+    const fileExtension = "." + filename.split(".").pop()
 
-  await s3.send(new PutObjectCommand({
-    Bucket: 'alpacastack-post-images',
-    Key: `testing.jpg`,
-    Body: buffer
-  }));
+    const uuidFilename = uuidv4() + fileExtension
 
-  console.log("Success Upload")
+    //Converting formData to buffer to send to cloud storage.
+    const bytes = await file.arrayBuffer()
+    const buffer = Buffer.from(bytes)
 
+
+    // Sending to cloud storage
+    await s3.send(new PutObjectCommand({
+      Bucket: 'alpacastack-post-images',
+      Key: `${uuidFilename}`,
+      Body: buffer
+    }));
+
+    return NextResponse.json({success: "File uploaded to cloud storage!", uuidFilename})
 
   } catch(e) {
     console.log(e)
+    return NextResponse.json({error: "File not upload, something went wrong!"})
   }
-  return NextResponse.json({success: true})
 }

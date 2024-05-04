@@ -37,8 +37,8 @@ type AddPostFormProps = {
 }
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
-  //FileList is immutable, so we need to create a new one
 
+  //FileList is immutable, so we need to create a new one
   const dataTransfer = new DataTransfer();
 
   // Add newly updaloded images
@@ -73,7 +73,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
     },
   });
 
-  //Watch title to create slug
+  //Watch title input to create url friendly slug
   const watchTitle = form.watch("title");
 
   useEffect(() => {
@@ -90,55 +90,56 @@ export const AddPostForm = (props: AddPostFormProps) => {
   }, [watchTitle]);
 
 
-  const onSubmit = async (values: z.infer<typeof AddPostSchema>) => {
+  const onSubmit = (values: z.infer<typeof AddPostSchema>) => {
 
     const fileData = new FormData()
     fileData.set('file', values.image)
 
-    try {
+    startTransition(async () => {
 
-    const res = await fetch('/api/upload-post-image', {
-      method: 'POST',
-      body: fileData
-    })
+      //Send post image to cloud storage
+      const res = await fetch('/api/upload-post-image', {
+        method: 'POST',
+        body: fileData
+      })
+      
+      if(!res.ok) {
+        setError("Something went wrong, image did not upload.")
+        return
+      }
+      const data = await res.json()
+      const imageFilename = await data.uuidFilename
 
-    if(!res.ok) throw new Error(await res.text())
+      //Craft payload data for database
+      const payload = {
+        title: values.title,
+        slug: slugValue,
+        status: values.status,
+        category: values.category,
+        content: formContent,
+        imagePath: imageFilename,
+      }
 
-    } catch(e) {
-      console.error(e)
-    }
+      //Add payload data to action to create in database
+       addPost(payload)
+         .then((data) => {
+           if (data.error) {
+             setError(data.error);
+           }
+      
+           if (data.success) {
+             update();
+             setSuccess(data.success);
 
-
-
-
-    // const payload = {
-    //   title: values.title,
-    //   slug: slugValue,
-    //   status: values.status,
-    //   category: values.category,
-    //   content: formContent,
-    //
-    // }
-
-
-    // startTransition(() => {
-    //   addPost(payload)
-    //     .then((data) => {
-    //       if (data.error) {
-    //         setError(data.error);
-    //       }
-    //
-    //       if (data.success) {
-    //         update();
-    //         setSuccess(data.success);
-    //         if(data.data.slug) {
-    //           const updatedSlug = data.data.slug
-    //           form.setValue("slug", updatedSlug)
-    //         }
-    //       }
-    //     })
-    //     .catch(() => setError("Something went wrong!"));
-    // });
+            //If there are duplicate posts, slug will finalize with incremental number at the end. 
+             if(data.data.slug) {
+               const updatedSlug = data.data.slug
+               form.setValue("slug", updatedSlug)
+             }
+           }
+         })
+         .catch(() => setError("Could not add to post databse, something went wrong!"));
+    });
 
   };
 
