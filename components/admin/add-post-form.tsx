@@ -7,21 +7,20 @@ import { useSession } from "next-auth/react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AddPostSchema } from "@/schemas";
+import { AddPostSchema, BlogContentSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { TiptapEditor } from "@/components/admin/tiptap-editor";
 import {kebabCase} from "change-case";
-import { type Category } from "@prisma/client";
+import { type Category, type Post } from "@prisma/client";
 import {
   Form,
   FormField,
   FormControl,
   FormItem,
   FormLabel,
-  FormDescription,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -34,6 +33,17 @@ import {
 
 type AddPostFormProps = {
   categories: Category[]
+  postData?: Post 
+}
+
+type AddPostPayload = {
+  postId: string;
+  title: string;
+  slug: string;
+  status: string;
+  category: string;
+  content: string,
+  imagePath: string | undefined,
 }
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
@@ -53,23 +63,24 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
 };
 
 export const AddPostForm = (props: AddPostFormProps) => {
-  const {categories} = props
+  const {categories, postData} = props
 
   const { update } = useSession();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
-  const [formContent, setFormContent] = useState<string>("");
+  const [formContent, setFormContent] = useState<string | undefined>(postData?.content);
   const [slugValue, setSlugValue] = useState<string>("");
-  const [imagePreview, setImagePreview] = useState("")
+  const [imagePreview, setImagePreview] = useState<string | undefined>(`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${postData?.imagePath}`);
+  const [formContentError, setFormContentError] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof AddPostSchema>>({
     resolver: zodResolver(AddPostSchema),
     defaultValues: {
-      title: '',
-      slug: '',
-      status: '',
-      category: '',
+      title: postData ? postData.title : '',
+      slug: postData ? postData.slug : '',
+      status: postData ? postData.status : '',
+      category: postData ? postData.categoryId : '',
     },
   });
 
@@ -92,32 +103,61 @@ export const AddPostForm = (props: AddPostFormProps) => {
 
   const onSubmit = (values: z.infer<typeof AddPostSchema>) => {
 
-    const fileData = new FormData()
-    fileData.set('file', values.image)
+    setError(undefined);
+    setSuccess(undefined);
+
+     // Validate the editor content
+    if(!formContent) {
+      setFormContentError(true);
+      return
+    }
+    const contentValidationResults = BlogContentSchema.safeParse({ content: formContent });
+
+    setFormContentError(false);
+    if (!contentValidationResults.success) {
+      setFormContentError(true);
+      setError("Post unable to submit, form content is required")
+      return
+    } 
+
+    let imageFilename: string | undefined;
 
     startTransition(async () => {
 
-      //Send post image to cloud storage
-      const res = await fetch('/api/upload-post-image', {
-        method: 'POST',
-        body: fileData
-      })
+      //Send post image to cloud storage if uploaded.
+      if(values.image) {
+
+        const fileData = new FormData()
+        fileData.set('file', values.image)
+
+        const res = await fetch('/api/upload-post-image', {
+          method: 'POST',
+          body: fileData
+        })
       
-      if(!res.ok) {
-        setError("Something went wrong, image did not upload.")
-        return
+        if(!res.ok) {
+          setError("Something went wrong, image did not upload.")
+          return
+        }
+        const data = await res.json()
+        imageFilename = await data.uuidFilename
+
       }
-      const data = await res.json()
-      const imageFilename = await data.uuidFilename
 
       //Craft payload data for database
-      const payload = {
+      const payload: AddPostPayload = {
+        postId: '',
         title: values.title,
         slug: slugValue,
         status: values.status,
         category: values.category,
         content: formContent,
         imagePath: imageFilename,
+      }
+
+      //If post id exists then add to payload. 
+      if(postData && postData.id) {
+        payload.postId = postData.id
       }
 
       //Add payload data to action to create in database
@@ -191,6 +231,9 @@ export const AddPostForm = (props: AddPostFormProps) => {
                 <FormItem>
                   <FormLabel>Content</FormLabel>
                   <TiptapEditor formContent={formContent} setFormContent={setFormContent} />
+                  {!!formContentError && 
+                    <p className="text-[0.8rem] font-medium text-destructive">Form content is required</p>
+                  }
                 </FormItem>
               </div>
             </Card>

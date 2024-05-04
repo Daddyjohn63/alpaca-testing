@@ -1,18 +1,45 @@
 import { Heading } from "@/components/ui/heading";
 import BreadCrumb from "@/components/admin/breadcrumb";
+import { AddPostForm } from "@/components/admin/add-post-form";
+import { db } from "@/lib/db";
+import { notFound } from "next/navigation";
 
-function PostDetailsPage() {
+type Params = {
+  id: string;
+}
+const breadcrumbItems = [{ title: "Edit Post", link: "/admin/" }];
 
-  const breadcrumbItems = [{ title: "Post Details", link: "/admin/" }];
+const PostDetailsPage = async({params}: {params: Params}) => {
+
+  const {id} = params;
+
+  if(!id) {
+    return notFound()
+  }
+
+  const categories = await db.category.findMany()
+  const postData = await db.post.findFirst({
+    where: {
+      id
+    }
+  })
+
+  if(!postData) {
+    return notFound()
+  }
+
+
   return (
-    <div className="h-full">
-      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+    <div>
         <BreadCrumb items={breadcrumbItems} />
         <Heading
-          title="Post Details Page"
-          description="Manage post details here"
+          title="Edit Post"
+          description="Edit your post here"
         /> 
-      </div>
+        <AddPostForm 
+          categories={categories}
+          postData={postData}
+        />
     </div>
   )
 }

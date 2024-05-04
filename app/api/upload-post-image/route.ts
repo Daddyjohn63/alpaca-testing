@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4} from "uuid"; 
-import { S3Client, CreateBucketCommand, PutObjectCommand } from '@aws-sdk/client-s3';
-
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 // Create an S3 client
 // You must copy the endpoint from your B2 bucket details

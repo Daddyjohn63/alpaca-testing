@@ -70,6 +70,10 @@ export const SettingsSchema = z.object({
     path: ["password"]
 })
 
+export const BlogContentSchema = z.object({
+    content: z.string().min(1),
+})
+
 const MAX_FILE_SIZE = 5000000; //5MB
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
@@ -79,8 +83,9 @@ export const AddPostSchema = z.object({
     status: z.string().min(1, "Must select an option"),
     category: z.string().min(1, "Must select an option."),
     image: z
-        .custom<File>()
-        .refine((file) => file?.size <= MAX_FILE_SIZE, "Max image size is 5MB.")
-        .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .webp formats are supported.")
+        .custom<File | undefined>()
+        .optional()
+        .refine((file) => file === undefined || file?.size <= MAX_FILE_SIZE, "Max image size is 5MB.")
+        .refine((file) => file === undefined || ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .webp formats are supported.")
 
 })
