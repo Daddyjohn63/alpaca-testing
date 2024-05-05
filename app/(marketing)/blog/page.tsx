@@ -44,8 +44,9 @@ const BlogPage = async({searchParams}: ParamsProps) => {
                   <Link href={`blog/${post.slug}`}>
                     <div className="w-full aspect-video rounded-md overflow-hidden flex items-center justify-center bg-muted border-2 border-transparent hover:border-primary">
                       <img
-                        src={`https://f005.backblazeb2.com/file/alpacastack-post-images/${post.imagePath}`}
+                        src={`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${post.imagePath}`}
                         className="w-full"
+                        alt={post.title}
                       />
                     </div>
                   </Link>

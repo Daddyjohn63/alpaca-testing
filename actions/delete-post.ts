@@ -1,7 +1,7 @@
 'use server'
 import { db } from "@/lib/db"
 
-export const deletePost = async (id: number) => {
+export const deletePost = async (id: string) => {
 
   try {
     await db.post.delete({

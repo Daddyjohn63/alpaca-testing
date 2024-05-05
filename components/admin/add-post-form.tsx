@@ -105,7 +105,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
     //Sets slug in state for onSubmit
     setSlugValue(urlFriendlySlug)
 
-  }, [watchTitle]);
+  }, [watchTitle, form]);
 
 
   const onSubmit = (values: z.infer<typeof AddPostSchema>) => {
@@ -297,7 +297,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
               <FormLabel>Post Image</FormLabel>
                   {!!imagePreview ? (
                     <div className="bg-muted flex justify-center items-center p-3 rounded-md border border-border">
-                      <img src={imagePreview} className="rounded-sm" />
+                      <img src={imagePreview} alt="Image preview" className="rounded-sm" />
                     </div>
                   ) : (
                   <div className="bg-muted flex justify-center aspect-video items-center p-3 rounded-md border border-border">

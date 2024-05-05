@@ -38,8 +38,10 @@ const CategoriesPage = async ({searchParams}: ParamsProps) => {
     skip: offset,
   }
 
+  //Fetch from categories table
   const data = await db.category.findMany(query)
 
+  //Get count to display on page title and for table pages
   const count = await db.category.count()
   const pageCount = Math.ceil(count / pageLimit);
 

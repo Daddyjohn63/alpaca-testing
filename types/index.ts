@@ -15,10 +15,11 @@ export type TablePost = {
   author: string;
 }
 export type TableCategories = {
-  id: number;
+  id: string;
   name: string;
 }
 export type TableUsers = {
   id: string;
   name: string | null;
+  role: string;
 }

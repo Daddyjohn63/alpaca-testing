@@ -5,7 +5,7 @@ import { Editor } from "@tiptap/core";
 
 
 interface FormContent {
-  formContent: string;
+  formContent: string | undefined;
   setFormContent: (value: string) => void
 }
 
@@ -260,7 +260,7 @@ export const TiptapEditor = ({formContent, setFormContent}: FormContent) => {
   });
 
   useEffect(() => {
-    if(editor && editor.getHTML() !== formContent) {
+    if(editor && editor.getHTML() !== formContent && formContent !== undefined) {
         editor.commands.setContent(formContent);
     }
 }, [formContent, editor]);

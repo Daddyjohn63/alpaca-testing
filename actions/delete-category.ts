@@ -1,7 +1,7 @@
 'use server'
 import { db } from "@/lib/db"
 
-export const deleteCategory= async (id: number) => {
+export const deleteCategory= async (id: string) => {
 
   try {
     await db.category.delete({
