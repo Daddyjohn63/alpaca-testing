@@ -7,9 +7,9 @@ type Props = {
   title: string;
   content: string;
   slug: string;
-  category: string,
-  status: string,
-  imagePath: string | undefined
+  category: string;
+  status: string;
+  imagePath: string | undefined;
 }
 
 export const addPost = async (values: Props) => {
@@ -20,8 +20,6 @@ export const addPost = async (values: Props) => {
   }
   
   const {postId, title, slug, imagePath, content, status, category} = values
-
-  console.log(imagePath)
 
   try {
 
@@ -41,6 +39,7 @@ export const addPost = async (values: Props) => {
 
     //If post Id exists, then update post, else create new post
     if(postId !== '') {
+
 
       // Update existing post
       const data = await db.post.update({
@@ -66,23 +65,29 @@ export const addPost = async (values: Props) => {
 
     } else {
 
-    // Add post
-    const data = await db.post.create({
-      data: {
-        title,
-        slug: updatedSlug,
-        content,
-        authorId: user.id,
-        status,
-        categoryId: category,
-        imagePath: imagePath
-      },
-      select: {
-        slug: true,
+      console.log(imagePath)
+      //Check if image is uploaded
+      if(!imagePath) {
+        return {error: "Post not added, need to upload featured image!"}
       }
-    })
+      
+      // Add post
+      const data = await db.post.create({
+        data: {
+          title,
+          slug: updatedSlug,
+          content,
+          authorId: user.id,
+          status,
+          categoryId: category,
+          imagePath: imagePath ? imagePath : ''
+        },
+        select: {
+          slug: true,
+        }
+      })
 
-    return {success: "Post had been successfully added!", data}
+      return {success: "Post had been successfully added!", data}
     }
   }
   catch(e) {

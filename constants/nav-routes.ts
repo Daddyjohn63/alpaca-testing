@@ -100,6 +100,11 @@ export const adminNavItems: NavItems[] = [
         href: "/admin/categories",
     },
     {
+        icon: "media",
+        text: "Media",
+        href: "/admin/media",
+    },
+    {
         icon: "user",
         text: "Users",
         href: "/admin/users",

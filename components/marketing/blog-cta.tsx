@@ -18,7 +18,7 @@ export function SidebarCTA(props: SidebarCTAProps) {
   return (
     <div className="border border-border bg-background p-5 rounded-md space-y-4">
       {!!image && (
-        <Image src={`/${image}`} width={0} height={0} sizes="100vw" style={{width: '100%', height: 'auto'}} alt={title}/> 
+        <Image src={`/${image}`} width={0} height={0} sizes="100vw" style={{width: '100%', height: 'auto'}} alt={title} className="rounded-sm"/> 
       )}
       <div className="space-y-2">
       <h3 className="font-bold text-xl">{title}</h3>

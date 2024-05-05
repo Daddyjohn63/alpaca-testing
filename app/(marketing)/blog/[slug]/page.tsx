@@ -21,20 +21,22 @@ const PostPage = async({params}: {params: Params}) => {
     return notFound()
   }
 
+  const bgImagePath = data.imagePath;
+
   return (
     <div>
-      <PageHeroSection title={data.title} />
-      <div className="container flex flex-row py-20 divide-x">
-        <article id="blog-content" className="w-full pr-10">
+      <PageHeroSection title={data.title} bgImagePath={bgImagePath}  />
+      <div className="container grid md:grid-cols-7 gap-10 py-20">
+        <article id="blog-content" className="md:col-span-5">
           <div dangerouslySetInnerHTML={{ __html: data.content }} />
         </article>
-        <aside className="w-[400px] pl-10">
+        <aside className="md:col-span-2 self-start sticky top-2">
           <SidebarCTA 
             image="cta-img.jpg"
             title="Download AlpacaStack Now!" 
             description="Download Alpaca Stack today and launch your knew SaaS startup blazingly fast!"
             btnText="Download Now!" 
-            btnHref="https://google.com"/>
+            btnHref="/"/>
         </aside>
       </div>
     </div>

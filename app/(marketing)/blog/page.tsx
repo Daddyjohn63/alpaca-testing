@@ -18,6 +18,9 @@ const BlogPage = async({searchParams}: ParamsProps) => {
   const skip = (page - 1) * take
 
   const data = await db.post.findMany({
+    where: {
+      status: 'published'
+    },
     take: take,
     skip: skip,
     orderBy: {

@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import BreadCrumb from "@/components/admin/breadcrumb";
 import { DataTable } from "@/components/admin/posts-table/data-table";
@@ -7,7 +6,8 @@ import { db } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { formatDateVerbose } from "@/lib/utils";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
+export const dynamic = 'force-dynamic'
 
 const breadcrumbItems = [{ title: "Posts", link: "/admin/posts" }];
 
@@ -57,7 +57,12 @@ const PostsPage = async ({ searchParams }: ParamsProps) => {
         select: {
           name: true,
         },
-    },
+      },
+      category: {
+        select: {
+        name: true,
+        },
+      },
     },
     orderBy: {
       createdAt: 'desc' as any
@@ -66,12 +71,14 @@ const PostsPage = async ({ searchParams }: ParamsProps) => {
     skip: offset,
   }
 
+
   //Fetch posts from database
   const data = await db.post.findMany(query)
 
   if (!data) {
     return;
   }
+
 
   const formattedData = data.map((item) => {
 
@@ -82,6 +89,7 @@ const PostsPage = async ({ searchParams }: ParamsProps) => {
       updatedAt: formatDateVerbose(item.updatedAt.toLocaleDateString()),
       status: item.status,
       author: item.author.name || "User",
+      category: item.category.name,
     }
 
     return data

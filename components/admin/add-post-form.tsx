@@ -71,7 +71,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
   const [isPending, startTransition] = useTransition();
   const [formContent, setFormContent] = useState<string | undefined>(postData?.content);
   const [slugValue, setSlugValue] = useState<string>("");
-  const [imagePreview, setImagePreview] = useState<string | undefined>(`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${postData?.imagePath}`);
+  const [imagePreview, setImagePreview] = useState<string | undefined>();
   const [formContentError, setFormContentError] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof AddPostSchema>>({
@@ -83,6 +83,13 @@ export const AddPostForm = (props: AddPostFormProps) => {
       category: postData ? postData.categoryId : '',
     },
   });
+
+  //Show image for post update
+  useEffect(() => {
+    if(postData) {
+      setImagePreview(`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${postData?.imagePath}`)
+    }
+  },[postData])
 
   //Watch title input to create url friendly slug
   const watchTitle = form.watch("title");
@@ -146,18 +153,13 @@ export const AddPostForm = (props: AddPostFormProps) => {
 
       //Craft payload data for database
       const payload: AddPostPayload = {
-        postId: '',
+        postId: postData ? postData.id : '',
         title: values.title,
         slug: slugValue,
         status: values.status,
         category: values.category,
         content: formContent,
         imagePath: imageFilename,
-      }
-
-      //If post id exists then add to payload. 
-      if(postData && postData.id) {
-        payload.postId = postData.id
       }
 
       //Add payload data to action to create in database

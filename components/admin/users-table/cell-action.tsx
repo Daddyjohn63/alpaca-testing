@@ -22,11 +22,10 @@ interface CellActionProps {
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const router = useRouter();
   const {toast} = useToast()
 
   const onConfirm = async () => {
-  
+
     deleteUser(data.id)
       .then((res) => {
         setOpen(false);
@@ -46,7 +45,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             window.location.reload()
           }, 1000);
         }
-    }).catch(() => {
+      }).catch(() => {
         setOpen(false)
         toast({
           title: "Error",
@@ -54,28 +53,30 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           variant: 'destructive'
         })
 
-    })
+      })
   };
 
   return (
-    <>
-      <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        onConfirm={onConfirm}
-        loading={loading}
-      />
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+    <div>
+      {data.role !== "ADMIN" && (
+        <>
+          <AlertModal
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            onConfirm={onConfirm}
+            loading={loading}
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          {/*
+              {/*
           <DropdownMenuItem
             onClick={() => router.push(`/admin/users/${data.id}`)}
           >
@@ -83,11 +84,13 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </DropdownMenuItem>
 
           */}
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Delete
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
+              <DropdownMenuItem onClick={() => setOpen(true)}>
+                <Trash className="mr-2 h-4 w-4" /> Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
+      )}
+    </div>
   );
 };

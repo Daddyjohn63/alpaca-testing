@@ -45,8 +45,18 @@ export const columns: ColumnDef<TablePost>[] = [
     cell: ({row}) => (<div className="min-w-[100px]">{row.getValue("author")}</div>)
   },
   {
+    accessorKey: "category",
+    header: "Category"
+  },
+  {
     accessorKey: "status",
     header: "Status",
+    cell: ({row}) => {
+      return (
+        <span className={`${row.getValue("status") === "published" ? 'bg-green-500' : 'bg-red-500'} py-1 px-3 rounded-full`}>{row.getValue("status")}</span>
+      )
+
+    }
   },
   {
     accessorKey: "createdAt",
