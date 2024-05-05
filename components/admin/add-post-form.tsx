@@ -87,7 +87,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
   //Show image for post update
   useEffect(() => {
     if(postData) {
-      setImagePreview(`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${postData?.imagePath}`)
+      setImagePreview(`https://f005.backblazeb2.com/file/alpacastack-post-images/${postData?.imagePath}`)
     }
   },[postData])
 
