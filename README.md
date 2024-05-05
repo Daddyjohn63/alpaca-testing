@@ -45,3 +45,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Setup Tutorial
 - Testing
     
+
+## TODO:
+
+- [ ] Fix blog editor
+- [ ] Add media page
+- [ ] Finish add / edit categories
+- [ ] Add stripe webhooks
+
+
+
+
+
