@@ -30,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Edit } from "lucide-react";
 
 type AddPostFormProps = {
   categories: Category[]
@@ -65,22 +66,24 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
 export const AddPostForm = (props: AddPostFormProps) => {
   const {categories, postData} = props
 
+  //If postData exists and postData.id is not undefined, then its an edit post page. 
+  const editPost = postData && postData.id ? postData : undefined;
+
   const { update } = useSession();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
-  const [formContent, setFormContent] = useState<string | undefined>(postData?.content);
-  const [slugValue, setSlugValue] = useState<string>("");
   const [imagePreview, setImagePreview] = useState<string | undefined>();
-  const [formContentError, setFormContentError] = useState<boolean>(false);
+  const [editSlug, setEditSlug] = useState<boolean>(true)
 
   const form = useForm<z.infer<typeof AddPostSchema>>({
     resolver: zodResolver(AddPostSchema),
     defaultValues: {
       title: postData ? postData.title : '',
-      slug: postData ? postData.slug : '',
+      slug: '',
       status: postData ? postData.status : '',
       category: postData ? postData.categoryId : '',
+      content: postData ? postData.content: ''
     },
   });
 
@@ -94,38 +97,28 @@ export const AddPostForm = (props: AddPostFormProps) => {
   //Watch title input to create url friendly slug
   const watchTitle = form.watch("title");
 
+
+  // Enable auto slug creation and editing if edit slug is turned on (true)
   useEffect(() => {
-
-    // Converts title to kebab case, a url friendly slug
-    const urlFriendlySlug = kebabCase(watchTitle)
-
-    // Changes it visually on input field
-    form.setValue("slug", urlFriendlySlug)
-
-    //Sets slug in state for onSubmit
-    setSlugValue(urlFriendlySlug)
-
+    if(editSlug === true) {
+      // Converts title to kebab case, a url friendly slug
+      const urlFriendlySlug = kebabCase(watchTitle)
+      form.setValue("slug", urlFriendlySlug)
+    }
   }, [watchTitle, form]);
 
+  //If post slug already exists, then set edit slug to false and disable auto creation. 
+  useEffect(() => {
+    if(editPost){
+      setEditSlug(false)
+      form.setValue("slug", editPost.slug)
+    }
+  },[])
 
   const onSubmit = (values: z.infer<typeof AddPostSchema>) => {
 
     setError(undefined);
     setSuccess(undefined);
-
-     // Validate the editor content
-    if(!formContent) {
-      setFormContentError(true);
-      return
-    }
-    const contentValidationResults = BlogContentSchema.safeParse({ content: formContent });
-
-    setFormContentError(false);
-    if (!contentValidationResults.success) {
-      setFormContentError(true);
-      setError("Post unable to submit, form content is required")
-      return
-    } 
 
     let imageFilename: string | undefined;
 
@@ -141,7 +134,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
           method: 'POST',
           body: fileData
         })
-      
+
         if(!res.ok) {
           setError("Something went wrong, image did not upload.")
           return
@@ -151,14 +144,15 @@ export const AddPostForm = (props: AddPostFormProps) => {
 
       }
 
+
       //Craft payload data for database
       const payload: AddPostPayload = {
         postId: postData ? postData.id : '',
         title: values.title,
-        slug: slugValue,
+        slug: values.slug,
         status: values.status,
         category: values.category,
-        content: formContent,
+        content: values.content,
         imagePath: imageFilename,
       }
 
@@ -180,7 +174,9 @@ export const AddPostForm = (props: AddPostFormProps) => {
              }
            }
          })
-         .catch(() => setError("Could not add to post databse, something went wrong!"));
+         .catch((data) => {
+          setError(data.error)
+        });
     });
 
   };
@@ -220,23 +216,33 @@ export const AddPostForm = (props: AddPostFormProps) => {
                     <FormItem>
                       <FormLabel>URL Slug</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="top-10-ways-to-be-awesome"
-                          disabled={isPending}
-                        />
+                        <div className="flex gap-2 justify-center items-center">
+                          <Input
+                            {...field}
+                            placeholder="top-10-ways-to-be-awesome"
+                            disabled={isPending || editSlug === false}
+                          />
+                          <Edit className="border p-2 w-9 h-9 rounded-sm" onClick={() => setEditSlug(!editSlug)} />
+
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <FormItem>
-                  <FormLabel>Content</FormLabel>
-                  <TiptapEditor formContent={formContent} setFormContent={setFormContent} />
-                  {!!formContentError && 
-                    <p className="text-[0.8rem] font-medium text-destructive">Form content is required</p>
-                  }
-                </FormItem>
+                <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>TipTap</FormLabel>
+                      <FormControl>
+                        <TiptapEditor description={field.value} onChange={field.onChange} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </Card>
           </div>

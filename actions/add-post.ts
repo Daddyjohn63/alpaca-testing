@@ -23,23 +23,27 @@ export const addPost = async (values: Props) => {
 
   try {
 
-    //Check for duplicate posts
-    const postCount = await db.post.count({
+    //Check for duplicate slugs
+    const slugCheck = await db.post.findFirst({
       where: {
-        title: title
+        slug: slug
+      },
+      select: {
+        id: true,
+        slug: true,
       }
     })
 
-    // Add inremental number to slug post if duplicates found
-    let updatedSlug = slug;
-    if(postCount > 0) {
-      const nextPostNum = postCount + 1; 
-      updatedSlug = slug + '-' + nextPostNum.toString() 
+    if(!!slugCheck) {
+
+      //If its the same post as the one I am editing, then ignore the slug check. 
+      if(postId !== slugCheck.id){
+        return {error: "URL slug already taken, change it up!"}
+      }
     }
 
     //If post Id exists, then update post, else create new post
     if(postId !== '') {
-
 
       // Update existing post
       const data = await db.post.update({
@@ -48,7 +52,7 @@ export const addPost = async (values: Props) => {
         },
         data: {
           title,
-          slug: updatedSlug,
+          slug,
           content,
           authorId: user.id,
           status,
@@ -65,7 +69,7 @@ export const addPost = async (values: Props) => {
 
     } else {
 
-      console.log(imagePath)
+      //Add new post
       //Check if image is uploaded
       if(!imagePath) {
         return {error: "Post not added, need to upload featured image!"}
@@ -75,7 +79,7 @@ export const addPost = async (values: Props) => {
       const data = await db.post.create({
         data: {
           title,
-          slug: updatedSlug,
+          slug,
           content,
           authorId: user.id,
           status,
@@ -92,6 +96,6 @@ export const addPost = async (values: Props) => {
   }
   catch(e) {
     console.log(e)
-    return {error: "Post was not added, something went wrong"}
+    return {error: "Something went wrong, could not add post!"}
   }
 }

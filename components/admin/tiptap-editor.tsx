@@ -1,14 +1,9 @@
-import { EditorContent, EditorProvider, useCurrentEditor, useEditor, } from "@tiptap/react";
+import { type Editor, useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect, useState } from "react";
-import { Editor } from "@tiptap/core";
-
-
-interface FormContent {
-  formContent: string | undefined;
-  setFormContent: (value: string) => void
-}
-
+import { Bold, Text, Image as ImageIcon, Link as LinkIcon, Strikethrough, Italic, Code, List, ListOrdered, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6} from 'lucide-react'
+import { Toggle } from "@/components/ui/toggle"
+import Link from '@tiptap/extension-link'
+import Image from '@tiptap/extension-image'
 const MenuBar = ({ editor }: {editor: Editor | null}) => {
 
   if (!editor) {
@@ -16,261 +11,196 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
   }
 
   return (
-    <>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        disabled={!editor.can().chain().focus().toggleBold().run()}
-        className={`${
-          editor.isActive("bold")
-            ? "is-active bg-primary text-primary-foreground"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+    <div className="border-b border-gray-300 mb-2 bg-transparent py-2 flex flex-wrap gap-1">
+      <Toggle
+        pressed={editor.isActive("bold")}
+        onPressedChange={() => 
+          editor.chain().focus().toggleBold().run()
+        }
+        className={editor.isActive('bold') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        bold
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-        disabled={!editor.can().chain().focus().toggleItalic().run()}
-        className={`${
-          editor.isActive("italic")
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <Bold className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("italic")}
+        onPressedChange={() => 
+          editor.chain().focus().toggleItalic().run()
+        }
+        className={editor.isActive('italic') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        italic
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        disabled={!editor.can().chain().focus().toggleStrike().run()}
-        className={`${
-          editor.isActive("strike")
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <Italic className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("strikethrough")}
+        onPressedChange={() => 
+          editor.chain().focus().toggleStrike().run()
+        }
+        className={editor.isActive('strikethrough') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        strike
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        disabled={!editor.can().chain().focus().toggleCode().run()}
-        className={`${
-          editor.isActive("code")
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <Strikethrough className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("heading", {level: 1})}
+        onPressedChange={() => 
+          editor.chain().focus().toggleHeading({level:1}).run()
+        }
+        className={editor.isActive('heading1', { level: 1 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        code
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().unsetAllMarks().run()}
-        className="border border-border bg-background text-forground mb-2 mr-1 px-2 rounded"
+        <Heading1 className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("heading", {level: 2})}
+        onPressedChange={() => 
+          editor.chain().focus().toggleHeading({level:2}).run()
+        }
+        className={editor.isActive('heading', { level: 2 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        clear marks
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().clearNodes().run()}
-        className="border border-border bg-background text-forground mb-2 mr-1 px-2 rounded"
+        <Heading2 className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("heading", {level: 3})}
+        onPressedChange={() => 
+          editor.chain().focus().toggleHeading({level:3}).run()
+        }
+        className={editor.isActive('heading', { level: 3 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+
       >
-        clear nodes
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().setParagraph().run()}
-        className={`${
-          editor.isActive("paragraph")
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <Heading3 className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("heading",{level: 4})}
+        onPressedChange={() => 
+          editor.chain().focus().toggleHeading({level:4}).run()
+        }
+        className={editor.isActive('heading', { level: 4 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        paragraph
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={`${
-          editor.isActive("heading", { level: 1 })
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <Heading4 className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("heading", {level: 5})}
+        onPressedChange={() => 
+          editor.chain().focus().toggleHeading({level:5}).run()
+        }
+        className={editor.isActive('heading', { level: 5 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        h1
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={`${
-          editor.isActive("heading", { level: 2 })
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <Heading5 className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("heading", {level: 6})}
+        onPressedChange={() => 
+          editor.chain().focus().toggleHeading({level:6}).run()
+        }
+        className={editor.isActive('heading', { level: 6 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        h2
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={`${
-          editor.isActive("heading", { level: 3 })
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <Heading6 className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("bulletList")}
+        onPressedChange={() => 
+          editor.chain().focus().toggleBulletList().run()
+        }
+        className={editor.isActive('bulletList') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        h3
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={`${
-          editor.isActive("heading", { level: 4 })
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <List className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("orderedList")}
+        onPressedChange={() => 
+          editor.chain().focus().toggleOrderedList().run()
+        }
+        className={editor.isActive('orderedList') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        h4
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={`${
-          editor.isActive("heading", { level: 5 })
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <ListOrdered className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("link")}
+        onPressedChange={() => {
+          const previousUrl = editor.getAttributes('link').href
+          const url = window.prompt('URL', previousUrl)
+
+          // cancelled
+          if (url === null) {
+            return
+          }
+          // empty
+          if (url === '') {
+            editor.chain().focus().extendMarkRange('link').unsetLink()
+              .run()
+            return
+          }
+
+          editor.chain().focus().extendMarkRange('link').toggleLink({href: url, target: 'blank'}).run()
+        }
+        }
+        className={editor.isActive('link') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        h5
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={`${
-          editor.isActive("heading", { level: 6 })
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <LinkIcon className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("image")}
+        onPressedChange={() => {
+
+          const url = window.prompt('URL')
+            if(url) {
+            editor.chain().focus().setImage({src: url}).run()
+          }
+        }}
+        className={editor.isActive('image') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        h6
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={`${
-          editor.isActive("bulletList")
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
+        <ImageIcon className="h-4 w-4"/>
+      </Toggle>
+      <Toggle
+        pressed={editor.isActive("codeBlock")}
+        onPressedChange={() => 
+          editor.chain().focus().toggleCodeBlock().run()
+        }
+        className={editor.isActive('codeBlock') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
       >
-        bullet list
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        className={`${
-          editor.isActive("orderedList")
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
-      >
-        ordered list
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={`${
-          editor.isActive("codeBlock")
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
-      >
-        code block
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().toggleBlockquote().run()}
-        className={`${
-          editor.isActive("blockquote")
-            ? "is-active bg-primary text-background"
-            : "border border-border bg-background text-foreground"
-        } mb-2 mr-1 px-2 rounded`}
-      >
-        blockquote
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().setHorizontalRule().run()}
-        className="border border-border bg-background text-forground mb-2 mr-1 px-2 rounded"
-      >
-        horizontal rule
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().setHardBreak().run()}
-        className="border border-border bg-background text-forground mb-2 mr-1 px-2 rounded"
-      >
-        hard break
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().undo().run()}
-        disabled={!editor.can().chain().focus().undo().run()}
-        className="border border-border bg-background text-forground mb-2 mr-1 px-2 rounded"
-      >
-        undo
-      </button>
-      <button
-      type="button"
-        onClick={() => editor.chain().focus().redo().run()}
-        disabled={!editor.can().chain().focus().redo().run()}
-        className="border border-border bg-background text-forground mb-2 mr-1 px-2 rounded"
-      >
-        redo
-      </button>
-    </>
+        <Code className="h-4 w-4"/>
+      </Toggle>
+
+    </div>
   );
 };
 
 
 
-export const TiptapEditor = ({formContent, setFormContent}: FormContent) => {
+export const TiptapEditor = (
+  {
+    description,
+    onChange,
+  }: {
+    description: string,
+    onChange: (richText: string) => void
+  }) => {
 
   const editor = useEditor({
-    content: '',
+    content: description,
     extensions: [
-      // Color.configure({ types: [TextStyle.name, ListItem.name] }),
-      // TextStyle.configure({ types: [ListItem.name] }),
-      StarterKit.configure({
-        bulletList: {
-          keepMarks: true,
-          keepAttributes: false,
-        },
-        orderedList: {
-          keepMarks: true,
-          keepAttributes: false, 
-        },
+      StarterKit.configure({}),
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        validate: href => /^https?:\/\//.test(href),
       }),
+      Image.configure({
+        inline: true,
+      })
     ],
+    editorProps: {
+      attributes: {
+        class: "rounded-md text-background min-h-[150px] bg-input p-2"
+      }
+    },
     onUpdate({ editor }) {
-        setFormContent(editor.getHTML())
+      onChange(editor.getHTML())
     },
   });
 
-  useEffect(() => {
-    if(editor && editor.getHTML() !== formContent && formContent !== undefined) {
-        editor.commands.setContent(formContent);
-    }
-}, [formContent, editor]);
-  
   return (
-    <div className="bg-white p-3 rounded-md">
+    <div className="relative bg-white p-3 rounded-md">
       <MenuBar editor={editor} />
-      <EditorContent 
-        editor={editor} 
-        className="bg-input text-black p-2 border border-border rounded-md"/>
+      <EditorContent editor={editor} />
     </div>
   );
 };

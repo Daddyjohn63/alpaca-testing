@@ -78,10 +78,11 @@ const MAX_FILE_SIZE = 5000000; //5MB
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export const AddPostSchema = z.object({
-    title: z.string().min(1, "A title is required."),
+    title: z.string().min(1, "A title is required"),
     slug: z.string().min(1, "A url slug is required"),
     status: z.string().min(1, "Must select an option"),
-    category: z.string().min(1, "Must select an option."),
+    category: z.string().min(1, "Must select an option"),
+    content: z.string().min(1, "Blog content is required"),
     image: z
         .custom<File | undefined>()
         .optional()
