@@ -1,6 +1,6 @@
 "use client";
 import { Textarea } from "@/components/ui/textarea"
-import { addPost } from "@/actions/add-post";
+import { addCategory} from "@/actions/add-category";
 import { useState, useEffect, useTransition, ChangeEvent } from "react";
 import { ImageIcon } from "@radix-ui/react-icons";
 import { Card } from "@/components/ui/card";
@@ -37,96 +37,93 @@ type AddCategoryFormProps = {
   categoryData?: Category 
 }
 
-type AddPostPayload = {
-  postId: string;
-  title: string;
+type AddCategoryPayload = {
+  categoryId: string;
+  name: string;
   slug: string;
-  status: string;
-  category: string;
-  content: string,
-  imagePath: string | undefined,
+  description: string | undefined;
 }
 
 export const AddCategoryForm = (props: AddCategoryFormProps) => {
   const {categoryData} = props
 
   //If postData exists and postData.id is not undefined, then its an edit post page. 
+  const editCategory = categoryData && categoryData.id ? categoryData : undefined;
 
+  const { update } = useSession();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
-  const [imagePreview, setImagePreview] = useState<string | undefined>();
   const [editSlug, setEditSlug] = useState<boolean>(true)
 
   const form = useForm<z.infer<typeof AddCategorySchema>>({
     resolver: zodResolver(AddCategorySchema),
     defaultValues: {
+      name: categoryData?.name ?? '',
+      slug: '',
+      description: categoryData?.description ?? ''
     },
   });
 
+  //Watch name input to create url friendly slug
+  const watchName = form.watch("name");
+
+
+  // Enable auto slug creation and editing if edit slug is turned on (true)
+  useEffect(() => {
+    if(editSlug === true) {
+      // Converts title to kebab case, a url friendly slug
+      const urlFriendlySlug = kebabCase(watchName)
+      form.setValue("slug", urlFriendlySlug)
+    }
+  }, [watchName, form]);
+
+  //If post slug already exists, then set edit slug to false and disable auto creation. 
+  useEffect(() => {
+    if(editCategory){
+      setEditSlug(false)
+      form.setValue("slug", editCategory.slug)
+    }
+  },[])
+
+
   const onSubmit = (values: z.infer<typeof AddCategorySchema>) => {
-  //
-  //   setError(undefined);
-  //   setSuccess(undefined);
-  //
-  //   let imageFilename: string | undefined;
-  //
-  //   startTransition(async () => {
-  //
-  //     //Send post image to cloud storage if uploaded.
-  //     if(values.image) {
-  //
-  //       const fileData = new FormData()
-  //       fileData.set('file', values.image)
-  //
-  //       const res = await fetch('/api/upload-post-image', {
-  //         method: 'POST',
-  //         body: fileData
-  //       })
-  //
-  //       if(!res.ok) {
-  //         setError("Something went wrong, image did not upload.")
-  //         return
-  //       }
-  //       const data = await res.json()
-  //       imageFilename = await data.uuidFilename
-  //
-  //     }
-  //
-  //
-  //     //Craft payload data for database
-  //     const payload: AddPostPayload = {
-  //       postId: postData ? postData.id : '',
-  //       title: values.title,
-  //       slug: values.slug,
-  //       status: values.status,
-  //       category: values.category,
-  //       content: values.content,
-  //       imagePath: imageFilename,
-  //     }
-  //
-  //     //Add payload data to action to create in database
-  //      addPost(payload)
-  //        .then((data) => {
-  //          if (data.error) {
-  //            setError(data.error);
-  //          }
-  //     
-  //          if (data.success) {
-  //            update();
-  //            setSuccess(data.success);
-  //
-  //           //If there are duplicate posts, slug will finalize with incremental number at the end. 
-  //            if(data.data.slug) {
-  //              const updatedSlug = data.data.slug
-  //              form.setValue("slug", updatedSlug)
-  //            }
-  //          }
-  //        })
-  //        .catch((data) => {
-  //         setError(data.error)
-  //       });
-  //   });
+
+    setError(undefined);
+    setSuccess(undefined);
+
+    startTransition(async () => {
+
+      //Craft payload data for database
+      const payload: AddCategoryPayload = {
+        categoryId: categoryData?.id ?? '',
+        name: values.name,
+        slug: values.slug,
+        description: values.description,
+      }
+
+      //Add payload data to action to create in database
+       addCategory(payload)
+         .then((data) => {
+           if (data.error) {
+             setError(data.error);
+           }
+      
+           if (data.success) {
+             update();
+             setSuccess(data.success);
+
+            //If there are duplicate posts, slug will finalize with incremental number at the end. 
+             if(data.data.slug) {
+               const updatedSlug = data.data.slug
+               form.setValue("slug", updatedSlug)
+             }
+           }
+         })
+         .catch((data) => {
+          setError(data.error)
+        });
+    });
 
   };
 
@@ -203,7 +200,7 @@ export const AddCategoryForm = (props: AddCategoryFormProps) => {
           </div>
           <div className="md:w-[350px] space-y-5">
             <Button disabled={isPending} type="submit" className="w-full py-7">
-              Submit Post
+              Submit Category
             </Button>
           </div>
         </div>
