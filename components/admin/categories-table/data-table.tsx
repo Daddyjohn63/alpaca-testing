@@ -196,7 +196,7 @@ export function DataTable<TData, TValue>({
         }
         className="w-full md:max-w-sm"
       />
-        <Link href="/admin/posts/add-category">
+        <Link href="/admin/categories/add-category">
           <Button className="gap-2">
             <Edit size={20} />Add Category
           </Button>

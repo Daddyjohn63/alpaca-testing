@@ -80,6 +80,7 @@ const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/web
 export const AddPostSchema = z.object({
     title: z.string().min(1, "A title is required"),
     slug: z.string().min(1, "A url slug is required"),
+    excerpt: z.string().optional(),
     status: z.string().min(1, "Must select an option"),
     category: z.string().min(1, "Must select an option"),
     content: z.string().min(1, "Blog content is required"),
@@ -90,3 +91,11 @@ export const AddPostSchema = z.object({
         .refine((file) => file === undefined || ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .webp formats are supported.")
 
 })
+
+export const AddCategorySchema = z.object({
+    name: z.string().min(1, "A name is required"),
+    slug: z.string().min(1, "A url slug is required"),
+    description: z.string().optional()
+
+})
+

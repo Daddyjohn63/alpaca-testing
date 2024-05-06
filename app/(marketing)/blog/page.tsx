@@ -18,6 +18,18 @@ const BlogPage = async({searchParams}: ParamsProps) => {
   const skip = (page - 1) * take
 
   const data = await db.post.findMany({
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      excerpt: true,
+      imagePath: true,
+      category: {
+        select: {
+          name: true,
+        },
+      },
+    },
     where: {
       status: 'published'
     },
@@ -52,16 +64,17 @@ const BlogPage = async({searchParams}: ParamsProps) => {
                   </Link>
                   <div className="space-y-1">
                     <Link href={`blog/${post.slug}`}>
-                      <h3 className="font-bold text-lg leading-6 hover:text-primary">{post.title}</h3>
+                      <h3 className="font-bold text-xl leading-7 hover:text-primary">{post.title}</h3>
                     </Link>
-                    <p className="text-sm text-foreground">excerpt here</p>
+                    {post.excerpt && 
+                      <p className="text-sm text-foreground/60">{post.excerpt}... <Link href={`blog/${post.slug}`} className="text-primary">[readmore]</Link></p>
+                    }
                     <div className="pt-2">
                     {/*
                       <p className="text-xs text-muted-foreground">Aug 24th, 2024</p>
                     */}
-                    <ul className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                      <li>#marketing</li>
-                      <li>#sales</li>
+                    <ul className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+                      <li><span>#{post.category.name}</span></li>
                     </ul>
                   </div>
                   </div>

@@ -1,4 +1,5 @@
 "use client";
+import { Textarea } from "@/components/ui/textarea";
 import { addPost } from "@/actions/add-post";
 import { useState, useEffect, useTransition, ChangeEvent } from "react";
 import { ImageIcon } from "@radix-ui/react-icons";
@@ -7,7 +8,7 @@ import { useSession } from "next-auth/react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AddPostSchema, BlogContentSchema } from "@/schemas";
+import { AddPostSchema} from "@/schemas";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
@@ -41,6 +42,7 @@ type AddPostPayload = {
   postId: string;
   title: string;
   slug: string;
+  excerpt: string | undefined;
   status: string;
   category: string;
   content: string,
@@ -79,11 +81,12 @@ export const AddPostForm = (props: AddPostFormProps) => {
   const form = useForm<z.infer<typeof AddPostSchema>>({
     resolver: zodResolver(AddPostSchema),
     defaultValues: {
-      title: postData ? postData.title : '',
+      title: postData?.title ?? '',
       slug: '',
-      status: postData ? postData.status : '',
-      category: postData ? postData.categoryId : '',
-      content: postData ? postData.content: ''
+      excerpt: postData?.excerpt ?? '',
+      status: postData?.status ?? '',
+      category: postData?.categoryId ?? '',
+      content: postData?.content ?? ''
     },
   });
 
@@ -150,6 +153,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
         postId: postData ? postData.id : '',
         title: values.title,
         slug: values.slug,
+        excerpt: values.excerpt,
         status: values.status,
         category: values.category,
         content: values.content,
@@ -225,6 +229,23 @@ export const AddPostForm = (props: AddPostFormProps) => {
                           <Edit className="border p-2 w-9 h-9 rounded-sm" onClick={() => setEditSlug(!editSlug)} />
 
                         </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="excerpt"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Experpt</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          {...field}
+                          disabled={isPending}
+                          className="bg-input text-black"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

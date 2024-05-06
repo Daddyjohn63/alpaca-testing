@@ -16,7 +16,7 @@ const AddPostPage = async() => {
     <div>
       <BreadCrumb items={breadcrumbItems} />
       <Heading
-        title={`Add Post`}
+        title="Add Post"
         description="Add blog post"
       /> 
       <AddPostForm categories={categories} />

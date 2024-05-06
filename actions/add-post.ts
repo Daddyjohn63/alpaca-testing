@@ -6,6 +6,7 @@ type Props = {
   postId: string;
   title: string;
   content: string;
+  excerpt?: string;
   slug: string;
   category: string;
   status: string;
@@ -19,7 +20,7 @@ export const addPost = async (values: Props) => {
     return {error: "Unauthenticated User"}
   }
   
-  const {postId, title, slug, imagePath, content, status, category} = values
+  const {postId, title, slug, excerpt, imagePath, content, status, category} = values
 
   try {
 
@@ -53,6 +54,7 @@ export const addPost = async (values: Props) => {
         data: {
           title,
           slug,
+          excerpt,
           content,
           authorId: user.id,
           status,
@@ -80,6 +82,7 @@ export const addPost = async (values: Props) => {
         data: {
           title,
           slug,
+          excerpt,
           content,
           authorId: user.id,
           status,
