@@ -99,3 +99,12 @@ export const AddCategorySchema = z.object({
 
 })
 
+export const AddMediaSchema = z.object({
+    altText: z.string().optional(),
+    image: z
+        .custom<File | undefined>()
+        .optional()
+        .refine((file) => file === undefined || file?.size <= MAX_FILE_SIZE, "Max image size is 5MB.")
+        .refine((file) => file === undefined || ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .webp formats are supported.")
+
+})

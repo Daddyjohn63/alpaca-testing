@@ -29,3 +29,20 @@ export function getYearStringFromDate(date: Date): string {
     return year 
 }
 
+export function getImageData(event: ChangeEvent<HTMLInputElement>) {
+
+
+  //FileList is immutable, so we need to create a new one
+  const dataTransfer = new DataTransfer();
+
+  // Add newly updaloded images
+  Array.from(event.target.files!).forEach((image) => 
+      dataTransfer.items.add(image as File)
+  );
+
+  const files = dataTransfer.files[0];
+  const displayUrl = URL.createObjectURL(event.target.files![0])
+
+  return {files, displayUrl };
+};
+

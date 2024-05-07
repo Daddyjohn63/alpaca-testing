@@ -91,6 +91,8 @@ model Post {
   slug       String    @unique
   excerpt    String?
   content    String
+  mediaId    Int?
+  media      Media?   @relation(fields: [mediaId], references: [id])
   imagePath  String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
@@ -99,13 +101,24 @@ model Post {
   category   Category @relation(fields: [categoryId], references: [id])
   authorId   String
   author     User      @relation(fields: [authorId], references: [id])
+  
 }
 
 model Category {
-  id    String    @id @default(cuid())
-  name  String @unique
-  slug  String @unique
+  id         String    @id @default(cuid())
+  name       String @unique
+  slug       String @unique
   description String?
-  status  String?    @default("draft")
-  posts Post[]
+  status     String?    @default("draft")
+  posts      Post[]
+}
+
+model Media {
+  id          Int      @id @default(autoincrement())
+  imagePath   String   @db.VarChar(255)
+  altText     String?  @db.VarChar(255)
+  description String?  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  posts       Post[]
 }

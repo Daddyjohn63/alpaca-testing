@@ -40,7 +40,13 @@ const BlogPage = async({searchParams}: ParamsProps) => {
     },
   })
 
-  const count = await db.post.count()
+  //Count total published posts for pagination
+  const count = await db.post.count({
+    where: {
+      status: 'published'
+    }
+  })
+
   const totalPages = Math.ceil(count / take);
 
   return (
@@ -84,7 +90,7 @@ const BlogPage = async({searchParams}: ParamsProps) => {
           </div>
         </div>
         <div className="pt-10">
-          <PaginationControls totalPages={totalPages} page={page}/>
+          {count > 0 ? <PaginationControls totalPages={totalPages} page={page}/> : ''}
         </div>
       </section>
     </div>

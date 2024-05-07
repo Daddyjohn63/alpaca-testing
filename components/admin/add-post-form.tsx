@@ -1,4 +1,5 @@
 "use client";
+import { getImageData } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { addPost } from "@/actions/add-post";
 import { useState, useEffect, useTransition, ChangeEvent } from "react";
@@ -49,21 +50,6 @@ type AddPostPayload = {
   imagePath: string | undefined,
 }
 
-function getImageData(event: ChangeEvent<HTMLInputElement>) {
-
-  //FileList is immutable, so we need to create a new one
-  const dataTransfer = new DataTransfer();
-
-  // Add newly updaloded images
-  Array.from(event.target.files!).forEach((image) => 
-      dataTransfer.items.add(image as File)
-  );
-
-  const files = dataTransfer.files[0];
-  const displayUrl = URL.createObjectURL(event.target.files![0])
-
-  return {files, displayUrl };
-};
 
 export const AddPostForm = (props: AddPostFormProps) => {
   const {categories, postData} = props
