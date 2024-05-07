@@ -18,7 +18,7 @@ const breadcrumbItems = [{ title: "Media", link: "/admin/media" }];
 const MediaPage = async ({searchParams}: ParamsProps) => {
 
   const page = Number(searchParams.page) || 1;
-  const take = Number(searchParams.take) || 9;
+  const take = Number(searchParams.take) || 18;
   const skip = (page - 1) * take
 
   const data = await db.media.findMany({
