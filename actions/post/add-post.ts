@@ -10,7 +10,7 @@ type Props = {
   slug: string;
   category: string;
   status: string;
-  imagePath: string | undefined;
+  imagePath: string | undefined | null;
 }
 
 export const addPost = async (values: Props) => {
@@ -59,7 +59,7 @@ export const addPost = async (values: Props) => {
           authorId: user.id,
           status,
           categoryId: category,
-          imagePath: imagePath
+          imagePath: imagePath === null ? null : imagePath
         },
         select: {
           slug: true,

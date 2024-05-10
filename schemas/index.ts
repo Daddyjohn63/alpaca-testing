@@ -86,9 +86,9 @@ export const AddPostSchema = z.object({
     content: z.string().min(1, "Blog content is required"),
     image: z
         .custom<File | undefined>()
-        .optional()
         .refine((file) => file === undefined || file?.size <= MAX_FILE_SIZE, "Max image size is 5MB.")
         .refine((file) => file === undefined || ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .webp formats are supported.")
+        .optional()
 
 })
 

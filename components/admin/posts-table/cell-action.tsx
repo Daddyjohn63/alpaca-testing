@@ -13,7 +13,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { type TablePost } from "@/types";
 import { useToast } from "@/components/ui/use-toast";
-import { deletePost } from "@/actions/delete-post";
+import { deletePost } from "@/actions/post/delete-post";
 
 interface CellActionProps {
   data: TablePost;

@@ -13,7 +13,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { type TableCategories } from "@/types";
 import { useToast } from "@/components/ui/use-toast";
-import { deleteCategory } from "@/actions/delete-category";
+import { deleteCategory } from "@/actions/category/delete-category";
 
 interface CellActionProps {
   data: TableCategories;

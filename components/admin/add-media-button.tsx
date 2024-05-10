@@ -25,7 +25,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { addMedia } from "@/actions/add-media";
+import { addMedia } from "@/actions/media/add-media";
 
 type AddImagePayload = {
   imagePath: string | undefined,

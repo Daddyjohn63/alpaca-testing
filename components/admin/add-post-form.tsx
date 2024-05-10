@@ -1,7 +1,8 @@
 "use client";
+//TODO: Refactor Page
 import { getImageData } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
-import { addPost } from "@/actions/add-post";
+import { addPost } from "@/actions/post/add-post";
 import { useState, useEffect, useTransition, ChangeEvent } from "react";
 import { ImageIcon } from "@radix-ui/react-icons";
 import { Card } from "@/components/ui/card";
@@ -17,6 +18,8 @@ import { FormSuccess } from "@/components/form-success";
 import { TiptapEditor } from "@/components/admin/tiptap-editor";
 import {kebabCase} from "change-case";
 import { type Category, type Post } from "@prisma/client";
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Form,
   FormField,
@@ -32,7 +35,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Edit } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Edit, XIcon } from "lucide-react";
+import { AddMediaGrid } from "./add-media-grid";
+import { getSelectMedia} from "@/actions/media/get-media";
 
 type AddPostFormProps = {
   categories: Category[]
@@ -47,12 +60,14 @@ type AddPostPayload = {
   status: string;
   category: string;
   content: string,
-  imagePath: string | undefined,
+  imagePath: string | undefined | null,
 }
 
 
 export const AddPostForm = (props: AddPostFormProps) => {
   const {categories, postData} = props
+
+  const bucketUrl = 'https://f005.backblazeb2.com/file/alpacastack-post-images'
 
   //If postData exists and postData.id is not undefined, then its an edit post page. 
   const editPost = postData && postData.id ? postData : undefined;
@@ -62,7 +77,15 @@ export const AddPostForm = (props: AddPostFormProps) => {
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
   const [imagePreview, setImagePreview] = useState<string | undefined>();
+  const [imagePath, setImagePath] = useState<string | undefined | null>();
   const [editSlug, setEditSlug] = useState<boolean>(true)
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
+
+  const [mediaData, setMediaData] = useState<any>()
+  const [mediaSkip, setMediaSkip] = useState<number>(0)
+  const [mediaLimit, setMediaLimit] = useState<number>(12)
+
+
 
   const form = useForm<z.infer<typeof AddPostSchema>>({
     resolver: zodResolver(AddPostSchema),
@@ -79,12 +102,22 @@ export const AddPostForm = (props: AddPostFormProps) => {
   //Show image for post update
   useEffect(() => {
     if(postData) {
-      setImagePreview(`https://f005.backblazeb2.com/file/alpacastack-post-images/${postData?.imagePath}`)
+      setImagePreview(`${bucketUrl}/${postData?.imagePath}`)
+      setImagePath(postData?.imagePath)
     }
+
   },[postData])
 
   //Watch title input to create url friendly slug
   const watchTitle = form.watch("title");
+
+  //If post slug already exists, then set edit slug to false and disable auto creation. 
+  useEffect(() => {
+    if(editPost){
+      setEditSlug(false)
+      form.setValue("slug", editPost.slug)
+    }
+  },[])
 
 
   // Enable auto slug creation and editing if edit slug is turned on (true)
@@ -96,24 +129,59 @@ export const AddPostForm = (props: AddPostFormProps) => {
     }
   }, [watchTitle, form]);
 
-  //If post slug already exists, then set edit slug to false and disable auto creation. 
-  useEffect(() => {
-    if(editPost){
-      setEditSlug(false)
-      form.setValue("slug", editPost.slug)
-    }
-  },[])
+
+  const getInitMediaData = async () => {
+    const data = await getSelectMedia(mediaLimit,0)
+    const media = data.data
+    setMediaData(media)
+
+  }
+
+  useEffect(()=> {
+    const fetchMediaData = async() => {
+      const data = await getSelectMedia(mediaLimit, mediaSkip)
+      //TODO: Add error handling
+    
+      if(!data.data || data.data.length <= 0) {
+        return
+      }
+      setMediaData(data.data)
+    };
+    fetchMediaData()
+
+  },[mediaSkip, mediaLimit])
+
+  const getNextMediaData = async () => {
+    setMediaSkip(currentTake => currentTake + mediaLimit)
+
+  }
+  const getPrevMediaData = async () => {
+    setMediaSkip(currentTake => Math.max(0, currentTake - mediaLimit))
+  }
+
+  const applyMediaToFeaturedImage = (imagePath:string) => {
+    setImagePreview(`${bucketUrl}/${imagePath}`)
+    setOpenDialog(false)
+    setImagePath(imagePath)
+  }
+
+  const removePreviewImage = () => {
+    setImagePreview(undefined)
+    setImagePath(null)
+    form.setValue('image', undefined)
+  }
 
   const onSubmit = (values: z.infer<typeof AddPostSchema>) => {
-
     setError(undefined);
     setSuccess(undefined);
 
-    let imageFilename: string | undefined;
+    let imageFilename = imagePath;
+
+    console.log(imageFilename)
+    console.log(values)
 
     startTransition(async () => {
-
-      //Send post image to cloud storage if uploaded.
+      //if values.image exists, then upload new image to cloud storage and overwrite imageFilename for db
       if(values.image) {
 
         const fileData = new FormData()
@@ -133,7 +201,6 @@ export const AddPostForm = (props: AddPostFormProps) => {
 
       }
 
-
       //Craft payload data for database
       const payload: AddPostPayload = {
         postId: postData ? postData.id : '',
@@ -143,7 +210,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
         status: values.status,
         category: values.category,
         content: values.content,
-        imagePath: imageFilename,
+        imagePath: imageFilename || null,
       }
 
       //Add payload data to action to create in database
@@ -244,7 +311,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
                     <FormItem>
                       <FormLabel>TipTap</FormLabel>
                       <FormControl>
-                        <TiptapEditor description={field.value} onChange={field.onChange} />
+                        <TiptapEditor disabled={isPending} description={field.value} onChange={field.onChange} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -309,7 +376,8 @@ export const AddPostForm = (props: AddPostFormProps) => {
             <FormItem>
               <FormLabel>Post Image</FormLabel>
                   {!!imagePreview ? (
-                    <div className="bg-muted flex justify-center items-center p-3 rounded-md border border-border">
+                    <div className="relative bg-muted flex justify-center items-center p-3 rounded-md border border-border">
+                      <XIcon onClick={removePreviewImage} className="absolute top-0 right-0 m-4"/>
                       <img src={imagePreview} alt="Image preview" className="rounded-sm" />
                     </div>
                   ) : (
@@ -319,25 +387,96 @@ export const AddPostForm = (props: AddPostFormProps) => {
 
                   )}
               <FormControl>
-                <Input 
-                    id="picture"
-                    type="file"
-                    className="file:bg-muted-foreground file:rounded-sm file:mr-4 bg-muted border-border text-foreground pt-[6px]"
-                    {...rest}
-                    onChange={(event) => {
-                      if(!event.target.files || event.target.files.length <= 0) {
-                        return
-                      }
-                      const {files, displayUrl} = getImageData(event)
-                      setImagePreview(displayUrl);
-                      onChange(files)
-                    }}
-                    />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                        <Button asChild variant="outline" className="border border-border">
+                          <DialogTrigger className="w-full">
+                            Add Featured Image
+                          </DialogTrigger>
+                        </Button>
+                        <DialogContent className="max-w-4xl">
+                          <DialogHeader>
+                            <DialogTitle>
+                            </DialogTitle>
+                            <DialogDescription>
+
+                                <FormError message={error} /> 
+                                <FormField
+                                  control={form.control}
+                                  name="image"
+                                  render={({ field: { onChange, value, ...rest} }) => (
+                                    <FormItem>
+                                      <FormLabel>Upload Image</FormLabel>
+                                      <FormControl>
+
+
+                            <Tabs defaultValue="upload" className="min-h-[400px]">
+                                      <div className="text-center mb-4">
+                              <TabsList className="max-w-[400px]">
+                                <TabsTrigger value="file-upload">File Upload</TabsTrigger>
+                                <TabsTrigger value="choose-media" onClick={getInitMediaData}>Choose Media</TabsTrigger>
+                              </TabsList>
+                              </div>
+                              <TabsContent value="file-upload">
+                                        <div className="h-[500px] flex items-center justify-center">
+
+                                        <Input 
+                                          type="file"
+                                          className="file:bg-muted-foreground file:rounded-sm file:mr-4 bg-muted border-border text-foreground pt-[6px] max-w-[400px]"
+                                          {...rest}
+                                          onChange={(event) => {
+                                            if(!event.target.files || event.target.files.length <= 0) {
+                                              return
+                                            }
+                                            const {files, displayUrl} = getImageData(event)
+                                            setImagePreview(displayUrl)
+                                            onChange(files)
+                                            setOpenDialog(false)
+                                          }}
+                                        />
+                                        </div>
+
+                                      </TabsContent>
+                                      <TabsContent value="choose-media">
+                                        <div className="flex flex-wrap gap-3 max-h-[450px] overflow-scroll mb-3">
+                                          {mediaData && mediaData.map((item) => {
+                                            return(
+                                              <div className="w-[200px] h-[140px] overflow-hidden">
+                                                <img src={`${bucketUrl}/${item.imagePath}`} onClick={() => applyMediaToFeaturedImage(item.imagePath)}/>
+                                              </div>
+                                            )
+                                          })}
+                                        </div>
+                                        <div className="flex justify-center gap-5">
+                                          <Button disabled={mediaSkip <= 0 ? true : false} onClick={() => getPrevMediaData()}>Prev</Button>
+                                          <Button disabled={!!mediaData && mediaData.length < mediaLimit ? true : false} onClick={() => getNextMediaData()}>Next</Button>
+                                        </div>
+
+                                      </TabsContent>
+                                    </Tabs>
+
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+
+
+                            {/*
+                              <div className="text-right mt-5">
+                                <Button type="submit">Add Image</Button>
+                              </div>
+                            */}
+
+                          </DialogDescription>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
         </div>
       </form>

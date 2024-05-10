@@ -18,7 +18,7 @@ const breadcrumbItems = [{ title: "Media", link: "/admin/media" }];
 const MediaPage = async ({searchParams}: ParamsProps) => {
 
   const page = Number(searchParams.page) || 1;
-  const take = Number(searchParams.take) || 18;
+  const take = Number(searchParams.take) || 16;
   const skip = (page - 1) * take
 
   const data = await db.media.findMany({
@@ -46,7 +46,6 @@ const MediaPage = async ({searchParams}: ParamsProps) => {
         <AddMediaButton />
       </div>
       <div>
-        <div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {data && data.map((media) => {
 
@@ -69,7 +68,6 @@ const MediaPage = async ({searchParams}: ParamsProps) => {
         <div className="pt-10">
           {count > 0 ? <PaginationControls totalPages={totalPages} page={page}/> : ''}
         </div>
-      </div>
 
     </div>
   )

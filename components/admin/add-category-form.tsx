@@ -1,6 +1,6 @@
 "use client";
 import { Textarea } from "@/components/ui/textarea"
-import { addCategory} from "@/actions/add-category";
+import { addCategory} from "@/actions/category/add-category";
 import { useState, useEffect, useTransition, ChangeEvent } from "react";
 import { ImageIcon } from "@radix-ui/react-icons";
 import { Card } from "@/components/ui/card";

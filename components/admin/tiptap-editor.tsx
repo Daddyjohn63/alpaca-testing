@@ -4,6 +4,9 @@ import { Bold, Text, Image as ImageIcon, Link as LinkIcon, Strikethrough, Italic
 import { Toggle } from "@/components/ui/toggle"
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
+
+
+
 const MenuBar = ({ editor }: {editor: Editor | null}) => {
 
   if (!editor) {
@@ -11,7 +14,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
   }
 
   return (
-    <div className="border-b border-gray-300 mb-2 bg-transparent py-2 flex flex-wrap gap-1">
+    <div className="border-b border-gray-300 mb-2 bg-transparent pb-2 flex flex-wrap gap-1">
       <Toggle
         pressed={editor.isActive("bold")}
         onPressedChange={() => 
@@ -167,15 +170,18 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
 
 export const TiptapEditor = (
   {
+    disabled,
     description,
     onChange,
   }: {
+    disabled: boolean,
     description: string,
     onChange: (richText: string) => void
   }) => {
 
   const editor = useEditor({
     content: description,
+    editable: disabled,
     extensions: [
       StarterKit.configure({}),
       Link.configure({
@@ -189,7 +195,7 @@ export const TiptapEditor = (
     ],
     editorProps: {
       attributes: {
-        class: "rounded-md text-background min-h-[150px] bg-input p-2"
+        class: "rounded-md text-background min-h-[150px] p-2"
       }
     },
     onUpdate({ editor }) {
@@ -198,7 +204,7 @@ export const TiptapEditor = (
   });
 
   return (
-    <div className="relative bg-white p-3 rounded-md">
+    <div className={`${disabled ? 'bg-white/50' : 'bg-white'} relative p-3 rounded-md`}>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>
