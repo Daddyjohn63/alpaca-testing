@@ -19,10 +19,10 @@ export default auth((req) => {
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
   //Be careful the order of this if clause matters. If wrong it will result in infinate redirect loop.
+
   if (isApiAuthRoute) {
     return null;
   }
-
 
   if (isAuthRoute) {
     if (isLoggedIn) {
