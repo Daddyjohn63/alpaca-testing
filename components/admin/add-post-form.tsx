@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { getImageData } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { updatePost } from "@/actions/post/update-post";
@@ -392,7 +393,14 @@ export const AddPostForm = (props: AddPostFormProps) => {
                     <div className="relative bg-muted flex justify-center items-center p-3 rounded-md border border-border">
 
                       <XIcon onClick={removeFeaturedImage} className="absolute top-0 right-0 m-4 p-[4px] bg-destructive text-white rounded-full"/>
-                      <img src={imagePreview} alt="Image preview" className="rounded-sm" />
+                      <Image 
+                        src={imagePreview} 
+                        alt="Image preview" 
+                        className="rounded-sm"
+                        width="230"
+                        height="160"
+                        priority
+                      />
                     </div>
                   ) : (
                       <div className="bg-muted flex justify-center aspect-video items-center p-3 rounded-md border border-border">

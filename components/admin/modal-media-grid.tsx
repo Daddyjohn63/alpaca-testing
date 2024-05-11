@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { getSelectMedia } from "@/actions/media/get-media"
@@ -49,7 +50,13 @@ export const ModalMediaGrid = (props: ModalMediaGridProps) => {
             {mediaData && mediaData.map((image: Media) => {
               return(
                 <div key={image.id} className="w-[200px] h-[140px] overflow-hidden">
-                  <img src={`${bucketUrl}/${image.imagePath}`} onClick={() => setMediaObj(image)}/>
+                  <Image 
+                    src={`${bucketUrl}/${image.imagePath}`} 
+                    onClick={() => setMediaObj(image)}
+                    alt="media image"
+                    width="200"
+                    height="130"
+                  />
                 </div>
               )
             })}

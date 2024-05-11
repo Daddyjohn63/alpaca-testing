@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { PaginationControls } from "@/components/pagination-controls";
 import Link from "next/link";
 import { AddMediaButton } from "@/components/admin/add-media-button";
+import Image from "next/image";
 
 
 type ParamsProps = {
@@ -53,10 +54,12 @@ const MediaPage = async ({searchParams}: ParamsProps) => {
                 <div key={media.id} className="space-y-4">
                   <Link href={`blog/${media.id}`}>
                     <div className="w-full aspect-video rounded-md overflow-hidden flex items-center justify-center bg-muted border-2 border-transparent hover:border-primary">
-                      <img
+                      <Image
                         src={`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${media.imagePath}`}
                         className="w-full"
                         alt={media.altText || 'media item'}
+                        width="550"
+                        height="310"
                       />
                     </div>
                   </Link>

@@ -65,10 +65,12 @@ const BlogPage = async({searchParams}: ParamsProps) => {
                   <Link href={`blog/${post.slug}`}>
                     <div className="w-full aspect-video rounded-md overflow-hidden flex items-center justify-center bg-muted border-2 border-transparent hover:border-primary">
                       {!!post.media && (
-                        <img
+                        <Image
                           src={`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${post.media.imagePath}`}
                           className="w-full"
                           alt={post.title}
+                          width="570"
+                          height="320"
                         />
                       )}
                     </div>

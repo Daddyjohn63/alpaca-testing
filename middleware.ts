@@ -4,36 +4,30 @@ import authConfig from "@/auth.config";
 
 import {
   DEFAULT_LOGIN_REDIRECT,
+  isUnderConstruction,
+  underConstructionRoutes,
   apiAuthPrefix,
   authRoutes,
   publicRoutes,
-  underConstructionRoutes,
 } from "@/routes";
 
 export const { auth } = NextAuth(authConfig);
-
 
 //This middleware has been setup to restrict all sites by default. Only the allowed sites in routes.ts are unrestricted.
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
-
+  
+  const isUnderConstructionRoutes = underConstructionRoutes.includes(nextUrl.pathname)
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isUnderConstructionRoute = underConstructionRoutes.includes(nextUrl.pathname);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith('/blog');
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
   //Be careful the order of this if clause matters. If wrong it will result in infinate redirect loop.
 
+
   if (isApiAuthRoute) {
     return null;
-  }
-
-  if (isUnderConstructionRoute) {
-    if(!isLoggedIn) {
-      console.log("Under Construction")
-      return Response.redirect(new URL('/under-construction', nextUrl));
-    }
   }
 
   if (isAuthRoute) {
@@ -41,6 +35,24 @@ export default auth((req) => {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
     return null
+  }
+
+  if (isUnderConstruction && !isUnderConstructionRoutes) {
+    if(!isLoggedIn && nextUrl.pathname.startsWith('/dashboard')) {
+      return Response.redirect(new URL('/login', nextUrl))
+    }
+    if(!nextUrl.pathname.startsWith('/admin')) {
+      return Response.redirect(new URL('/under-construction', nextUrl));
+    }
+    return null
+  }
+
+  if(!isUnderConstruction && isLoggedIn && nextUrl.pathname === '/under-construction') {
+    return Response.redirect(new URL('/', nextUrl))
+  }
+
+  if(isUnderConstruction && isUnderConstructionRoutes) {
+    return
   }
 
   if (!isLoggedIn && !isPublicRoute) {
@@ -55,6 +67,7 @@ export default auth((req) => {
 
     return Response.redirect(new URL(`/login?callbackUrl=${encodedCallbackUrl}`, nextUrl));
   }
+
   return null;
 });
 

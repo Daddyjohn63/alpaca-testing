@@ -1,12 +1,15 @@
 /**
- * An array of routes that redirect to under construction page
+ * An array of routes that are availble while under construction
  * The routes do not require authentication
  * @type {string[]}
  */
 
+export const isUnderConstruction = false;
 export const underConstructionRoutes = [
-    "/"
-]
+    "/under-construction",
+    "/admin",
+    "/login"
+];
 
 /**
  * An array of routes that are accessible to the public
@@ -16,10 +19,8 @@ export const underConstructionRoutes = [
 
 export const publicRoutes = [
     "/new-verification",
-    "/under-construction",
     "/",
 ];
-
 
 /**
  * An array of routes that are used for authentication
