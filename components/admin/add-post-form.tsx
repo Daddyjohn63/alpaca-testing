@@ -1,9 +1,9 @@
 "use client";
-//TODO: Refactor Page
 import { getImageData } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
+import { updatePost } from "@/actions/post/update-post";
 import { addPost } from "@/actions/post/add-post";
-import { useState, useEffect, useTransition, ChangeEvent } from "react";
+import { useState, useEffect, useTransition} from "react";
 import { ImageIcon } from "@radix-ui/react-icons";
 import { Card } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
@@ -17,8 +17,7 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { TiptapEditor } from "@/components/admin/tiptap-editor";
 import {kebabCase} from "change-case";
-import { type Category, type Post } from "@prisma/client";
-
+import { type Category } from "@prisma/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Form,
@@ -44,84 +43,99 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Edit, XIcon } from "lucide-react";
-import { AddMediaGrid } from "./add-media-grid";
-import { getSelectMedia} from "@/actions/media/get-media";
+import { ModalMediaGrid } from "./modal-media-grid";
+
+type Media = {
+  id: number;
+  imagePath: string;
+}
+type Post = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string;
+  mediaId: number | null;
+  createdAt: Date;
+  updatedAt: Date;
+  status: string;
+  categoryId: string;
+  authorId: string; 
+  media: Media | null; 
+} 
 
 type AddPostFormProps = {
-  categories: Category[]
-  postData?: Post 
+  categories: Category[];
+  postData?: Post
 }
 
 type AddPostPayload = {
-  postId: string;
+  postId: string | undefined;
   title: string;
   slug: string;
-  excerpt: string | undefined;
+  excerpt: string | undefined | null;
   status: string;
   category: string;
-  content: string,
-  imagePath: string | undefined | null,
+  content: string;
+  imagePath: string | undefined | null;
+  existingImageId: number | undefined,
+  deleteImage: boolean;
 }
 
-
 export const AddPostForm = (props: AddPostFormProps) => {
+
   const {categories, postData} = props
 
   const bucketUrl = 'https://f005.backblazeb2.com/file/alpacastack-post-images'
 
   //If postData exists and postData.id is not undefined, then its an edit post page. 
-  const editPost = postData && postData.id ? postData : undefined;
+  const existingPost = postData && postData.id ? postData : undefined;
 
   const { update } = useSession();
+
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
   const [imagePreview, setImagePreview] = useState<string | undefined>();
-  const [imagePath, setImagePath] = useState<string | undefined | null>();
+  const [deleteImage, setDeleteImage] = useState<boolean>(false)
+  const [existingImage, setExistingImage] = useState<Media | undefined>();
+
   const [editSlug, setEditSlug] = useState<boolean>(true)
   const [openDialog, setOpenDialog] = useState<boolean>(false)
-
-  const [mediaData, setMediaData] = useState<any>()
-  const [mediaSkip, setMediaSkip] = useState<number>(0)
-  const [mediaLimit, setMediaLimit] = useState<number>(12)
-
-
 
   const form = useForm<z.infer<typeof AddPostSchema>>({
     resolver: zodResolver(AddPostSchema),
     defaultValues: {
-      title: postData?.title ?? '',
+      title: existingPost?.title ?? '',
       slug: '',
-      excerpt: postData?.excerpt ?? '',
-      status: postData?.status ?? '',
-      category: postData?.categoryId ?? '',
-      content: postData?.content ?? ''
+      excerpt: existingPost?.excerpt ?? '',
+      status: existingPost?.status ?? '',
+      category: existingPost?.categoryId ?? '',
+      content: existingPost?.content ?? ''
     },
   });
-
-  //Show image for post update
-  useEffect(() => {
-    if(postData) {
-      setImagePreview(`${bucketUrl}/${postData?.imagePath}`)
-      setImagePath(postData?.imagePath)
-    }
-
-  },[postData])
 
   //Watch title input to create url friendly slug
   const watchTitle = form.watch("title");
 
-  //If post slug already exists, then set edit slug to false and disable auto creation. 
+  //Show image for post update
   useEffect(() => {
-    if(editPost){
-      setEditSlug(false)
-      form.setValue("slug", editPost.slug)
+    //Update featured image
+    if(existingPost && existingPost.media) {
+      setImagePreview(`${bucketUrl}/${existingPost.media.imagePath}`)
+      setExistingImage(existingPost?.media)
     }
-  },[])
 
+    //If post slug already exists, then set edit slug to false and disable auto creation. 
+    if(existingPost) {
+      setEditSlug(false)
+      form.setValue("slug", existingPost.slug)
+    }
 
-  // Enable auto slug creation and editing if edit slug is turned on (true)
+  },[postData])
+
   useEffect(() => {
+    // Enable auto slug creation and editing if edit slug is turned on (true)
     if(editSlug === true) {
       // Converts title to kebab case, a url friendly slug
       const urlFriendlySlug = kebabCase(watchTitle)
@@ -129,45 +143,18 @@ export const AddPostForm = (props: AddPostFormProps) => {
     }
   }, [watchTitle, form]);
 
-
-  const getInitMediaData = async () => {
-    const data = await getSelectMedia(mediaLimit,0)
-    const media = data.data
-    setMediaData(media)
-
-  }
-
-  useEffect(()=> {
-    const fetchMediaData = async() => {
-      const data = await getSelectMedia(mediaLimit, mediaSkip)
-      //TODO: Add error handling
-    
-      if(!data.data || data.data.length <= 0) {
-        return
-      }
-      setMediaData(data.data)
-    };
-    fetchMediaData()
-
-  },[mediaSkip, mediaLimit])
-
-  const getNextMediaData = async () => {
-    setMediaSkip(currentTake => currentTake + mediaLimit)
-
-  }
-  const getPrevMediaData = async () => {
-    setMediaSkip(currentTake => Math.max(0, currentTake - mediaLimit))
-  }
-
-  const applyMediaToFeaturedImage = (imagePath:string) => {
-    setImagePreview(`${bucketUrl}/${imagePath}`)
+  const setMediaObjToFeatured = (imageObj: Media) => {
+    setImagePreview(`${bucketUrl}/${imageObj.imagePath}`)
     setOpenDialog(false)
-    setImagePath(imagePath)
+    setDeleteImage(false)
+    setExistingImage(imageObj)
+    form.setValue('image', undefined)
   }
 
-  const removePreviewImage = () => {
+  const removeFeaturedImage = () => {
     setImagePreview(undefined)
-    setImagePath(null)
+    setExistingImage(undefined)
+    setDeleteImage(true)
     form.setValue('image', undefined)
   }
 
@@ -175,13 +162,11 @@ export const AddPostForm = (props: AddPostFormProps) => {
     setError(undefined);
     setSuccess(undefined);
 
-    let imageFilename = imagePath;
-
-    console.log(imageFilename)
-    console.log(values)
+    let uploadedImagePath: string
 
     startTransition(async () => {
       //if values.image exists, then upload new image to cloud storage and overwrite imageFilename for db
+      console.log(values.image)
       if(values.image) {
 
         const fileData = new FormData()
@@ -197,45 +182,79 @@ export const AddPostForm = (props: AddPostFormProps) => {
           return
         }
         const data = await res.json()
-        imageFilename = await data.uuidFilename
+        uploadedImagePath = await data.uuidFilename
 
       }
 
       //Craft payload data for database
       const payload: AddPostPayload = {
-        postId: postData ? postData.id : '',
+        postId: existingPost?.id,
         title: values.title,
         slug: values.slug,
         excerpt: values.excerpt,
         status: values.status,
         category: values.category,
         content: values.content,
-        imagePath: imageFilename || null,
+        imagePath: uploadedImagePath,
+        existingImageId: existingImage?.id,
+        deleteImage: deleteImage
       }
 
-      //Add payload data to action to create in database
-       addPost(payload)
-         .then((data) => {
-           if (data.error) {
-             setError(data.error);
-           }
-      
-           if (data.success) {
-             update();
-             setSuccess(data.success);
+      //Update existing post, else add new post.
+      if(!!existingPost) {
+        updatePost(payload)
+          .then((data) => {
 
-            //If there are duplicate posts, slug will finalize with incremental number at the end. 
-             if(data.data.slug) {
-               const updatedSlug = data.data.slug
-               form.setValue("slug", updatedSlug)
-             }
-           }
-         })
-         .catch((data) => {
-          setError(data.error)
-        });
+            if(data.error) {
+              setError(data.error)
+            }
+            if(data.success) {
+              update();
+              setSuccess(data.success)
+
+            }
+
+          })
+          .catch((data) => {
+              setError(data.error)
+          })
+         
+      }
+      else {
+        addPost(payload)
+          .then((data) => {
+            if (data.error) {
+              setError(data.error);
+            }
+
+            if (data.success) {
+              update();
+              setSuccess(data.success);
+
+              // //If there are duplicate posts, slug will finalize with incremental number at the end. 
+              // if(data.data.slug) {
+              //   const updatedSlug = data.data.slug
+              //   form.setValue("slug", updatedSlug)
+              // }
+            }
+          })
+          .catch((data) => {
+            setError(data.error)
+          });
+      }
+
+
+
+
+
+
+
+
+
+
+
+
     });
-
   };
 
   return (
@@ -245,8 +264,8 @@ export const AddPostForm = (props: AddPostFormProps) => {
           <div className="lg:w-full">
             <Card className="p-5" >
               <div className="mb-5">
-              <FormError message={error} />
-              <FormSuccess message={success} />
+                <FormError message={error} />
+                <FormSuccess message={success} />
               </div>
               <div className="space-y-4">
                 <FormField
@@ -370,87 +389,77 @@ export const AddPostForm = (props: AddPostFormProps) => {
             />
 
             <FormField
-          control={form.control}
-          name="image"
-          render={({ field: { onChange, value, ...rest} }) => (
-            <FormItem>
-              <FormLabel>Post Image</FormLabel>
+              control={form.control}
+              name="image"
+              render={({ field: { onChange, value, ...rest} }) => (
+                <FormItem>
+                  <FormLabel>Post Image</FormLabel>
                   {!!imagePreview ? (
                     <div className="relative bg-muted flex justify-center items-center p-3 rounded-md border border-border">
-                      <XIcon onClick={removePreviewImage} className="absolute top-0 right-0 m-4"/>
+
+                      <XIcon onClick={removeFeaturedImage} className="absolute top-0 right-0 m-4 p-[4px] bg-destructive text-white rounded-full"/>
                       <img src={imagePreview} alt="Image preview" className="rounded-sm" />
                     </div>
                   ) : (
-                  <div className="bg-muted flex justify-center aspect-video items-center p-3 rounded-md border border-border">
+                      <div className="bg-muted flex justify-center aspect-video items-center p-3 rounded-md border border-border">
                         <ImageIcon className="w-10 h-10 text-muted-foreground/70"/>
-                  </div>
+                      </div>
 
-                  )}
-              <FormControl>
-                      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-                        <Button asChild variant="outline" className="border border-border">
-                          <DialogTrigger className="w-full">
-                            Add Featured Image
-                          </DialogTrigger>
-                        </Button>
-                        <DialogContent className="max-w-4xl">
-                          <DialogHeader>
-                            <DialogTitle>
-                            </DialogTitle>
-                            <DialogDescription>
+                    )}
+                  <FormControl>
+                    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                      <Button asChild variant="outline" className="border border-border">
+                        <DialogTrigger className="w-full">
+                          Add Featured Image
+                        </DialogTrigger>
+                      </Button>
+                      <DialogContent className="max-w-4xl">
+                        <DialogHeader>
+                          <DialogTitle>
+                          </DialogTitle>
+                          <DialogDescription>
 
-                                <FormError message={error} /> 
-                                <FormField
-                                  control={form.control}
-                                  name="image"
-                                  render={({ field: { onChange, value, ...rest} }) => (
-                                    <FormItem>
-                                      <FormLabel>Upload Image</FormLabel>
-                                      <FormControl>
+                            <FormError message={error} /> 
+                            <FormField
+                              control={form.control}
+                              name="image"
+                              render={({ field: { onChange, value, ...rest} }) => (
+                                <FormItem>
+                                  <FormLabel>Upload Image</FormLabel>
+                                  <FormControl>
 
 
-                            <Tabs defaultValue="upload" className="min-h-[400px]">
+                                    <Tabs defaultValue="upload" className="min-h-[400px]">
                                       <div className="text-center mb-4">
-                              <TabsList className="max-w-[400px]">
-                                <TabsTrigger value="file-upload">File Upload</TabsTrigger>
-                                <TabsTrigger value="choose-media" onClick={getInitMediaData}>Choose Media</TabsTrigger>
-                              </TabsList>
-                              </div>
-                              <TabsContent value="file-upload">
+                                        <TabsList className="max-w-[400px]">
+                                          <TabsTrigger value="file-upload">File Upload</TabsTrigger>
+                                          <TabsTrigger value="choose-media">Choose Media</TabsTrigger>
+                                        </TabsList>
+                                      </div>
+                                      <TabsContent value="file-upload">
                                         <div className="h-[500px] flex items-center justify-center">
 
-                                        <Input 
-                                          type="file"
-                                          className="file:bg-muted-foreground file:rounded-sm file:mr-4 bg-muted border-border text-foreground pt-[6px] max-w-[400px]"
-                                          {...rest}
-                                          onChange={(event) => {
-                                            if(!event.target.files || event.target.files.length <= 0) {
-                                              return
-                                            }
-                                            const {files, displayUrl} = getImageData(event)
-                                            setImagePreview(displayUrl)
-                                            onChange(files)
-                                            setOpenDialog(false)
-                                          }}
-                                        />
+                                          <Input 
+                                            type="file"
+                                            className="file:bg-muted-foreground file:rounded-sm file:mr-4 bg-muted border-border text-foreground pt-[6px] max-w-[400px]"
+                                            {...rest}
+                                            onChange={(event) => {
+                                              if(!event.target.files || event.target.files.length <= 0) {
+                                                return
+                                              }
+                                              const {files, displayUrl} = getImageData(event)
+                                              setImagePreview(displayUrl)
+                                              setExistingImage(undefined)
+                                              onChange(files)
+                                              setDeleteImage(false)
+                                              setOpenDialog(false)
+                                            }}
+                                          />
                                         </div>
 
                                       </TabsContent>
                                       <TabsContent value="choose-media">
-                                        <div className="flex flex-wrap gap-3 max-h-[450px] overflow-scroll mb-3">
-                                          {mediaData && mediaData.map((item) => {
-                                            return(
-                                              <div className="w-[200px] h-[140px] overflow-hidden">
-                                                <img src={`${bucketUrl}/${item.imagePath}`} onClick={() => applyMediaToFeaturedImage(item.imagePath)}/>
-                                              </div>
-                                            )
-                                          })}
-                                        </div>
-                                        <div className="flex justify-center gap-5">
-                                          <Button disabled={mediaSkip <= 0 ? true : false} onClick={() => getPrevMediaData()}>Prev</Button>
-                                          <Button disabled={!!mediaData && mediaData.length < mediaLimit ? true : false} onClick={() => getNextMediaData()}>Next</Button>
-                                        </div>
-
+                                        <ModalMediaGrid setMediaObj={setMediaObjToFeatured}  />
                                       </TabsContent>
                                     </Tabs>
 
@@ -459,15 +468,6 @@ export const AddPostForm = (props: AddPostFormProps) => {
                                 </FormItem>
                               )}
                             />
-
-
-
-                            {/*
-                              <div className="text-right mt-5">
-                                <Button type="submit">Add Image</Button>
-                              </div>
-                            */}
-
                           </DialogDescription>
                         </DialogHeader>
                       </DialogContent>

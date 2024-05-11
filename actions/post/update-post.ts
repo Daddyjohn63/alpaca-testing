@@ -12,16 +12,17 @@ type Props = {
   status: string;
   imagePath: string | undefined | null;
   existingImageId: number | undefined;
+  deleteImage: boolean;
 }
 
-export const addPost = async (values: Props) => {
+export const updatePost = async (values: Props) => {
 
   const user = await currentUser()
   if(!user) {
     return {error: "Unauthenticated User"}
   }
 
-  const {postId,title, slug, excerpt, content, status, category, imagePath, existingImageId} = values
+  const {postId,title, slug, excerpt, content, status, category, imagePath, existingImageId, deleteImage} = values
 
   try {
 
@@ -46,24 +47,30 @@ export const addPost = async (values: Props) => {
 
 
     //If image uploaded then add image metadata to media table
-    let mediaId: number | undefined;
+    let mediaId: number | undefined | null;
 
-    //If user uploaded image
-    if(!!imagePath && !existingImageId) {
-      const imageData = await db.media.create({
-        data: {
-          imagePath: imagePath, 
-          altText: '',
-          description: '',
-        }
-      })
+    if(deleteImage) {
+      mediaId = null
+    } else {
 
-      mediaId = imageData.id
-    }
+      //If user uploaded image
+      if(!!imagePath && !existingImageId) {
+        const imageData = await db.media.create({
+          data: {
+            imagePath: imagePath, 
+            altText: '',
+            description: '',
+          }
+        })
 
-    //of user selected image already uploaded
-    if(!!existingImageId) {
-      mediaId = existingImageId
+        mediaId = imageData.id
+      }
+
+      //if user selected image already uploaded
+      if(!!existingImageId) {
+        mediaId = existingImageId
+      }
+
     }
 
     //Now add post data and image data to post table
@@ -80,8 +87,11 @@ export const addPost = async (values: Props) => {
     };
 
     // Add post
-    await db.post.create({
+    await db.post.update({
       data: addPostPayload,
+      where: {
+       id: postId
+      }
     })
 
     return {success: "Post had been successfully added!"}

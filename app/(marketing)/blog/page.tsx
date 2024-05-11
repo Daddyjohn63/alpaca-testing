@@ -23,7 +23,11 @@ const BlogPage = async({searchParams}: ParamsProps) => {
       title: true,
       slug: true,
       excerpt: true,
-      imagePath: true,
+      media: {
+        select: {
+          imagePath: true
+        }
+      },
       category: {
         select: {
           name: true,
@@ -56,16 +60,19 @@ const BlogPage = async({searchParams}: ParamsProps) => {
         <div className="container">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-14">
             {data && data.map((post) => {
+              console.log(post.slug)
 
               return (
                 <div key={post.id} className="space-y-4">
                   <Link href={`blog/${post.slug}`}>
                     <div className="w-full aspect-video rounded-md overflow-hidden flex items-center justify-center bg-muted border-2 border-transparent hover:border-primary">
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${post.imagePath}`}
-                        className="w-full"
-                        alt={post.title}
-                      />
+                      {!!post.media && (
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${post.media.imagePath}`}
+                          className="w-full"
+                          alt={post.title}
+                        />
+                      )}
                     </div>
                   </Link>
                   <div className="space-y-1">
@@ -76,13 +83,13 @@ const BlogPage = async({searchParams}: ParamsProps) => {
                       <p className="text-sm text-foreground/60">{post.excerpt}... <Link href={`blog/${post.slug}`} className="text-primary">[readmore]</Link></p>
                     }
                     <div className="pt-2">
-                    {/*
+                      {/*
                       <p className="text-xs text-muted-foreground">Aug 24th, 2024</p>
                     */}
-                    <ul className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-                      <li><span>#{post.category.name}</span></li>
-                    </ul>
-                  </div>
+                      <ul className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+                        <li><span>#{post.category.name}</span></li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               )

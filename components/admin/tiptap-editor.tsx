@@ -179,9 +179,10 @@ export const TiptapEditor = (
     onChange: (richText: string) => void
   }) => {
 
+
   const editor = useEditor({
     content: description,
-    editable: disabled,
+    editable: !disabled,
     extensions: [
       StarterKit.configure({}),
       Link.configure({

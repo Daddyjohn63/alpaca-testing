@@ -16,9 +16,6 @@ export const getAllMedia = async() => {
 }
 export const getSelectMedia = async(limit: number ,skip: number) => {
 
-  console.log(limit)
-  console.log(skip)
-
   const data = await db.media.findMany({
     take: limit,
     skip

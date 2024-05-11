@@ -21,25 +21,33 @@ const PostDetailsPage = async({params}: {params: Params}) => {
   const postData = await db.post.findFirst({
     where: {
       id
-    }
+    },
+    include: {
+      media: {
+        select: {
+          id: true,
+          imagePath: true,
+        }
+      }
+    },
+
   })
 
   if(!postData) {
     return notFound()
   }
 
-
   return (
     <div>
-        <BreadCrumb items={breadcrumbItems} />
-        <Heading
-          title="Edit Post"
-          description="Edit your post here"
-        /> 
-        <AddPostForm 
-          categories={categories}
-          postData={postData}
-        />
+      <BreadCrumb items={breadcrumbItems} />
+      <Heading
+        title="Edit Post"
+        description="Edit your post here"
+      /> 
+      <AddPostForm 
+        categories={categories}
+        postData={postData}
+      />
     </div>
   )
 }
