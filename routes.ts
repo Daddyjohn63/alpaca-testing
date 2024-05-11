@@ -1,4 +1,14 @@
 /**
+ * An array of routes that redirect to under construction page
+ * The routes do not require authentication
+ * @type {string[]}
+ */
+
+export const underConstructionRoutes = [
+    "/"
+]
+
+/**
  * An array of routes that are accessible to the public
  * The routes do not require authentication
  * @type {string[]}
@@ -6,8 +16,10 @@
 
 export const publicRoutes = [
     "/new-verification",
-    "/"
+    "/under-construction",
+    "/",
 ];
+
 
 /**
  * An array of routes that are used for authentication
@@ -35,5 +47,5 @@ export const apiAuthPrefix = "/api/auth";
  * The default redirect path after logging in.
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT = "/dashboard";
 
+export const DEFAULT_LOGIN_REDIRECT = "/dashboard";
