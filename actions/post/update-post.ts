@@ -86,15 +86,18 @@ export const updatePost = async (values: Props) => {
       mediaId: mediaId,
     };
 
-    // Add post
-    await db.post.update({
+    // Add post to post table in database
+    const data = await db.post.update({
       data: addPostPayload,
       where: {
        id: postId
-      }
+      },
+      select: {
+        slug: true
+      },
     })
 
-    return {success: "Post had been successfully added!"}
+    return {success: "Post had been successfully added!", data}
   }
   catch(e) {
     console.log(e)

@@ -190,7 +190,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
       const payload: AddPostPayload = {
         postId: existingPost?.id,
         title: values.title,
-        slug: values.slug,
+        slug: kebabCase(values.slug),
         excerpt: values.excerpt,
         status: values.status,
         category: values.category,
@@ -212,6 +212,12 @@ export const AddPostForm = (props: AddPostFormProps) => {
               update();
               setSuccess(data.success)
 
+              //update slug in input form
+              if(data.data.slug) {
+                const updatedSlug = data.data.slug
+                form.setValue("slug", updatedSlug)
+              }
+
             }
 
           })
@@ -231,29 +237,17 @@ export const AddPostForm = (props: AddPostFormProps) => {
               update();
               setSuccess(data.success);
 
-              // //If there are duplicate posts, slug will finalize with incremental number at the end. 
-              // if(data.data.slug) {
-              //   const updatedSlug = data.data.slug
-              //   form.setValue("slug", updatedSlug)
-              // }
+              //update slug in input form
+              if(data.data.slug) {
+                const updatedSlug = data.data.slug
+                form.setValue("slug", updatedSlug)
+              }
             }
           })
           .catch((data) => {
             setError(data.error)
           });
       }
-
-
-
-
-
-
-
-
-
-
-
-
     });
   };
 

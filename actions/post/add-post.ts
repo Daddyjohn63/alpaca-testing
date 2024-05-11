@@ -80,11 +80,14 @@ export const addPost = async (values: Props) => {
     };
 
     // Add post
-    await db.post.create({
+    const data = await db.post.create({
       data: addPostPayload,
+      select: {
+        slug: true
+      },
     })
 
-    return {success: "Post had been successfully added!"}
+    return {success: "Post had been successfully added!", data}
   }
   catch(e) {
     console.log(e)
