@@ -14,14 +14,21 @@ const PostPage = async({params}: {params: Params}) => {
   const data = await db.post.findFirst({
     where: {
       slug: slug
-    }
+    },
+    include: {
+      media: {
+        select: {
+          imagePath: true,
+        },
+      },
+    },
   })
 
   if(!data) {
     return notFound()
   }
 
-  const bgImagePath = data.imagePath;
+  const bgImagePath = data.media?.imagePath;
 
   return (
     <div>

@@ -60,8 +60,6 @@ const BlogPage = async({searchParams}: ParamsProps) => {
         <div className="container">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-14">
             {data && data.map((post) => {
-              console.log(post.slug)
-
               return (
                 <div key={post.id} className="space-y-4">
                   <Link href={`blog/${post.slug}`}>
