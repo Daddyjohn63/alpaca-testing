@@ -1,6 +1,6 @@
 import BreadCrumb from "@/components/admin/breadcrumb"
 import { Heading } from "@/components/ui/heading";
-import { AddPostForm } from "@/components/admin/add-post-form";
+import { AddEditPostForm } from "@/components/admin/add-edit-post-form";
 import { db } from "@/lib/db";
 
 const breadcrumbItems = [
@@ -19,7 +19,7 @@ const AddPostPage = async() => {
         title="Add Post"
         description="Add blog post"
       /> 
-      <AddPostForm categories={categories} />
+      <AddEditPostForm categories={categories} />
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import { Heading } from "@/components/ui/heading";
 import BreadCrumb from "@/components/admin/breadcrumb";
-import { AddCategoryForm } from "@/components/admin/add-category-form";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { AddEditMediaForm } from "@/components/admin/add-edit-media-form";
