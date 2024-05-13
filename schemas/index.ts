@@ -112,7 +112,6 @@ export const AddMediaSchema = z.object({
 
 export const ContactUsSchema = z.object({
     name: z.string().min(1, "A name is required"),
-    email: z.string().min(1, "An email address is required"),
+    email: z.string().email({message: "Email is required"}),
     message: z.string().min(1, "A message is required")
-
 })
