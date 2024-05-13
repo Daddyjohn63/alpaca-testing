@@ -109,3 +109,10 @@ export const AddMediaSchema = z.object({
         .refine((file) => file === undefined || ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .webp formats are supported.")
 
 })
+
+export const ContactUsSchema = z.object({
+    name: z.string().min(1, "A name is required"),
+    email: z.string().min(1, "An email address is required"),
+    message: z.string().min(1, "A message is required")
+
+})

@@ -55,12 +55,17 @@ export const interestingNavItems: NavItems[] = [
 export const boringNavItems: NavItems[] = [
     {
         text: "Terms & Conditions",
-        href: "/"
+        href: "/terms-conditions"
     },
     {
         text: "Privacy Policy",
-        href: "/"
+        href: "/privacy-policy"
+    },
+        {
+        text: "Contact Us",
+        href: "/contact-us"
     }
+
 ]
 
 // DASHBOARD
