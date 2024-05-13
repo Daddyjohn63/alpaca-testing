@@ -32,7 +32,7 @@ export const columns: ColumnDef<TablePost>[] = [
 
       return (
         <div className="min-w-[200px]">
-        <Link href={`/admin/posts/${row.original.id}`} className="font-bold text-primary">
+        <Link href={`/admin/posts/edit-post/${row.original.id}`} className="font-bold text-primary">
           {row.getValue("title")}
         </Link>
         </div>

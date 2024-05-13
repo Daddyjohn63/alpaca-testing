@@ -83,7 +83,7 @@ type AddPostPayload = {
   deleteImage: boolean;
 }
 
-export const AddPostForm = (props: AddPostFormProps) => {
+export const AddEditPostForm = (props: AddPostFormProps) => {
 
   const {categories, postData} = props
 
@@ -133,7 +133,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
       form.setValue("slug", existingPost.slug)
     }
 
-  },[postData])
+  },[existingPost])
 
   useEffect(() => {
     // Enable auto slug creation and editing if edit slug is turned on (true)
@@ -142,7 +142,7 @@ export const AddPostForm = (props: AddPostFormProps) => {
       const urlFriendlySlug = kebabCase(watchTitle)
       form.setValue("slug", urlFriendlySlug)
     }
-  }, [watchTitle, form]);
+  }, [watchTitle, form, editSlug]);
 
   const setMediaObjToFeatured = (imageObj: Media) => {
     setImagePreview(`${bucketUrl}/${imageObj.imagePath}`)

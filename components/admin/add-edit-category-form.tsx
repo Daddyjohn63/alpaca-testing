@@ -2,7 +2,6 @@
 import { Textarea } from "@/components/ui/textarea"
 import { addCategory} from "@/actions/category/add-category";
 import { useState, useEffect, useTransition, ChangeEvent } from "react";
-import { ImageIcon } from "@radix-ui/react-icons";
 import { Card } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
 import * as z from "zod";
@@ -13,7 +12,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { TiptapEditor } from "@/components/admin/tiptap-editor";
 import {kebabCase} from "change-case";
 import { type Category } from "@prisma/client";
 import {
@@ -24,13 +22,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Edit } from "lucide-react";
 
 type AddCategoryFormProps = {
@@ -44,7 +35,7 @@ type AddCategoryPayload = {
   description: string | undefined;
 }
 
-export const AddCategoryForm = (props: AddCategoryFormProps) => {
+export const AddEditCategoryForm = (props: AddCategoryFormProps) => {
   const {categoryData} = props
 
   //If postData exists and postData.id is not undefined, then its an edit post page. 
@@ -76,7 +67,7 @@ export const AddCategoryForm = (props: AddCategoryFormProps) => {
       const urlFriendlySlug = kebabCase(watchName)
       form.setValue("slug", urlFriendlySlug)
     }
-  }, [watchName, form]);
+  }, [watchName, form, editSlug]);
 
   //If post slug already exists, then set edit slug to false and disable auto creation. 
   useEffect(() => {
@@ -84,7 +75,7 @@ export const AddCategoryForm = (props: AddCategoryFormProps) => {
       setEditSlug(false)
       form.setValue("slug", editCategory.slug)
     }
-  },[])
+  },[editCategory])
 
 
   const onSubmit = (values: z.infer<typeof AddCategorySchema>) => {

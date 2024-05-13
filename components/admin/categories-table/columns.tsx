@@ -34,7 +34,7 @@ export const columns: ColumnDef<Category>[] = [
 
       return (
         <div>
-        <Link href={`/admin/categories/${row.original.id}`} className="font-bold text-primary">
+        <Link href={`/admin/categories/edit-category/${row.original.id}`} className="font-bold text-primary">
           {row.getValue("name")}
         </Link>
         </div>

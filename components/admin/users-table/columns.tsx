@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
 import { type TableUsers } from "@/types";
 import { formatDateVerbose } from "@/lib/utils";
+import Image from "next/image";
 
 export const columns: ColumnDef<TableUsers>[] = [
   {
@@ -33,7 +34,12 @@ export const columns: ColumnDef<TableUsers>[] = [
       return (
         <div>
           {!!imageUrl && (
-            <img alt="User Image" src={`${imageUrl}`} className="w-10 h-10 border-2 border-foreground rounded-full"/>
+            <Image 
+              alt="User Image" 
+              src={`${imageUrl}`} 
+              width="50"
+              height="50"
+              className="w-10 h-10 border-2 border-foreground rounded-full"/>
           )}
           {!imageUrl && (
             <div className="w-10 h-10 border-2 border-muted-foreground bg-muted rounded-full"></div>

@@ -47,12 +47,12 @@ export const ModalMediaGrid = (props: ModalMediaGridProps) => {
   return (
     <div className="w-full">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 h-[450px] auto-rows-max grid-auto-flow-dense overflow-hidden">
-            {mediaData && mediaData.map((image: Media) => {
+            {mediaData && mediaData.map((media: Media) => {
               return(
-                <div key={image.id} className="w-[200px] h-[140px] overflow-hidden">
+                <div key={media.id} className="w-[200px] h-[140px] overflow-hidden">
                   <Image 
-                    src={`${bucketUrl}/${image.imagePath}`} 
-                    onClick={() => setMediaObj(image)}
+                    src={`${bucketUrl}/${media.imagePath}`} 
+                    onClick={() => setMediaObj(media)}
                     alt="media image"
                     width="200"
                     height="130"

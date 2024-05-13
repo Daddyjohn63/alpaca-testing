@@ -101,6 +101,7 @@ export const AddCategorySchema = z.object({
 
 export const AddMediaSchema = z.object({
     altText: z.string().optional(),
+    description: z.string().optional(),
     image: z
         .custom<File | undefined>()
         .optional()

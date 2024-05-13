@@ -1,6 +1,6 @@
 import { Heading } from "@/components/ui/heading";
 import BreadCrumb from "@/components/admin/breadcrumb";
-import { AddCategoryForm } from "@/components/admin/add-category-form";
+import { AddEditCategoryForm } from "@/components/admin/add-edit-category-form";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 
@@ -27,17 +27,16 @@ const PostDetailsPage = async({params}: {params: Params}) => {
     return notFound()
   }
 
-
   return (
     <div>
-        <BreadCrumb items={breadcrumbItems} />
-        <Heading
-          title="Edit Category"
-          description="Edit your category here"
-        /> 
-        <AddCategoryForm 
-          categoryData={categoryData}
-        />
+      <BreadCrumb items={breadcrumbItems} />
+      <Heading
+        title="Edit Category"
+        description="Edit your category here"
+      /> 
+      <AddEditCategoryForm 
+        categoryData={categoryData}
+      />
     </div>
   )
 }
