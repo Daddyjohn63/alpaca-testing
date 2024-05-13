@@ -19,6 +19,7 @@ export const underConstructionRoutes = [
 
 export const publicRoutes = [
     "/new-verification",
+    "/contact-us",
     "/",
 ];
 

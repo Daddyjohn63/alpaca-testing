@@ -32,3 +32,18 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
   });
 };
+
+export const sendContactUsEmail = async (name: string, email: string, message: string) => {
+
+  await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: email,
+    subject: "New contact form submission from alpacastack.com",
+    html: `
+        <p>Name: ${name}</p>
+        <p>Email: ${email}</p>
+        <p>Message: ${message}</p>
+    `,
+  });
+
+}

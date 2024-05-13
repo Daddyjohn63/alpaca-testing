@@ -3,7 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FormSuccess } from "@/components/form-success"
 import { FormError } from "@/components/form-error"
+import { useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
+import { contactUs } from "@/actions/contact-us"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
@@ -20,6 +22,12 @@ import { Input } from "@/components/ui/input"
 import { ContactUsSchema } from "@/schemas"
 
 export function ContactUsForm() {
+
+  const [error, setError] = useState<string | undefined>()
+  const [success, setSuccess] = useState<string | undefined>()
+  const [isPending, startTransition] = useTransition()
+
+
   const form = useForm<z.infer<typeof ContactUsSchema>>({
     resolver: zodResolver(ContactUsSchema),
     defaultValues: {
@@ -29,11 +37,22 @@ export function ContactUsForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof ContactUsSchema>) {
-    console.log(values)
+  async function onSubmit (values: z.infer<typeof ContactUsSchema>) {
 
-
-
+    startTransition(() => {
+      contactUs(values)
+        .then((data) => {
+          if(data?.error){
+            setError(data.error)
+          }
+          if(data?.success){
+            setSuccess(data.success)
+          }
+        })
+        .catch(() => {
+          setError("Something went wrong!")
+        })
+    })
   }
 
   return (
@@ -46,7 +65,7 @@ export function ContactUsForm() {
             <FormItem>
               <FormLabel>Full Name</FormLabel>
               <FormControl>
-                <Input placeholder="Marty McFly" {...field} />
+                <Input disabled={isPending} placeholder="Marty McFly" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -59,7 +78,7 @@ export function ContactUsForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="marty@mcflyhoverboards.com" {...field} />
+                <Input disabled={isPending} placeholder="marty@mcflyhoverboards.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -72,14 +91,14 @@ export function ContactUsForm() {
             <FormItem>
               <FormLabel>Message</FormLabel>
               <FormControl>
-                <Textarea {...field} rows={7} className="bg-input text-black"/>
+                <Textarea {...field} disabled={isPending} rows={7} className="bg-input text-black"/>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormSuccess />
-        <FormError />
+        <FormSuccess message={success}  />
+        <FormError message={error} />
         <Button type="submit">Send Message</Button>
       </form>
     </Form>

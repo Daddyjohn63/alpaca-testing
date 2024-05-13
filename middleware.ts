@@ -25,7 +25,6 @@ export default auth((req) => {
 
   //Be careful the order of this if clause matters. If wrong it will result in infinate redirect loop.
 
-
   if (isApiAuthRoute) {
     return null;
   }
