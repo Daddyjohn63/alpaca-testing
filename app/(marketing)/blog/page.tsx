@@ -1,9 +1,10 @@
 import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
-import { Card } from "@/components/ui/card"
 import { db } from "@/lib/db"
 import Link from "next/link"
 import Image from "next/image"
 import { PaginationControls } from "@/components/pagination-controls"
+import { isBlogPublic } from "@/routes"
+import { notFound } from "next/navigation"
 
 type ParamsProps = {
   searchParams: {
@@ -12,6 +13,11 @@ type ParamsProps = {
 };
 
 const BlogPage = async({searchParams}: ParamsProps) => {
+
+  console.log(isBlogPublic)
+  if(!isBlogPublic) {
+    return notFound()
+  }
 
   const page = Number(searchParams.page) || 1;
   const take = Number(searchParams.take) || 9;

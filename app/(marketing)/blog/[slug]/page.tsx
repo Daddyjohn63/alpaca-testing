@@ -2,12 +2,18 @@ import { db } from "@/lib/db"
 import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
 import { notFound } from "next/navigation";
 import { SidebarCTA } from "@/components/marketing/blog-cta";
+import { isBlogPublic } from "@/routes"
+
 type Params = {
   slug: string;
 }
 
 
 const PostPage = async({params}: {params: Params}) => {
+
+  if(!isBlogPublic) {
+    return notFound()
+  }
 
   const {slug} = params
 
