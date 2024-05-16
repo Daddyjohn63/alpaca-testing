@@ -1,5 +1,5 @@
 export const isBlogPublic = false;
-export const isUnderConstruction = false;
+export const isUnderConstruction = true;
 
 /**
  * An array of routes that are accessible to the public
