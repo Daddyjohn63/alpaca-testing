@@ -14,7 +14,6 @@ type ParamsProps = {
 
 const BlogPage = async({searchParams}: ParamsProps) => {
 
-  console.log(isBlogPublic)
   if(!isBlogPublic) {
     return notFound()
   }

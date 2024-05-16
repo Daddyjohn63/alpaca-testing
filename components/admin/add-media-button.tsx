@@ -82,21 +82,17 @@ export const AddMediaButton = () => {
       //Upload to database
       addMedia(payload)
         .then((data) => {
-          console.log(data.success)
           //reload page after successful upload
-          setTimeout(() => {
-            window.location.reload()
-          }, 0);
-
+          window.location.reload()
 
         })
         .catch((data) => {
           setError("Something went wrong, could not add image data")
-          console.log(data.error)
         })
 
     } catch(e) {
-      console.log(e)
+      setError("Something went wrong, could not add image data")
+
     }
   }
 

@@ -6,8 +6,6 @@ import { ContactUsSchema } from "@/schemas";
 
 export async function contactUs (values: z.infer<typeof ContactUsSchema>) {
 
-  console.log("hi")
-
   const validateFields = ContactUsSchema.safeParse(values)
 
   if(!validateFields.success){

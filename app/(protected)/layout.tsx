@@ -6,6 +6,10 @@ const ProtectedLayout = async ({ children }: { children: React.ReactNode }) => {
 
   const role = await currentRole()
 
+  const isStagingEnv = process.env.STAGING_ENV === 'true'
+  if(isStagingEnv && role !== 'ADMIN') {
+    redirect('/staging-splash')
+  }
   if(isUnderConstruction && role !== 'ADMIN') {
    redirect('/under-construction') 
   }

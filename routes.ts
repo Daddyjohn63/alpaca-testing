@@ -1,9 +1,9 @@
 export const isBlogPublic = false;
-export const isUnderConstruction = true;
+export const isUnderConstruction = false;
 
 /**
  * An array of routes that are accessible to the public
- * The routes do not require authentication
+ * The routes do not require authentication. All routes are private by default. 
  * @type {string[]}
  */
 

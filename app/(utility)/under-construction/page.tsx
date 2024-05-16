@@ -7,7 +7,7 @@ import { currentUser } from "@/lib/auth";
 const UnderConstructionPage = async () => {
 
   const user = await currentUser()
-  console.log(!!user)
+
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="space-y-6 max-w-4xl">

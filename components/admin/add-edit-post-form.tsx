@@ -167,7 +167,6 @@ export const AddEditPostForm = (props: AddPostFormProps) => {
 
     startTransition(async () => {
       //if values.image exists, then upload new image to cloud storage and overwrite imageFilename for db
-      console.log(values.image)
       if(values.image) {
 
         const fileData = new FormData()

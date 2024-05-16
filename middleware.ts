@@ -17,7 +17,8 @@ export default auth((req) => {
 
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
-  
+
+  const isStagingEnv = process.env.STAGING_ENV === 'true'
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith('/blog');
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
@@ -26,17 +27,22 @@ export default auth((req) => {
 
   //if in api auth route, allow public
   if (isApiAuthRoute) {
-    console.log("isApiAuthRoute")
     return null;
   }
 
   //Redirect all auth routes to default login page if NOT logged in. 
   if (isAuthRoute) {
-    console.log("isAuthRoute")
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
     return null
+  }
+
+  // If staging environment and is NOT logged in. 
+  if(isStagingEnv){
+    if(!isLoggedIn){
+      return Response.redirect(new URL(`/login`, nextUrl));
+    }
   }
 
   if(isUnderConstruction) {
@@ -45,7 +51,6 @@ export default auth((req) => {
 
   //If the user is NOT logged in and the page is NOT a public page, redirect to login page. 
   if (!isLoggedIn && !isPublicRoute) {
-    console.log("!isLogginIn && !isPublicRoute")
 
     let callbackUrl = nextUrl.pathname;
 
@@ -57,7 +62,6 @@ export default auth((req) => {
 
     return Response.redirect(new URL(`/login?callbackUrl=${encodedCallbackUrl}`, nextUrl));
   }
-
 
   //If it gets to this point and we return null, middleware does nothing essentually making the page public. 
   return null;
