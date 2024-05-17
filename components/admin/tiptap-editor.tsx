@@ -5,8 +5,6 @@ import { Toggle } from "@/components/ui/toggle"
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
 
-
-
 const MenuBar = ({ editor }: {editor: Editor | null}) => {
 
   if (!editor) {
@@ -20,7 +18,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleBold().run()
         }
-        className={editor.isActive('bold') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('bold') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:bg-muted/20'}
       >
         <Bold className="h-4 w-4"/>
       </Toggle>
@@ -29,7 +27,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleItalic().run()
         }
-        className={editor.isActive('italic') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('italic') ? 'bg-muted-foreground/10 text-black hover:bg-muted' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Italic className="h-4 w-4"/>
       </Toggle>
@@ -196,7 +194,7 @@ export const TiptapEditor = (
     ],
     editorProps: {
       attributes: {
-        class: "rounded-md text-background min-h-[150px] p-2"
+        class: "rounded-md bg-input text-black min-h-[150px] p-2"
       }
     },
     onUpdate({ editor }) {
@@ -205,7 +203,7 @@ export const TiptapEditor = (
   });
 
   return (
-    <div className={`${disabled ? 'bg-white/50' : 'bg-white'} relative p-3 rounded-md`}>
+    <div className="bg-input relative p-3 rounded-md">
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>

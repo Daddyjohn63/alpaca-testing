@@ -38,7 +38,7 @@ export async function MarketingHeader() {
                 </Link>
               )}
               {!!user && (
-                <div>
+                <div className="flex items-center gap-2">
                   <Button asChild>
                     <Link href="/dashboard">Dashboard</Link>
                   </Button>
@@ -48,18 +48,18 @@ export async function MarketingHeader() {
           </ul>
         </nav>
         <div className="md:hidden">
-              {!user && (
-                <Link href="/login">
-                  <Button className="text-md">Sign In</Button>
-                </Link>
-              )}
-              {!!user && (
-                <div>
-                  <Button asChild>
-                    <Link href="/dashboard">Dashboard</Link>
-                  </Button>
-                </div>
-              )}
+          {!user && (
+            <Link href="/login">
+              <Button className="text-md">Sign In</Button>
+            </Link>
+          )}
+          {!!user && (
+            <div>
+              <Button asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+            </div>
+          )}
 
         </div>
       </div>

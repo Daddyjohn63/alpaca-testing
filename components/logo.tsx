@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/site-config";
 
 type LogoProps = {
   size?: string;
@@ -32,16 +33,26 @@ type Variants = {
 }
 
 const variants: Variants = {
-  light: "/logo_horizontal_light.svg",
-  dark: "/logo_horizontal_dark.svg"
+  light: "/logo_horizontal_lightmode.svg",
+  dark: "/logo_horizontal_darkmode.svg"
 }
 
 export const Logo = (props: LogoProps) => {
 
-  const { size = "sm", variant = "light", className } = props
+  const { size = "sm", variant, className } = props
+
+  //If variant is not defined, set to darkmode
+  let defaultVariant = variant || 'dark'
+
+  //If variant is not set by user, and theme color is light, set logo to light
+  if(!variant) {
+    if(siteConfig.themeColor === 'light') {
+      defaultVariant = 'light';
+    }  
+  }
 
   const { width, height } = sizes[size] || sizes.sm
-  const logo_variant = variants[variant] || variants.light
+  const logo_variant = variants[defaultVariant] || variants.light
 
   return (
       <Link

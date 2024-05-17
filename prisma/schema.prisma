@@ -27,6 +27,7 @@ model User {
   accounts      Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  stripeCustomerId  String? @unique
   posts Post[] 
 }
 

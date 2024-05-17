@@ -1,16 +1,17 @@
 import BreadCrumb from "@/components/dashboard/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 
-const breadcrumbItems = [{ title: "Something", link: "/dashboard/something" }];
-const SomethingPage = () => {
+const breadcrumbItems = [{ title: "Billing", link: "/dashboard/billing" }];
+const BillingPage = () => {
   return (
       <div>
         <BreadCrumb items={breadcrumbItems} />
         <Heading
-          title="Something Page"
-          description="Manage something here"
+          title="Billing Page"
+          description="Manage billing here"
         /> 
       </div>
   );
 }
-export default SomethingPage
+export default BillingPage;
+

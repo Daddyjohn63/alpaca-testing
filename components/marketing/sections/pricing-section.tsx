@@ -113,7 +113,6 @@ export function PricingSection({className}: {className?: string}) {
               price="169"
               features={starterFeatures}
               btnName="Get Starter Stack"
-              btnHref="#"
             />
         </li>
           <li>
@@ -122,7 +121,6 @@ export function PricingSection({className}: {className?: string}) {
               price="199"
               features={proFeatures}
               btnName="Get Pro Stack"
-              btnHref="#"
               mostPopular
             />
         </li>

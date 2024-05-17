@@ -1,4 +1,5 @@
 "use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +19,9 @@ import Link from "next/link";
 export function UserNav() {
   const user = useCurrentUser();
 
-  if (user) {
+  console.log(user)
+
+  if (!!user) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

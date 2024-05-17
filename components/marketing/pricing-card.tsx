@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, XCircle } from "lucide-react"
+import { BuyNowBtn } from "@/components/buy-now-btn"
 
 type Feature = {
   name: string,
@@ -11,14 +12,13 @@ type Props = {
   price: string;
   features: Feature[];
   btnName?: string;
-  btnHref?: string;
   mostPopular?: boolean;
   footerText?: string;
 }
 
 export function PricingCard(props: Props) {
 
-  const {tier, price, features, btnName = "Buy Now!", btnHref = "#", mostPopular = false, footerText = "Start building today"} = props
+  const {tier, price, features, btnName, mostPopular = false, footerText = "Start building today"} = props
 
   return (
     <div className={`${mostPopular ? "border-2 border-primary" : ""} relative w-[380px] bg-card rounded-md px-9 py-14`}>
@@ -38,11 +38,7 @@ export function PricingCard(props: Props) {
       </ul>
       <div className="space-y-4">
         {!!btnName && (
-          <Button className="w-full bg-primary text-primary-foreground" asChild>
-            <Link href={btnHref}>
-              {btnName}
-            </Link>
-          </Button>
+        <BuyNowBtn btnText={btnName} />
         )}
           <div className="text-center text-sm">
             {footerText}

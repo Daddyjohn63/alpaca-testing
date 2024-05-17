@@ -1,10 +1,11 @@
-import { isUnderConstruction } from "@/routes";
+import { siteConfig } from "@/site-config";
 import { currentRole } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 const ProtectedLayout = async ({ children }: { children: React.ReactNode }) => {
 
-  const role = await currentRole()
+  const role = await currentRole();
+  const isUnderConstruction = siteConfig.isUnderConstruction;
 
   const isStagingEnv = process.env.STAGING_ENV === 'true'
   if(isStagingEnv && role !== 'ADMIN') {

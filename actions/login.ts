@@ -4,7 +4,8 @@ import { AuthError } from "next-auth";
 import * as z from "zod";
 import { signIn } from "@/auth";
 import { LoginSchema } from "@/schemas";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { siteConfig } from "@/site-config";
+
 import {
   generateVerificationToken,
   generateTwoFactorToken,
@@ -17,6 +18,7 @@ import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation
 
 export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: string | null) => {
   const validatedFields = LoginSchema.safeParse(values);
+  const defaultLoginRedirect = siteConfig.routes.defaultLoginRedirect
 
   if (!validatedFields.success) {
     return { error: "Invalid fields" };
@@ -92,7 +94,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
     await signIn("credentials", {
       email,
       password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+      redirectTo: callbackUrl || defaultLoginRedirect,
     });
   } catch (error) {
 

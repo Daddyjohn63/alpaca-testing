@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import ThemeProvider from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { siteConfig } from "@/site-config";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 
 const RootLayout = async ({ children, }: Readonly<{ children: React.ReactNode; }>) => {
   const session = await auth();
+  const themeColor = siteConfig.themeColor;
 
   return (
     <SessionProvider session={session}>
@@ -22,7 +24,7 @@ const RootLayout = async ({ children, }: Readonly<{ children: React.ReactNode; }
         <body className={`${inter.className}`}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme={themeColor}
             enableSystem
             disableTransitionOnChange
           >

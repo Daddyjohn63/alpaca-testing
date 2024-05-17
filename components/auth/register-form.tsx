@@ -46,13 +46,6 @@ export const RegisterForm = () => {
   };
 
   return (
-    <CardWrapper
-      title="Account Registration"
-      subtitle="This is where the journey begins!"
-      backButtonLabel="Already have an account? Sign in here!"
-      backButtonHref="/login"
-      showSocial
-    >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -117,6 +110,5 @@ export const RegisterForm = () => {
           </div>
         </form>
       </Form>
-    </CardWrapper>
   );
 };

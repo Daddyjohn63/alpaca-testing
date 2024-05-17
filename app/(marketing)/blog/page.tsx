@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 import Link from "next/link"
 import Image from "next/image"
 import { PaginationControls } from "@/components/pagination-controls"
-import { isBlogPublic } from "@/routes"
+import { siteConfig } from "@/site-config"
 import { notFound } from "next/navigation"
 
 type ParamsProps = {
@@ -13,6 +13,8 @@ type ParamsProps = {
 };
 
 const BlogPage = async({searchParams}: ParamsProps) => {
+
+  const isBlogPublic = siteConfig.isBlogPublic;
 
   if(!isBlogPublic) {
     return notFound()

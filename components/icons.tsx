@@ -6,10 +6,12 @@ import {
   List,
   Image,
   LogIn,
+  CreditCard,
   LucideIcon,
   LucideProps,
   User,
   LogOut,
+  Wand,
   Cog
 } from "lucide-react";
 
@@ -24,7 +26,9 @@ export const Icons = {
   logout: LogOut,
   user: User,
   media: Image,
+  wand: Wand,
   cog: Cog,
+  card: CreditCard,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

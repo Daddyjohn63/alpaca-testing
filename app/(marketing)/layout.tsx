@@ -1,14 +1,15 @@
 import { MarketingHeader } from "@/components/marketing/sections/header-section";
 import { MarketingFooter } from "@/components/marketing/sections/footer-section";
-import { isUnderConstruction } from "@/routes";
 import { redirect } from "next/navigation";
 import { currentRole } from "@/lib/auth";
 import { notFound } from "next/navigation";
+import { siteConfig } from "@/site-config";
 
 const MarketingLayout = async ({ children }: { children: React.ReactNode }) => {
 
   const role = await currentRole()
   const isStagingEnv = process.env.STAGING_ENV === 'true'
+  const isUnderConstruction = siteConfig.isUnderConstruction
 
   if(isStagingEnv && role !== 'ADMIN') {
     return notFound()

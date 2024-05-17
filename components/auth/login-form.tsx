@@ -12,7 +12,6 @@ import { useSearchParams } from "next/navigation";
 import { FormError } from "@/components/form-error";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSuccess } from "@/components/form-success";
-import { CardWrapper } from "@/components/auth/card-wrapper";
 import {
   Form,
   FormControl,
@@ -68,13 +67,6 @@ export const LoginForm = () => {
   };
 
   return (
-    <CardWrapper
-      title="Login"
-      subtitle="Welcome back"
-      backButtonLabel="Don't have an account? Sign up!"
-      backButtonHref="/register"
-      showSocial
-    >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
           {showTwoFactor && (
@@ -153,6 +145,5 @@ export const LoginForm = () => {
           </Button>
         </form>
       </Form>
-    </CardWrapper>
   );
 };

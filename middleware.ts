@@ -1,13 +1,6 @@
 import NextAuth from "next-auth";
+import { siteConfig } from "./site-config";
 import authConfig from "@/auth.config";
-
-import {
-  DEFAULT_LOGIN_REDIRECT,
-  apiAuthPrefix,
-  authRoutes,
-  publicRoutes,
-  isUnderConstruction,
-} from "@/routes";
 
 
 export const { auth } = NextAuth(authConfig);
@@ -17,11 +10,14 @@ export default auth((req) => {
 
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
+  const isUnderConstruction = siteConfig.isUnderConstruction;
+  const defaultLoginRedirect = siteConfig.routes.defaultLoginRedirect;
 
   const isStagingEnv = process.env.STAGING_ENV === 'true'
-  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith('/blog');
-  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+
+  const isApiAuthRoute = nextUrl.pathname.startsWith(siteConfig.routes.apiAuthPrefix);
+  const isPublicRoute = siteConfig.routes.publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith('/blog');
+  const isAuthRoute = siteConfig.routes.authRoutes.includes(nextUrl.pathname);
 
   //Be careful the order of this if clause matters. If wrong it will result in infinate redirect loop.
 
@@ -33,7 +29,7 @@ export default auth((req) => {
   //Redirect all auth routes to default login page if NOT logged in. 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+      return Response.redirect(new URL(defaultLoginRedirect, nextUrl));
     }
     return null
   }
@@ -46,6 +42,7 @@ export default auth((req) => {
   }
 
   if(isUnderConstruction) {
+    console.log("under")
       return null
   }
 

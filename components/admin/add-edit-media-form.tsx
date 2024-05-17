@@ -176,7 +176,7 @@ export const AddEditMediaForm = (props: AddMediaFormProps) => {
                           {...field}
                           rows={5}
                           disabled={isPending}
-                          className="bg-input text-background"
+                          className="bg-input text-black"
                         />
                       </FormControl>
                       <FormMessage />

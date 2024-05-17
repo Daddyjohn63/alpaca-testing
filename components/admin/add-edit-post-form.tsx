@@ -409,7 +409,7 @@ export const AddEditPostForm = (props: AddPostFormProps) => {
                     )}
                   <FormControl>
                     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-                      <Button asChild variant="outline" className="border border-border">
+                      <Button asChild variant="outline" className="border border-border hover:text-primary-foreground">
                         <DialogTrigger className="w-full">
                           Add Featured Image
                         </DialogTrigger>

@@ -76,7 +76,7 @@ export const dashboardNavItems: NavItems[] = [
         href: "/dashboard",
     },
     {
-        icon: "user",
+        icon: "wand",
         text: "Something",
         href: "/dashboard/something",
     },
@@ -84,6 +84,11 @@ export const dashboardNavItems: NavItems[] = [
         icon: "cog",
         text: "Settings",
         href: "/dashboard/settings",
+    },
+    {
+        icon: "card",
+        text: "Billing",
+        href: "/dashboard/billing",
     },
 ];
 

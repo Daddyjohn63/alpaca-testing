@@ -2,7 +2,7 @@ import { db } from "@/lib/db"
 import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
 import { notFound } from "next/navigation";
 import { SidebarCTA } from "@/components/marketing/blog-cta";
-import { isBlogPublic } from "@/routes"
+import { siteConfig } from "@/site-config";
 
 type Params = {
   slug: string;
@@ -10,6 +10,8 @@ type Params = {
 
 
 const PostPage = async({params}: {params: Params}) => {
+
+  const isBlogPublic = siteConfig.isBlogPublic;
 
   if(!isBlogPublic) {
     return notFound()
