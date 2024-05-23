@@ -4,13 +4,42 @@ import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
 import { SidebarCTA } from "../marketing/blog-cta";
-import { UpgradeCTA } from "@/components/dashboard/upgrade-cta";
 import { Logo } from "@/components/logo";
 import { dashboardNavItems } from "@/constants/nav-routes";
+import { CreditCard } from "lucide-react";
+import { Button } from "../ui/button";
 
 export function DashboardSidebar() {
 
   const pathname = usePathname()
+
+  const handleBillingPortal = async () => {
+
+    try {
+      const res = await fetch('/api/stripe/create-portal', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            returnUrl: window.location.href
+        })
+      })
+
+      if(!res) {
+        console.log("Could not get billing portal URL")
+      }
+
+      const data = await res.json()
+
+      //Redirect to billing portal in stripe
+      window.location.href = data.url;
+
+    } catch(e) {
+      console.log(e)
+    }
+
+  }
 
   return (
     <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-72">
@@ -31,6 +60,11 @@ export function DashboardSidebar() {
             </li>
           ) 
          })}
+            <li>
+                <Button onClick={handleBillingPortal} variant="link" className="text-foreground/90 gap-3 w-full text-md justify-start items-center p-3 hover:bg-primary hover:text-primary-foreground rounded-md hover:no-underline">
+                 <CreditCard/> Billing
+                </Button>
+            </li>
       </ul>
           <SidebarCTA 
             image="cta-img.jpg"

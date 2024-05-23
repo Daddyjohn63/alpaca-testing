@@ -5,26 +5,54 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     typescript: true,
 })
 
-export const getStripeSession = async ({priceId, domainUrl, customerId}: {priceId: string, domainUrl: string; customerId: string}) => {
+export const createStripeCustomer = async(name: string | null | undefined, email: string | null | undefined) => {
 
-    const session = await stripe.checkout.sessions.create({
-        customer: customerId,
-        mode: 'subscription',
-        billing_address_collection: 'auto',
-        line_items: [{
-            price: priceId,
-            quantity: 1
-        }],
-        payment_method_types: ['card'],
-        customer_update: {
-            address: 'auto',
-            name: 'auto',
-        },
-        success_url: `${domainUrl}/payment/success`,
-        cancel_url: `${domainUrl}/payment/canceled`,
-    });
+    let payload = {
+        name: name ? name : undefined,
+        email: email ? email : undefined,
+    }
 
-    return session.url as string;
+    try {
+        const customer = await stripe.customers.create(payload)
+        const stripeCustomerId = customer.id
+
+        if(!stripeCustomerId) {
+            throw Error()
+        }
+
+        return stripeCustomerId
+    } 
+    catch(e) {
+        console.log(e)
+        return null
+    }
 
 }
+
+export const getCheckoutSession = async(sessionId: string) => {
+    
+    try {
+
+        const session = await stripe.checkout.sessions.retrieve(sessionId, {
+            expand: ["line_items"],
+        });
+
+        return session;
+
+    } catch(e) {
+        console.log(e)
+        return null
+    }
+}
+
+// This is used to create Customer Portal sessions, so users can manage their subscriptions (payment methods, cancel, etc..)
+export const createCustomerPortal = async (customerId: string, returnUrl: string) => {
+
+  const portalSession = await stripe.billingPortal.sessions.create({
+    customer: customerId,
+    return_url: returnUrl,
+  });
+
+  return portalSession.url;
+};
 

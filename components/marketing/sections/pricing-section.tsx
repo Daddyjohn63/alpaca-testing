@@ -1,102 +1,12 @@
 import { cn } from "@/lib/utils"
 import { SectionTitle } from "../section-title"
 import { PricingCard } from "../pricing-card"
-
-const starterFeatures = [
-  {
-    name: "Boilerplate source code",
-    included: true
-  },
-  {
-    name: "Setup documentaion",
-    included: true
-  },
-  {
-    name: "Blog CMS",
-    included: true
-  },
-  {
-    name: "Stripe payments",
-    included: true
-  },
-  {
-    name: "PostgreSQL / Prisma",
-    included: true
-  },
-  {
-    name: "Full Auth & Oauth Integration",
-    included: true
-  },
-  {
-    name: "Custom Component Library",
-    included: true
-  },
-  {
-    name: "Figma design files",
-    included: false
-  },
-  {
-    name: "Chat GPT marketing prompts",
-    included: false
-  },
-  {
-    name: "Discord Community",
-    included: false
-  },
-  {
-    name: "Lifetime updates",
-    included: false
-  },
-]
-
-const proFeatures = [
-  {
-    name: "Boilerplate source code",
-    included: true
-  },
-  {
-    name: "Setup documentaion",
-    included: true
-  },
-  {
-    name: "Blog CMS",
-    included: true
-  },
-  {
-    name: "Stripe payments",
-    included: true
-  },
-  {
-    name: "PostgreSQL / Prisma",
-    included: true
-  },
-  {
-    name: "Full Auth & Oauth Integration",
-    included: true
-  },
-  {
-    name: "Custom Component Library",
-    included: true
-  },
-  {
-    name: "Figma design files",
-    included: true
-  },
-  {
-    name: "Chat GPT marketing prompts",
-    included: true
-  },
-  {
-    name: "Discord Community",
-    included: true
-  },
-  {
-    name: "Lifetime updates",
-    included: true
-  },
-]
+import { siteConfig } from "@/site-config"
 
 export function PricingSection({className}: {className?: string}) {
+
+  const plans = siteConfig.stripe.plans
+
   return (
   <section id="pricing-section" className={cn(className)}>
       <div className="container">
@@ -107,24 +17,19 @@ export function PricingSection({className}: {className?: string}) {
     />
       <div className="flex justify-center">
         <ul className="flex flex-col md:flex-row gap-14">
-          <li>
-            <PricingCard
-              tier="Starter"
-              price="169"
-              features={starterFeatures}
-              btnName="Get Starter Stack"
-            />
-        </li>
-          <li>
-            <PricingCard
-              tier="Pro"
-              price="199"
-              features={proFeatures}
-              btnName="Get Pro Stack"
-              mostPopular
-            />
-        </li>
-
+            {!!plans && plans.map((plan, i) => {
+              return (
+                <li key={i}>
+                  <PricingCard
+                    name={plan.name}
+                    price={plan.price}
+                    features={plan.features}
+                    priceId={plan.priceId}
+                    isFeatured={plan.isFeatured}
+                  />
+                </li>
+              )
+            })}
         </ul>
         <div>
         </div>

@@ -85,11 +85,11 @@ export const dashboardNavItems: NavItems[] = [
         text: "Settings",
         href: "/dashboard/settings",
     },
-    {
-        icon: "card",
-        text: "Billing",
-        href: "/dashboard/billing",
-    },
+    // {
+    //     icon: "card",
+    //     text: "Billing",
+    //     href: "/dashboard/billing",
+    // },
 ];
 
 // ADMIN

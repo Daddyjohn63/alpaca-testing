@@ -1,20 +1,20 @@
-import Stripe from 'stripe';
+import Stripe from "stripe";
 import { NextResponse, NextRequest} from 'next/server';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-04-10",
-  typescript: true,
-})
+import { stripe } from '@/lib/stripe';
+import { db } from '@/lib/db';
+import { getCheckoutSession } from '@/lib/stripe';
+import { siteConfig } from '@/site-config';
 
 export async function POST(req: NextRequest) {
 
-  const payload = await req.text()
-  const response = JSON.parse(payload)
+  console.log("Webhook hit")
 
+  const payload = await req.text()
+  // const response = JSON.parse(payload)
   const sig = req.headers.get("Stripe-Signature")
 
-  const dateTime = new Date(response?.created * 1000).toLocaleDateString()
-  const timeString = new Date(response?.created * 1000).toLocaleDateString()
+  // const dateTime = new Date(response?.created * 1000).toLocaleDateString()
+  // const timeString = new Date(response?.created * 1000).toLocaleDateString()
 
   let event;
 
@@ -31,19 +31,58 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    console.log("event", event.type)
 
     //This is where all the magic happens.
     // Handle the event
     switch (event.type) {
       case 'checkout.session.completed':
+
         const checkoutSessionCompleted = event.data.object;
-        // Then define and call a function to handle the event checkout.session.completed
-        console.log(checkoutSessionCompleted)
+        const sessionId = checkoutSessionCompleted.id;
+        const session = await getCheckoutSession(sessionId);
+
+        if(!session) {
+          break;
+        }
+
+        //Grab important data from customer session
+        const customerId = session.customer;
+        const clientReferenceId = session.client_reference_id;
+        let priceId: string | undefined
+        if (session.line_items?.data[0]?.price) {
+          priceId = session?.line_items?.data[0]?.price.id;
+        }
+
+        const plan = siteConfig.stripe.plans.some((plan) => plan.priceId === priceId) 
+
+        if(!plan || !clientReferenceId || !priceId) {
+          break;
+        }
+
+        //Get customer data to update email in database.
+        const stripeCustomerData = (await stripe.customers.retrieve(
+          customerId as string
+        )) as Stripe.Customer;
+
+        //Update user in database and Allow access to product
+        await db.user.update({
+          where: {
+            id: clientReferenceId,
+          },
+          data: {
+            email: stripeCustomerData.email,
+            stripePriceId: priceId,
+            hasAccess: true,
+          }
+        })
+
+        //Send email after successful purchase. 
+
         break;
       case 'checkout.session.expired':
         const checkoutSessionExpired = event.data.object;
         // Then define and call a function to handle the event checkout.session.expired
+
         break;
       case 'customer.subscription.deleted':
         const customerSubscriptionDeleted = event.data.object;
@@ -63,16 +102,14 @@ export async function POST(req: NextRequest) {
         break;
       // ... handle other event types
       default:
-        console.log(`Unhandled event type ${event.type}`);
     }
-
 
     return NextResponse.json({status: "Success", event: event.type});
 
   }
-  catch(error) {
-
-    return NextResponse.json({status: "Failed", error})
+  catch(e) {
+    console.log(e)
+    return NextResponse.json({status: "Failed", e})
   }
 
 

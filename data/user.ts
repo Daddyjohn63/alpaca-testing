@@ -27,3 +27,31 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
+
+export const getUserStripeId = async (id: string) => {
+
+  try {
+
+    const data = await db.user.findFirst({
+      where: {
+        id: id,
+      },
+      select: {
+        stripeCustomerId: true,
+      }
+    })
+
+    if(!data || data.stripeCustomerId === '') {
+      return null
+    }
+
+    const stripeCustomerId = data.stripeCustomerId
+    return stripeCustomerId
+
+  } catch(e) {
+    console.log(e)
+    return null
+  }
+
+}
+

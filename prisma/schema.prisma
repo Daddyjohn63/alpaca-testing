@@ -28,6 +28,8 @@ model User {
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
   stripeCustomerId  String? @unique
+  stripePriceId String?
+  hasAccess Boolean @default(false)
   posts Post[] 
 }
 

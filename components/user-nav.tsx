@@ -19,8 +19,6 @@ import Link from "next/link";
 export function UserNav() {
   const user = useCurrentUser();
 
-  console.log(user)
-
   if (!!user) {
     return (
       <DropdownMenu>

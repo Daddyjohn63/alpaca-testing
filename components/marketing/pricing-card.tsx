@@ -8,27 +8,26 @@ type Feature = {
   included: boolean    
 }
 type Props = {
-  tier: string;
-  price: string;
+  name: string;
+  price: number;
   features: Feature[];
-  btnName?: string;
-  mostPopular?: boolean;
-  footerText?: string;
+  isFeatured?: boolean;
+  priceId: string;
 }
 
 export function PricingCard(props: Props) {
 
-  const {tier, price, features, btnName, mostPopular = false, footerText = "Start building today"} = props
+  const {name, price, features, isFeatured, priceId} = props
 
   return (
-    <div className={`${mostPopular ? "border-2 border-primary" : ""} relative w-[380px] bg-card rounded-md px-9 py-14`}>
-      {!!mostPopular && (
+    <div className={`${isFeatured? "border-2 border-primary" : ""} relative w-[380px] bg-card rounded-md px-9 py-14`}>
+      {!!isFeatured && (
         <span className="bg-accent px-5 py-2 text-card absolute top-0 -right-4 rotate-12">Most Popular</span>
       )}
       <div className="space-y-8">
       <div className="space-y-3">
-        <h3 className="text-3xl font-bold text-center">{tier}</h3>
-        <h4 className="text-3xl font-semibold text-center">${price}<span> usd</span></h4>
+        <h3 className="text-3xl font-bold text-center">{name}</h3>
+        <h4 className="text-3xl font-semibold text-center">${price.toString()}<span> usd</span></h4>
       </div>
       <ul className="space-y-3">
         {!!features && features.map((feature, i) => {
@@ -37,12 +36,7 @@ export function PricingCard(props: Props) {
         })}
       </ul>
       <div className="space-y-4">
-        {!!btnName && (
-        <BuyNowBtn btnText={btnName} />
-        )}
-          <div className="text-center text-sm">
-            {footerText}
-          </div>
+          <BuyNowBtn btnText={name} priceId={priceId} />
       </div>
     </div>
     </div>

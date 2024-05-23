@@ -15,9 +15,9 @@ import Social from "./auth/social";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useState } from "react";
 
-
 interface BuyNowBtnProps {
   btnText: string;
+  priceId: string;
 }
 
 export const BuyNowBtn = (props: BuyNowBtnProps) => {
@@ -25,10 +25,37 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
   const user = useCurrentUser()
   const [showLoginForm, setShowLoginForm] = useState(false)
 
-  const {btnText} = props;
+  const {btnText, priceId} = props;
 
-  const createCheckout = () => {
-    console.log("Create checkout")
+  const createCheckout = async () => {
+
+    const res = await fetch('/api/stripe/create-checkout', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'json/application',
+      },
+      body: JSON.stringify({
+        priceId: priceId,
+        mode: 'payment',
+        successUrl: window.location.href,
+        cancelUrl: window.location.href,
+      })
+    })
+
+    if(!res.ok) {
+      console.log("something went wrong")
+      return
+    }
+
+    const data = await res.json()
+
+    if(data.error) {
+      console.log(data.error)
+      return
+    }
+
+    console.log(data.success)
+    window.location.href = data.url;
   }
 
   return (
@@ -38,7 +65,7 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
           className="w-full bg-primary text-primary-foreground"
           onClick={createCheckout}
         >
-          {btnText}
+          Get {btnText}
         </Button>
       ): (
           <Dialog>
