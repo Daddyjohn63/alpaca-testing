@@ -38,7 +38,6 @@ export function DashboardSidebar() {
     } catch(e) {
       console.log(e)
     }
-
   }
 
   return (
@@ -61,7 +60,7 @@ export function DashboardSidebar() {
           ) 
          })}
             <li>
-                <Button onClick={handleBillingPortal} variant="link" className="text-foreground/90 gap-3 w-full text-md justify-start items-center p-3 hover:bg-primary hover:text-primary-foreground rounded-md hover:no-underline">
+                <Button onClick={handleBillingPortal} variant="link" className="h-auto text-foreground/90 gap-3 w-full text-md justify-start items-center p-3 hover:bg-primary hover:text-primary-foreground rounded-md hover:no-underline">
                  <CreditCard/> Billing
                 </Button>
             </li>

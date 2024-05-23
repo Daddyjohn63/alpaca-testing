@@ -5,9 +5,7 @@ import { db } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
 
-
-  const body = await req.json();
-  const {returnUrl} = body
+  const {returnUrl} = await req.json();
 
   const user = await currentUser()
 
@@ -36,13 +34,12 @@ export async function POST(req: NextRequest) {
     }
 
     const stripeCustomerId = dbUserData.stripeCustomerId
-
     const stripePortalUrl = await createCustomerPortal(stripeCustomerId, returnUrl);
 
     return NextResponse.json({ url: stripePortalUrl });
 
   } catch (e) {
     console.error(e);
-    return NextResponse.json({ error: "Something went wrong" });
+    return NextResponse.json({ error: "Something went wrong!" });
   }
 }
