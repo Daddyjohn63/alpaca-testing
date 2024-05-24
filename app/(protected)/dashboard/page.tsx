@@ -1,14 +1,5 @@
 import BreadCrumb from "@/components/dashboard/breadcrumb";
 import { Heading } from "@/components/ui/heading";
-import { siteConfig } from "@/site-config";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 
 
 const breadcrumbItems = [{ title: "Settings", link: "/dashboard/settings" }];

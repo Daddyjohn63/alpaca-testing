@@ -115,3 +115,9 @@ export const ContactUsSchema = z.object({
     email: z.string().email({message: "Email is required"}),
     message: z.string().min(1, "A message is required")
 })
+
+export const LeadGenSchema = z.object({
+    name: z.string().min(1, "A name is required"),
+    email: z.string().email({message: "Email is required"}),
+    phone: z.string().optional()
+})

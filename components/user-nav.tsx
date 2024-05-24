@@ -11,13 +11,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { logout } from "@/actions/logout";
 import { userNavItems } from "@/constants/nav-routes";
 import Link from "next/link";
 
-export function UserNav() {
-  const user = useCurrentUser();
+interface UserProps {
+  name: string;
+  email: string;
+  image: string | null;
+  id: string;
+  role: string;
+  isTwoFactorEnabled: boolean;
+  isOath: boolean;
+}
+
+export function UserNav({user}: {user: UserProps}) {
 
   if (!!user) {
     return (

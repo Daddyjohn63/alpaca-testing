@@ -1,26 +1,27 @@
 export const siteConfig = {
   appName: "Alpacastack",
   appDescription: "One site to rule them all",
-  isUnderConstruction: true, //Options: true, false - Ads an under construction page to all but /admin route.  
+  isUnderConstruction: false, //Options: true, false - Ads an under construction page to all but /admin route.  
   isBlogPublic: true, //Options: true, false - Redirects /blog route to 404. Be sure to remove blog route from constants if false.
   themeColor: 'dark', //Options: light, dark - Colors adjusted in global.css
   routes: {
     //Every route is prive by default, add a route here to make public. 
     publicRoutes: [
-        "/new-verification",
-        "/contact-us",
-        "/terms-conditions",
-        "/privacy-policy",
-        "/api/webhook/stripe",
-        "/",
+      "/api/webhook/stripe",
+      "/new-verification",
+      "/contact-us",
+      "/terms-conditions",
+      "/privacy-policy",
+      "/newsletter",
+      "/",
     ],
     //Used for Authentication. These routes will redirect logged in users to /dashboard
     authRoutes: [
-        "/login",
-        "/register",
-        "/error",
-        "/reset",
-        "/new-password"
+      "/login",
+      "/register",
+      "/error",
+      "/reset",
+      "/new-password"
     ],
     //Prefix for API auth routes. Routes that start with this prefix are used for api auth purposes. 
     apiAuthPrefix: "/api/auth",

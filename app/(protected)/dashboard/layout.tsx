@@ -1,6 +1,5 @@
 import { DashboardSidebar } from "@/components/dashboard/sidebar";
 import { DashboardHeader } from "@/components/dashboard/sections/header-section";
-import { MarketingFooter } from "@/components/marketing/sections/footer-section";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode; }) => {
   return (

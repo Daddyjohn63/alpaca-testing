@@ -91,14 +91,17 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
   }
 
   try {
+
     await signIn("credentials", {
       email,
       password,
       redirectTo: callbackUrl || defaultLoginRedirect,
     });
+
   } catch (error) {
 
     if (error instanceof AuthError) {
+
       switch (error.type) {
         case "CredentialsSignin":
           return { error: "Invalid login credentials!" };
@@ -106,6 +109,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
           return { error: "Something went wrong!" };
       }
     }
+
     throw error;
   }
 };
