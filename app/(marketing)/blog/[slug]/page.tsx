@@ -1,13 +1,12 @@
 import { db } from "@/lib/db"
 import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
 import { notFound } from "next/navigation";
-import { SidebarCTA } from "@/components/marketing/blog-cta";
+import { CTACard } from "@/components/cta-card";
 import { siteConfig } from "@/site-config";
 
 type Params = {
   slug: string;
 }
-
 
 const PostPage = async({params}: {params: Params}) => {
 
@@ -46,12 +45,12 @@ const PostPage = async({params}: {params: Params}) => {
           <div dangerouslySetInnerHTML={{ __html: data.content }} />
         </article>
         <aside className="md:col-span-2 self-start sticky top-2">
-          <SidebarCTA 
+          <CTACard 
             image="cta-img.jpg"
             title="Download AlpacaStack Now!" 
             description="Download Alpaca Stack today and launch your knew SaaS startup blazingly fast!"
             btnText="Download Now!" 
-            btnHref="/"/>
+            btnHref="/#pricing-page"/>
         </aside>
       </div>
     </div>

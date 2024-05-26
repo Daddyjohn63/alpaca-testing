@@ -3,42 +3,16 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
-import { SidebarCTA } from "../marketing/blog-cta";
 import { Logo } from "@/components/logo";
 import { dashboardNavItems } from "@/constants/nav-routes";
-import { CreditCard } from "lucide-react";
-import { Button } from "../ui/button";
+import { useCurrentAccess } from "@/hooks/use-current-access";
+import { Zap } from "lucide-react";
+import { CTACard } from "@/components/cta-card";
 
 export function DashboardSidebar() {
 
   const pathname = usePathname()
-
-  const handleBillingPortal = async () => {
-
-    try {
-      const res = await fetch('/api/stripe/create-portal', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            returnUrl: window.location.href
-        })
-      })
-
-      if(!res) {
-        console.log("Could not get billing portal URL")
-      }
-
-      const data = await res.json()
-
-      //Redirect to billing portal in stripe
-      window.location.href = data.url;
-
-    } catch(e) {
-      console.log(e)
-    }
-  }
+  const hasAccess = useCurrentAccess()
 
   return (
     <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-72">
@@ -53,24 +27,25 @@ export function DashboardSidebar() {
 
           return (
             <li key={i}>
-                <Link href={item.href} className={`${item.href === pathname ? "bg-muted-foreground/30" : ""} flex gap-3 w-full justify-left items-center p-3 hover:bg-primary hover:text-primary-foreground rounded-md`}>
-                 <Icon /> {item.text}
+                <Link href={item.href} className={`${item.href === pathname ? "bg-muted-foreground/30" : ""} flex gap-3 w-full justify-between items-center p-3 hover:bg-primary hover:text-primary-foreground rounded-md`}>
+                  <div className="flex justify-left gap-3">
+                 <Icon /> 
+                  {item.text}
+                  </div>
+                  {!!item.upgrade && !hasAccess && <Zap className="border border-muted-foreground r-md p-[5px] w-7 h-7 rounded-md" />}
                 </Link>
             </li>
           ) 
          })}
-            <li>
-                <Button onClick={handleBillingPortal} variant="link" className="h-auto text-foreground/90 gap-3 w-full text-md justify-start items-center p-3 hover:bg-primary hover:text-primary-foreground rounded-md hover:no-underline">
-                 <CreditCard/> Billing
-                </Button>
-            </li>
       </ul>
-          <SidebarCTA 
+        {!hasAccess && (
+          <CTACard 
             image="cta-img.jpg"
             title="Upgrade Right Now!" 
             description="Upgrade to a premium account and get full access to all features."
             btnText="Upgrade Now!" 
-            btnHref="https://google.com"/>
+            btnHref="/#pricing-section"/>
+        )}
       </div>
     </aside>
   )

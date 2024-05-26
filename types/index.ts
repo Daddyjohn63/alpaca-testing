@@ -4,6 +4,7 @@ export type NavItems = {
   icon?: keyof typeof Icons;
   text: string;
   href: string;
+  upgrade?: boolean;
 }
 
 export type TablePost = {

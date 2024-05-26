@@ -28,7 +28,7 @@ export const getUserById = async (id: string) => {
   }
 };
 
-export const getUserStripeId = async (id: string) => {
+export const getUserStripeCustomerId = async (id: string) => {
 
   try {
 

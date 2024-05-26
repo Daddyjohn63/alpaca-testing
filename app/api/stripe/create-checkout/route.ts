@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { stripe, createStripeCustomer } from "@/lib/stripe";
-import { getUserStripeId } from "@/data/user";
+import { getUserStripeCustomerId } from "@/data/user";
 
 export async function POST(req: NextRequest) {
 
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   try {
 
     //Get stripeCustomerId from user table;
-    let stripeCustomerId = await getUserStripeId(user.id)
+    let stripeCustomerId = await getUserStripeCustomerId(user.id)
     
     //if user does not have a stripe customer Id. then we create one. 
     if(!stripeCustomerId) {

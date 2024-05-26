@@ -74,22 +74,27 @@ export const dashboardNavItems: NavItems[] = [
         icon: "home",
         text: "Dashboard",
         href: "/dashboard",
+        upgrade: false,
     },
     {
-        icon: "wand",
-        text: "Something",
-        href: "/dashboard/something",
+        icon: "download",
+        text: "Downloads",
+        href: "/dashboard/downloads",
+        upgrade: true,
     },
     {
         icon: "cog",
         text: "Settings",
         href: "/dashboard/settings",
+        upgrade: false,
     },
-    // {
-    //     icon: "card",
-    //     text: "Billing",
-    //     href: "/dashboard/billing",
-    // },
+    { 
+        icon: "card",
+        text: "Billing",
+        href: "/dashboard/billing",
+        upgrade: false,
+
+    },
 ];
 
 // ADMIN

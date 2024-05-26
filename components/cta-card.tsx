@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
-type SidebarCTAProps = {
+interface CTACardProps {
   image?: string;
   title: string;
   description?: string;
@@ -11,7 +11,7 @@ type SidebarCTAProps = {
   btnHref?: string;
 }
 
-export function SidebarCTA(props: SidebarCTAProps) {
+export function CTACard(props: CTACardProps) {
 
   const {image, title, description, btnText, btnHref} = props;
 

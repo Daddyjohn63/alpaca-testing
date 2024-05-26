@@ -11,6 +11,7 @@ import {
   LucideProps,
   User,
   LogOut,
+  DownloadIcon,
   Wand,
   Cog
 } from "lucide-react";
@@ -27,6 +28,7 @@ export const Icons = {
   user: User,
   media: Image,
   wand: Wand,
+  download: DownloadIcon,
   cog: Cog,
   card: CreditCard,
   gitHub: ({ ...props }: LucideProps) => (
