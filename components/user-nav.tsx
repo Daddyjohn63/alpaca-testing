@@ -14,18 +14,11 @@ import {
 import { logout } from "@/actions/logout";
 import { userNavItems } from "@/constants/nav-routes";
 import Link from "next/link";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
-interface UserProps {
-  name: string;
-  email: string;
-  image: string | null;
-  id: string;
-  role: string;
-  isTwoFactorEnabled: boolean;
-  isOath: boolean;
-}
+export function UserNav() {
 
-export function UserNav({user}: {user: UserProps}) {
+  const user = useCurrentUser()
 
   if (!!user) {
     return (

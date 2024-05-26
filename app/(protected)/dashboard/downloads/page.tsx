@@ -34,8 +34,6 @@ const DownloadsPage = async () => {
   const priceId = userData.stripePriceId;
   const hasAccess = user.hasAccess;
 
-  console.log(siteConfig.priceId)
-
   return (
     <div>
         <BreadCrumb items={breadcrumbItems} />
@@ -51,11 +49,11 @@ const DownloadsPage = async () => {
           <div className="flex flex-col gap-3">
             ddd
 
-            {siteConfig && siteConfig.stripe.plans.map((plan) => {
+            {siteConfig && siteConfig.stripe.plans.map((plan, i) => {
 
               if(plan.priceId === priceId) {
                 return (
-                  <div className="border p-5 rounded-md">
+                  <div key={i} className="border p-5 rounded-md">
                     <h3>Alpaca Stack ({plan.name})</h3>
                     <p>{plan.description}</p>
                     <div className="flex gap-3 mt-3">
