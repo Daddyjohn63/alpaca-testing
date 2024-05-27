@@ -14,8 +14,15 @@ type ParamsProps = {
 };
 
 export const metadata = getSEOMetadata({
-  openGraphImage: 'ogImage-blog.jpg'
+  title: 'Awesome blog page',
+  description: 'Great content to help you succeed!',
+  openGraphImage: 'ogImage-blog.jpg',
+  openGraph: {
+   title: "Awesome blog page",
+    description: "Great content to help you succeed!"
+  }
 })
+
 
 const BlogPage = async({searchParams}: ParamsProps) => {
 

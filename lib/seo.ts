@@ -14,7 +14,8 @@ export const getSEOMetadata = ({
         openGraphImage?: string;
     } = {}) => {
 
-    const ogImage = `https://${siteConfig.primaryDomain}/${openGraphImage}` || `https:${siteConfig.primaryDomain}/opengraph-images.jpg`
+    const primaryDomain = process.env.NEXT_PUBLIC_PRIMARY_DOMAIN;
+    const ogImage = openGraphImage ? `https://${primaryDomain}/${openGraphImage}` : `https:${primaryDomain}/opengraph-images.jpg`
  
     return {
 

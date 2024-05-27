@@ -4,6 +4,9 @@ import { redirect } from "next/navigation";
 import { currentRole } from "@/lib/auth";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/site-config";
+import { getSEOMetadata } from "@/lib/seo";
+
+export const metadata = getSEOMetadata()
 
 const MarketingLayout = async ({ children }: { children: React.ReactNode }) => {
 

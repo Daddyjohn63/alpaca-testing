@@ -1,14 +1,10 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import ThemeProvider from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/site-config";
-import { getSEOMetadata } from "@/lib/seo";
-
-export const metadata = getSEOMetadata()
 
 const inter = Inter({ subsets: ["latin"] });
 
