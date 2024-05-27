@@ -9,7 +9,7 @@ export const getSEOMetadata = ({
     openGraph,
 }: Metadata = {}) => {
 
-    const openGraphImage = openGraph && openGraph.images ? openGraph?.images : `${process.env.NEXT_PUBLIC_PRIMARY_DOMAIN}/opengraph-image.jpg`
+    const openGraphImage = openGraph && openGraph.images ? openGraph?.images : `${siteConfig.primaryDomain}/opengraph-image.jpg`
 
     return {
 
@@ -21,7 +21,7 @@ export const getSEOMetadata = ({
         openGraph: {
             title: openGraph?.title || siteConfig.appName,
             description: openGraph?.description || siteConfig.appDescription, 
-            url: openGraph?.url || siteConfig.primaryDomainName,
+            url: openGraph?.url || siteConfig.primaryDomain,
             siteName: openGraph?.siteName || siteConfig.appName,
             images: [
                 {
