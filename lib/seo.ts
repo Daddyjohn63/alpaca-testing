@@ -6,17 +6,27 @@ export const getSEOMetadata = ({
     title,
     description,
     keywords,
+    canonicalUrlRelative,
     openGraph,
-}: Metadata = {}) => {
+    openGraphImage,
+}: Metadata & {
+        canonicalUrlRelative?: string;
+        openGraphImage?: string;
+    } = {}) => {
 
-    const openGraphImage = openGraph && openGraph.images ? openGraph?.images : `https://staging.${siteConfig.primaryDomain}/opengraph-image.jpg`
-
+    const ogImage = `https://${siteConfig.primaryDomain}/${openGraphImage}` || `https:${siteConfig.primaryDomain}/opengraph-images.jpg`
+ 
     return {
 
         title: title || siteConfig.appName,
         descrition: description || siteConfig.appDescription,
         keywords: keywords || siteConfig.keywords,
         applicationName: siteConfig.appName,
+
+
+        ...(canonicalUrlRelative && {
+          alternates: { canonical: canonicalUrlRelative },
+        }),
 
         openGraph: {
             title: openGraph?.title || siteConfig.appName,
@@ -25,7 +35,7 @@ export const getSEOMetadata = ({
             siteName: openGraph?.siteName || siteConfig.appName,
             images: [
                 {
-                    url: openGraphImage, // Absolute URL
+                    url: ogImage, // Absolute URL
                     width: 800,
                     height: 600,
                 }
@@ -38,8 +48,8 @@ export const getSEOMetadata = ({
             title: openGraph?.title || siteConfig.appName,
             description: openGraph?.description || siteConfig.appDescription, 
             card: 'summary_large_image', 
-            creator: '@alpaca_stack',
-            images: [openGraphImage,] //Absolute URLs
+            creator: '@travistylervii',
+            images: [ogImage,] //Absolute URLs
         },
 
     }

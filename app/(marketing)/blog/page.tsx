@@ -5,12 +5,17 @@ import Image from "next/image"
 import { PaginationControls } from "@/components/pagination-controls"
 import { siteConfig } from "@/site-config"
 import { notFound } from "next/navigation"
+import { getSEOMetadata } from "@/lib/seo"
 
 type ParamsProps = {
   searchParams: {
     [key: string]: string | string[] | undefined;
   };
 };
+
+export const metadata = getSEOMetadata({
+  openGraphImage: 'ogImage-blog.jpg'
+})
 
 const BlogPage = async({searchParams}: ParamsProps) => {
 
