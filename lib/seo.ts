@@ -14,7 +14,7 @@ export const getSEOMetadata = ({
         openGraphImage?: string;
     } = {}) => {
 
-    const primaryDomain = process.env.NEXT_PUBLIC_PRIMARY_DOMAIN;
+    const primaryDomain = 'https://staging.alpacastack.com';
     const ogImage = openGraphImage ? `${primaryDomain}/${openGraphImage}` : `${primaryDomain}/opengraph-images.jpg`
  
     return {
