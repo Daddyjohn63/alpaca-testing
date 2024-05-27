@@ -75,8 +75,7 @@ export const AddEditCategoryForm = (props: AddCategoryFormProps) => {
       setEditSlug(false)
       form.setValue("slug", editCategory.slug)
     }
-  },[editCategory])
-
+  },[form, editCategory])
 
   const onSubmit = (values: z.infer<typeof AddCategorySchema>) => {
 

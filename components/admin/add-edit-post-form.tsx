@@ -133,7 +133,7 @@ export const AddEditPostForm = (props: AddPostFormProps) => {
       form.setValue("slug", existingPost.slug)
     }
 
-  },[existingPost])
+  },[form, existingPost])
 
   useEffect(() => {
     // Enable auto slug creation and editing if edit slug is turned on (true)

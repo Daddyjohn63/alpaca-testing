@@ -19,7 +19,7 @@ export default async function DashboardHome() {
       {!!hasAccess && (
         <div className="max-w-3xl">
           <h2 className="text-xl font-bold mb-1">START HERE 👇</h2>
-          <p>Enter your GitHub username to get access to the official Alpaca Stack Template Repo. Enter your username in the form below and you'll receive an email from GitHub to confirm your access.</p>
+          <p>Enter your GitHub username to get access to the official Alpaca Stack Template Repo. Enter your username in the form below and you&apos;ll receive an email from GitHub to confirm your access.</p>
           <div className="mt-3">
             <RepoAccessForm />
             <div>
