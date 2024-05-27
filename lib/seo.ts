@@ -9,7 +9,7 @@ export const getSEOMetadata = ({
     openGraph,
 }: Metadata = {}) => {
 
-    const openGraphImage = openGraph && openGraph.images ? openGraph?.images : `${siteConfig.primaryDomain}/opengraph-image.jpg`
+    const openGraphImage = openGraph && openGraph.images ? openGraph?.images : `https://staging.${siteConfig.primaryDomain}/opengraph-image.jpg`
 
     return {
 
