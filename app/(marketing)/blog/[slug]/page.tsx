@@ -3,10 +3,39 @@ import { PageHeroSection } from "@/components/marketing/sections/page-hero-secti
 import { notFound } from "next/navigation";
 import { CTACard } from "@/components/cta-card";
 import { siteConfig } from "@/site-config";
+import { Metadata } from "next";
 
 type Params = {
   slug: string;
 }
+
+export const generateMetadata = async({params}: {params: Params}) => {
+
+  const {slug} = params;
+
+  const data = await db.post.findFirst({
+    where: {
+      slug: slug
+    },
+    include: {
+      media: {
+        select: {
+          imagePath: true,
+        },
+      },
+    },
+  })
+
+  if(!data) {
+    return null
+  }
+
+  return {
+    title: data.title,
+    description: data.excerpt
+  }
+}
+
 
 const PostPage = async({params}: {params: Params}) => {
 
@@ -31,6 +60,7 @@ const PostPage = async({params}: {params: Params}) => {
     },
   })
 
+
   if(!data) {
     return notFound()
   }
@@ -50,7 +80,7 @@ const PostPage = async({params}: {params: Params}) => {
             title="Download AlpacaStack Now!" 
             description="Download Alpaca Stack today and launch your knew SaaS startup blazingly fast!"
             btnText="Download Now!" 
-            btnHref="/#pricing-page"/>
+            btnHref="/#pricing-section"/>
         </aside>
       </div>
     </div>

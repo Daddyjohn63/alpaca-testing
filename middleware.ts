@@ -42,7 +42,6 @@ export default auth((req) => {
   }
 
   if(isUnderConstruction) {
-    console.log("under")
       return null
   }
 

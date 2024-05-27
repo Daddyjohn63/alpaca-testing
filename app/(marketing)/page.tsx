@@ -8,7 +8,10 @@ import { TestimonialSection1 } from "@/components/marketing/sections/testimonial
 import { VideoSection } from "@/components/marketing/sections/video-section";
 import Image from "next/image";
 
+
+
 const Home = async () => {
+
   return (
     <main> 
       <HeroFullSection />

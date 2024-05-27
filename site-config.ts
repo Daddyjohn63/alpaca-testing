@@ -1,6 +1,8 @@
 export const siteConfig = {
   appName: "Alpacastack",
   appDescription: "One site to rule them all",
+  keywords: ['Next.js', 'React', 'JavaScript'],
+  primaryDomainName: 'alpacastack.com',
   isUnderConstruction: true, //Options: true, false - Ads an under construction page to all but /admin route.  
   isBlogPublic: true, //Options: true, false - Redirects /blog route to 404. Be sure to remove blog route from constants if false.
   themeColor: 'dark', //Options: light, dark - Colors adjusted in global.css
@@ -37,6 +39,7 @@ export const siteConfig = {
       {
         priceId: process.env.NODE_ENV === "development" ? "price_1PH9y7GVfP1i6nIpi9nBrtM7" : "price_456",
         name: "Starter Stack",
+        githubRepoName: 'alpaca-stack-ts-template-starter',
         isFeatured: false,
         description: "Perfect for small projects",
         price: 169,
@@ -92,6 +95,7 @@ export const siteConfig = {
         priceId: process.env.NODE_ENV === "development" ? "price_1PHV1iGVfP1i6nIpMpZJiXOo" : "price_456",
         isFeatured: true,
         name: "Pro Stack",
+        githubRepoName: 'alpaca-stack-ts-template-pro',
         description: "You need more power",
         price: 199,
         priceAnchor: 299,

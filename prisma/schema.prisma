@@ -30,6 +30,7 @@ model User {
   stripeCustomerId  String? @unique
   stripePriceId String?
   hasAccess Boolean @default(false)
+  repoRequests  RepoRequest[]
   posts Post[] 
 }
 
@@ -130,4 +131,16 @@ model Lead {
   name        String?
   email       String
   phone       String?
+}
+
+model RepoRequest {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  userId          String
+  stripePriceId     String?
+  stripeCustomerId  String?
+  repoName        String?
+  githubUsername  String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

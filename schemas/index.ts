@@ -121,3 +121,7 @@ export const LeadGenSchema = z.object({
     email: z.string().email({message: "Email is required"}),
     phone: z.string().optional()
 })
+
+export const RepoAccessSchema = z.object({
+    username: z.string().min(1, {message: "Username is required"}),
+})
