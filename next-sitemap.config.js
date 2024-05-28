@@ -1,6 +1,7 @@
 //Reference: https://www.npmjs.com/package/next-sitemap#create-config-file
+/** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_PRIMARY_DOMAIN || "https://alpacastack.com",
+  siteUrl: "https://staging.alpacastack.com",
   generateRobotsTxt: true,
   exclude: ["/dashboard", "/admin", "/twitter-image.*", "/opengraph-image.*", "/icon.*"],
 };
