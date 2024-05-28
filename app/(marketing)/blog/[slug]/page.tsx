@@ -3,16 +3,15 @@ import { PageHeroSection } from "@/components/marketing/sections/page-hero-secti
 import { notFound } from "next/navigation";
 import { CTACard } from "@/components/cta-card";
 import { siteConfig } from "@/site-config";
-import { Metadata } from "next";
 import { getSEOMetadata } from "@/lib/seo";
+import { Metadata, ResolvingMetadata } from "next";
 
-type Params = {
-  slug: string;
+type Props = {
+  params: {slug: string};
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
-
-
-export const generateMetadata = async({params}: {params: Params}) => {
+export const generateMetadata = async({params}: Props, parent: ResolvingMetadata): Promise<Metadata> => {
 
   const {slug} = params;
 
@@ -30,13 +29,13 @@ export const generateMetadata = async({params}: {params: Params}) => {
   })
 
   if(!data) {
-    return null
+    return {}
   }
 
   let postImage = ''
 
   if(data.media){
-    postImage = data.media.imagePath;
+    postImage = `${siteConfig.fileStorage.bucketUrl}/${data.media.imagePath}`;
   }
 
   return getSEOMetadata({
@@ -62,7 +61,7 @@ export const generateMetadata = async({params}: {params: Params}) => {
 }
 
 
-const PostPage = async({params}: {params: Params}) => {
+const PostPage = async({params}: Props) => {
 
   const isBlogPublic = siteConfig.isBlogPublic;
 

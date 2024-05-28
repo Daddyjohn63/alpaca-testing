@@ -2,7 +2,7 @@ export const siteConfig = {
   appName: "Alpacastack",
   appDescription: "Launch your SaaS in minutes, not months!",
   keywords: ['Next.js', 'React', 'JavaScript'],
-  primaryDomain: 'alpacastack.com',
+  primaryDomain: 'staging.alpacastack.com',
   isUnderConstruction: false, //Options: true, false - Ads an under construction page to all but /admin route.  
   isBlogPublic: true, //Options: true, false - Redirects /blog route to 404. Be sure to remove blog route from constants if false.
   themeColor: 'dark', //Options: light, dark - Colors adjusted in global.css
@@ -30,6 +30,12 @@ export const siteConfig = {
     //Default redirect path after loging in. 
     defaultLoginRedirect: '/dashboard',
 
+  },
+  fileStorage: {
+    // If you use AWS S3/Cloudfront, put values in here
+    bucket: "alpacastack-post-images",
+    bucketUrl: `https://f005.backblazeb2.com/file/alpacastack-post-images`,
+    cdn: "https://cdn-id.cloudfront.net/",
   },
   email: {
     adminEmail: "noreply@alpacastack.com"

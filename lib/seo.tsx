@@ -8,14 +8,13 @@ export const getSEOMetadata = ({
     keywords,
     canonicalUrlRelative,
     openGraph,
-    openGraphImage,
+    ogImageUrl,
 }: Metadata & {
         canonicalUrlRelative?: string;
-        openGraphImage?: string;
+        ogImageUrl?: string;
     } = {}) => {
 
-    const primaryDomain = 'https://staging.alpacastack.com';
-    const ogImage = openGraphImage ? `${primaryDomain}/${openGraphImage}` : `${primaryDomain}/opengraph-images.jpg`
+    const ogImage = ogImageUrl ? ogImageUrl : `https://${siteConfig.primaryDomain}/opengraph-images.jpg`
 
     return {
 
@@ -26,7 +25,7 @@ export const getSEOMetadata = ({
         metadataBase: new URL(
             process.env.NODE_ENV === "development"
                 ? "http://localhost:3000/"
-                : `https://${primaryDomain}/`
+                : `https://${siteConfig.primaryDomain}/`
         ),
 
 

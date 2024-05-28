@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PaginationControls } from "@/components/pagination-controls";
 import Image from "next/image";
 import { type Media } from "@prisma/client";
+import { siteConfig } from "@/site-config";
 
 type MediaGridProps = {
   data: Media[];
@@ -25,7 +26,7 @@ const PaginatedMediaGrid = (props: MediaGridProps) => {
               <div className="w-full aspect-video rounded-md overflow-hidden flex items-center justify-center bg-muted border-2 border-transparent hover:border-primary">
                 <Link href={`/admin/media/edit-media/${media.id}`}>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${media.imagePath}`}
+                  src={`${siteConfig.fileStorage.bucketUrl}/${media.imagePath}`}
                   className="w-full"
                   alt={media.altText || 'media item'}
                   width="550"

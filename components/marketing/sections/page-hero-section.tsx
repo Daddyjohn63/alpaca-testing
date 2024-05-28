@@ -1,5 +1,7 @@
 'use client'
 
+import { siteConfig } from "@/site-config";
+
 type Props = {
   title: string;
   subtitle?: string;
@@ -10,7 +12,7 @@ export function PageHeroSection(props: Props) {
 
   const {title, subtitle, bgImagePath} = props;
 
-  const backgroundImageUrl = bgImagePath ? `url('${process.env.NEXT_PUBLIC_BLOG_POST_IMAGE_PATH}/${bgImagePath}')` : undefined;
+  const backgroundImageUrl = bgImagePath ? `url('${siteConfig.fileStorage.bucketUrl}/${bgImagePath}')` : undefined;
 
   return (
     <section className="bg-muted bg-center" style={{backgroundImage: backgroundImageUrl}}>
