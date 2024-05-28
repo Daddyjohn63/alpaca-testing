@@ -80,9 +80,9 @@ const BlogPage = async({searchParams}: ParamsProps) => {
             {data && data.map((post) => {
               return (
                 <div key={post.id} className="space-y-4">
+                  {!!post.media && (
                   <Link href={`blog/${post.slug}`}>
-                    <div className="w-full aspect-video rounded-md overflow-hidden flex items-center justify-center bg-muted border-2 border-transparent hover:border-primary">
-                      {!!post.media && (
+                      <div className="w-full aspect-video rounded-md overflow-hidden flex items-center justify-center bg-muted border-2 border-transparent hover:border-primary">
                         <Image
                           src={`${siteConfig.fileStorage.bucketUrl}/${post.media.imagePath}`}
                           className="w-full"
@@ -90,9 +90,9 @@ const BlogPage = async({searchParams}: ParamsProps) => {
                           width="570"
                           height="320"
                         />
-                      )}
-                    </div>
+                      </div>
                   </Link>
+                  )}
                   <div className="space-y-1">
                     <Link href={`blog/${post.slug}`}>
                       <h3 className="font-bold text-xl leading-7 hover:text-primary">{post.title}</h3>
