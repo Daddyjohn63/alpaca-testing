@@ -4,10 +4,13 @@ import { notFound } from "next/navigation";
 import { CTACard } from "@/components/cta-card";
 import { siteConfig } from "@/site-config";
 import { Metadata } from "next";
+import { getSEOMetadata } from "@/lib/seo";
 
 type Params = {
   slug: string;
 }
+
+
 
 export const generateMetadata = async({params}: {params: Params}) => {
 
@@ -30,10 +33,32 @@ export const generateMetadata = async({params}: {params: Params}) => {
     return null
   }
 
-  return {
-    title: data.title,
-    description: data.excerpt
+  let postImage = ''
+
+  if(data.media){
+    postImage = data.media.imagePath;
   }
+
+  return getSEOMetadata({
+    title: data.title,
+    description: data.excerpt,
+    canonicalUrlRelative: `/blog/${data.slug}`,
+    openGraph: {
+      title: data.title,
+      description: data.excerpt || '',
+      url: `/blog/${data.slug}`,
+      images: [
+        {
+          url: postImage,
+          width: 1200,
+          height: 660,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+
+    }
+  })
 }
 
 

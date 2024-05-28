@@ -14,12 +14,11 @@ type ParamsProps = {
 };
 
 export const metadata = getSEOMetadata({
-  title: 'Awesome blog page',
-  description: 'Great content to help you succeed!',
-  openGraphImage: 'ogImage-blog.jpg',
+  title: 'Alpaca Stack Blog',
+  description: 'Explore our blog for expert tips, tutorials, and insights on building powerful SaaS applications with Next.js.',
   openGraph: {
-   title: "Awesome blog page",
-    description: "Great content to help you succeed!"
+   title: "Alpaca Stack Blog",
+    description: "Explore our blog for expert tips, tutorials, and insights on building powerful SaaS applications with Next.js."
   }
 })
 
