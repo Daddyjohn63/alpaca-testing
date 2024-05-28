@@ -14,7 +14,7 @@ export const getSEOMetadata = ({
         ogImageUrl?: string;
     } = {}) => {
 
-    const ogImage = ogImageUrl ? ogImageUrl : `https://${siteConfig.primaryDomain}/opengraph-images.jpg`
+    const ogImage = ogImageUrl ? ogImageUrl : `https://${siteConfig.primaryDomain}/openGraph-image.png`
 
     return {
 
@@ -56,9 +56,7 @@ export const getSEOMetadata = ({
             creator: '@travistylervii',
             images: [ogImage,] //Absolute URLs
         },
-
     }
-
 }
 
 // Strctured Data for Rich Results on Google. Learn more: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data

@@ -4,14 +4,14 @@ import { notFound } from "next/navigation";
 import { CTACard } from "@/components/cta-card";
 import { siteConfig } from "@/site-config";
 import { getSEOMetadata } from "@/lib/seo";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 type Props = {
   params: {slug: string};
   searchParams?: { [key: string]: string | string[] | undefined }
 }
 
-export const generateMetadata = async({params}: Props, parent: ResolvingMetadata): Promise<Metadata> => {
+export const generateMetadata = async({params}: Props): Promise<Metadata> => {
 
   const {slug} = params;
 
@@ -29,7 +29,7 @@ export const generateMetadata = async({params}: Props, parent: ResolvingMetadata
   })
 
   if(!data) {
-    return {}
+    return getSEOMetadata()
   }
 
   let postImage = ''
@@ -42,20 +42,11 @@ export const generateMetadata = async({params}: Props, parent: ResolvingMetadata
     title: data.title,
     description: data.excerpt,
     canonicalUrlRelative: `/blog/${data.slug}`,
+    ogImageUrl: postImage,
     openGraph: {
       title: data.title,
       description: data.excerpt || '',
       url: `/blog/${data.slug}`,
-      images: [
-        {
-          url: postImage,
-          width: 1200,
-          height: 660,
-        },
-      ],
-      locale: "en_US",
-      type: "website",
-
     }
   })
 }
