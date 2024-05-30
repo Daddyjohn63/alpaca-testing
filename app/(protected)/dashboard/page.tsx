@@ -1,7 +1,10 @@
-import BreadCrumb from "@/components/dashboard/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { RepoAccessForm } from "@/components/dashboard/repo-access-form";
 import { currentAccess } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { CTAAlert } from "@/components/cta-alert";
+
 
 export default async function DashboardHome() {
 
@@ -11,25 +14,24 @@ export default async function DashboardHome() {
       <div>
         <Heading
           title="Dashboard"
-          description="Manage your account settings"
+          description="Explore downloads, documentation and guides."
         />
       {!hasAccess && (
-        <p>Nope</p>
+        <CTAAlert />
       )}
       {!!hasAccess && (
-        <div className="max-w-3xl">
-          <h2 className="text-xl font-bold mb-1">START HERE 👇</h2>
-          <p>Enter your GitHub username to get access to the official Alpaca Stack Template Repo. Enter your username in the form below and you&apos;ll receive an email from GitHub to confirm your access.</p>
+        <div className="max-w-3xl space-y-4">
+          <h2 className="text-2xl font-bold pt-5">STEP 1: Request Access</h2>
+          <p>To gain access to the official Alpaca Stack Template Repository, please enter your GitHub username in the form below. You will receive a confirmation email from GitHub shortly</p>
           <div className="mt-3">
             <RepoAccessForm />
-            <div>
-              <ul>
-                <li>Request access to Github repo(s).</li>
-                <li>Open email and accept access invitation.</li>
-                <li>Read the documentation to get started!</li>
-              </ul>
-            </div>
           </div>
+          <h2 className="text-2xl font-bold pt-5">STEP 2: Accept Our GitHub Invitation</h2>
+            <p>Once you've submitted your GitHub username, check your email for an invitation to join our private GitHub repository. Accept the invitation to proceed.</p>
+
+          <h2 className="text-2xl font-bold pt-5">STEP 3: Review Documentation</h2>
+          <p>Begin by exploring the comprehensive documentation for Alpaca Stack. This will guide you through all the features and functionalities of the platform.</p>
+          <Button asChild><Link href="https://docs.alpacastack.com/">Documentation</Link></Button>
         </div>
       )}
     </div>

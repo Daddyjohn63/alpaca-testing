@@ -12,7 +12,7 @@ export function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-72">
+    <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-80">
 
       <div>
       <Logo size="sm" className="hidden md:block"/>

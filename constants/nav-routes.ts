@@ -68,35 +68,6 @@ export const boringNavItems: NavItems[] = [
 
 ]
 
-// DASHBOARD
-export const dashboardNavItems: NavItems[] = [
-    {
-        icon: "home",
-        text: "Dashboard",
-        href: "/dashboard",
-        upgrade: false,
-    },
-    {
-        icon: "download",
-        text: "Downloads",
-        href: "/dashboard/downloads",
-        upgrade: true,
-    },
-    {
-        icon: "cog",
-        text: "Settings",
-        href: "/dashboard/settings",
-        upgrade: false,
-    },
-    { 
-        icon: "card",
-        text: "Billing",
-        href: "/dashboard/billing",
-        upgrade: false,
-
-    },
-];
-
 // ADMIN
 export const adminNavItems: NavItems[] = [
     {
@@ -125,3 +96,33 @@ export const adminNavItems: NavItems[] = [
         href: "/admin/users",
     },
 ];
+
+// DASHBOARD
+export const dashboardNavItems: NavItems[] = [
+    {
+        icon: "home",
+        text: "Dashboard",
+        href: "/dashboard",
+        upgrade: true,
+    },
+    {
+        icon: "documentation",
+        text: "Documentation",
+        href: "/dashboard/documentation",
+        upgrade: true,
+    },
+    {
+        icon: "cog",
+        text: "Settings",
+        href: "/dashboard/settings",
+        upgrade: false,
+    },
+    { 
+        icon: "card",
+        text: "Billing",
+        href: "/dashboard/billing",
+        upgrade: false,
+
+    },
+];
+

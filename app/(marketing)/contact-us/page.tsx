@@ -3,6 +3,16 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Facebook, Instagram, Youtube, Linkedin} from "lucide-react"
 import { ContactUsForm } from "@/components/marketing/contact-us-form"
+import { getSEOMetadata } from "@/lib/seo"
+
+export const metadata = getSEOMetadata({
+  title: 'Contact Us | Alpaca Stack',
+  description: 'Get in touch with the Alpaca Stack team for any inquiries, support, or feedback. We are here to help you with your Next.js projects and provide the assistance you need.',
+  openGraph: {
+    title: "Contact Us | Alpaca Stack",
+    description: "Get in touch with the Alpaca Stack team for any inquiries, support, or feedback. We are here to help you with your Next.js projects and provide the assistance you need."
+  }
+})
 
 const ContactUsPage = async() => {
 

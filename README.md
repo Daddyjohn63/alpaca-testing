@@ -41,23 +41,24 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## File Structure
 
-<<<<<<< HEAD
 - [X] Add Stripe Integration
-- [ ] Add dashboard configurations
-- [ ] Add SEO metadata
+- [X] Add dashboard configurations
+- [ ] Add Reviews Component
+- [ ] Add FAQ Component
+- [ ] Create Demo Site
+- [X] Add SEO metadata
 - [ ] Add Error Handling
 - [ ] Add Error Logging
-- [ ] Add dynamic robots.txt
+- [X] Add dynamic robots.txt
 - [ ] Add sitemap 
 - [ ] Add GPT API Lib
 - [X] Add Lead magnet
-- [ ] Add documentation
 - [ ] Fix lightmode colors
 - [ ] Refactor clean up code
+- [ ] Finish Documentation
+- [ ] Finish Training Course
 - [ ] Fix Github Access Token Automated Renewal
-=======
 
->>>>>>> b25155efb8b019d57ade8f3fba280ee173598184
 
 
 
