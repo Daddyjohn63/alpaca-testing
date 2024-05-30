@@ -27,7 +27,7 @@ export default async function DashboardHome() {
             <RepoAccessForm />
           </div>
           <h2 className="text-2xl font-bold pt-5">STEP 2: Accept Our GitHub Invitation</h2>
-            <p>Once you've submitted your GitHub username, check your email for an invitation to join our private GitHub repository. Accept the invitation to proceed.</p>
+            <p>Once you&apos;ve submitted your GitHub username, check your email for an invitation to join our private GitHub repository. Accept the invitation to proceed.</p>
 
           <h2 className="text-2xl font-bold pt-5">STEP 3: Review Documentation</h2>
           <p>Begin by exploring the comprehensive documentation for Alpaca Stack. This will guide you through all the features and functionalities of the platform.</p>
