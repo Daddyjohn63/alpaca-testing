@@ -2,5 +2,3 @@
 User-agent: *
 Allow: /
 
-# Host
-Host: http://localhost:3000
