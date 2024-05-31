@@ -43,13 +43,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - [X] Add Stripe Integration
 - [X] Add dashboard configurations
-- [ ] Fix session render on init load
-- [ ] Add Reviews Component
-- [ ] Add FAQ Component
+- [X] Fix session render on init load
+- [X] Add Reviews Component
+- [X] Add FAQ Component
 - [ ] Create Demo Site
 - [X] Add SEO metadata
 - [ ] Add Error Handling
-- [ ] Add Error Logging
 - [X] Add dynamic robots.txt
 - [ ] Add sitemap 
 - [ ] Add GPT API Lib
