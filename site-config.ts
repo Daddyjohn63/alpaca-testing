@@ -3,7 +3,7 @@ export const siteConfig = {
   appDescription: "Launch your SaaS in minutes, not months!",
   keywords: ['Next.js', 'React', 'JavaScript'],
   primaryDomain: 'staging.alpacastack.com',
-  isUnderConstruction: true, //Options: true, false - Ads an under construction page to all but /admin route.  
+  isUnderConstruction: false, //Options: true, false - Ads an under construction page to all but /admin route.  
   isBlogPublic: false, //Options: true, false - Redirects /blog route to 404. Be sure to remove blog route from constants if false.
   themeColor: 'dark', //Options: light, dark - Colors adjusted in global.css
   routes: {
