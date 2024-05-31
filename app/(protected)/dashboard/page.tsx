@@ -9,7 +9,6 @@ export default async function DashboardHome() {
 
   const hasAccess = await currentAccess()
 
-
   return (
       <div>
         <Heading

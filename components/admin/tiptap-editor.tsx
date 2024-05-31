@@ -18,7 +18,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleBold().run()
         }
-        className={editor.isActive('bold') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:bg-muted/20'}
+        className={editor.isActive('bold') ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Bold className="h-4 w-4"/>
       </Toggle>
@@ -27,7 +27,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleItalic().run()
         }
-        className={editor.isActive('italic') ? 'bg-muted-foreground/10 text-black hover:bg-muted' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
+        className={editor.isActive('italic') ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Italic className="h-4 w-4"/>
       </Toggle>
@@ -36,7 +36,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleStrike().run()
         }
-        className={editor.isActive('strikethrough') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('strikethrough') ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Strikethrough className="h-4 w-4"/>
       </Toggle>
@@ -45,7 +45,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleHeading({level:1}).run()
         }
-        className={editor.isActive('heading1', { level: 1 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('heading1', { level: 1 }) ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'} 
       >
         <Heading1 className="h-4 w-4"/>
       </Toggle>
@@ -54,7 +54,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleHeading({level:2}).run()
         }
-        className={editor.isActive('heading', { level: 2 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('heading', { level: 2 }) ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Heading2 className="h-4 w-4"/>
       </Toggle>
@@ -63,7 +63,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleHeading({level:3}).run()
         }
-        className={editor.isActive('heading', { level: 3 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('heading', { level: 3 }) ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
 
       >
         <Heading3 className="h-4 w-4"/>
@@ -73,7 +73,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleHeading({level:4}).run()
         }
-        className={editor.isActive('heading', { level: 4 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('heading', { level: 4 }) ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Heading4 className="h-4 w-4"/>
       </Toggle>
@@ -82,7 +82,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleHeading({level:5}).run()
         }
-        className={editor.isActive('heading', { level: 5 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('heading', { level: 5 }) ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Heading5 className="h-4 w-4"/>
       </Toggle>
@@ -91,7 +91,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleHeading({level:6}).run()
         }
-        className={editor.isActive('heading', { level: 6 }) ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('heading', { level: 6 }) ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Heading6 className="h-4 w-4"/>
       </Toggle>
@@ -100,7 +100,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleBulletList().run()
         }
-        className={editor.isActive('bulletList') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('bulletList') ?  'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <List className="h-4 w-4"/>
       </Toggle>
@@ -109,7 +109,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleOrderedList().run()
         }
-        className={editor.isActive('orderedList') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('orderedList') ?  'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <ListOrdered className="h-4 w-4"/>
       </Toggle>
@@ -133,7 +133,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
           editor.chain().focus().extendMarkRange('link').toggleLink({href: url, target: 'blank'}).run()
         }
         }
-        className={editor.isActive('link') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('link') ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <LinkIcon className="h-4 w-4"/>
       </Toggle>
@@ -146,7 +146,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
             editor.chain().focus().setImage({src: url}).run()
           }
         }}
-        className={editor.isActive('image') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('image') ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <ImageIcon className="h-4 w-4"/>
       </Toggle>
@@ -155,7 +155,7 @@ const MenuBar = ({ editor }: {editor: Editor | null}) => {
         onPressedChange={() => 
           editor.chain().focus().toggleCodeBlock().run()
         }
-        className={editor.isActive('codeBlock') ? 'bg-muted-foreground/10 text-black hover:bg-muted-foreground/20' : 'text-muted hover:bg-muted/20'}
+        className={editor.isActive('codeBlock') ? 'bg-muted-foreground/30 text-black hover:bg-muted-foreground/20' : 'text-muted-foreground hover:text-white hover:bg-gray-600'}
       >
         <Code className="h-4 w-4"/>
       </Toggle>
