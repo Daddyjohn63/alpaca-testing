@@ -40,12 +40,6 @@ export const NewVerificationForm = () => {
 
 
   return (
-    <CardWrapper
-      title="Verification Confirmation"
-      subtitle="One moment while we confirm your verification"
-      backButtonLabel="Back to login"
-      backButtonHref="/login"
-    >
       <div className="flex items-center w-full justify-center">
         {!success && !error && (
           <BeatLoader color="white" />
@@ -55,6 +49,5 @@ export const NewVerificationForm = () => {
           <FormError message={error} />
         )}
       </div>
-    </CardWrapper>
   );
 };

@@ -6,6 +6,10 @@ export const siteConfig = {
   isUnderConstruction: false, //Options: true, false - Ads an under construction page to all but /admin route.  
   isBlogPublic: false, //Options: true, false - Redirects /blog route to 404. Be sure to remove blog route from constants if false.
   themeColor: 'dark', //Options: light, dark - Colors adjusted in global.css
+  email: {
+    testEmail: "onboarding@resend.dev",
+    authEmail: "noreply@alpacastack.com"
+  },
   routes: {
     //Every route is prive by default, add a route here to make public. 
     publicRoutes: [
@@ -36,9 +40,6 @@ export const siteConfig = {
     bucket: "alpacastack-post-images",
     bucketUrl: `https://f005.backblazeb2.com/file/alpacastack-post-images`,
     cdn: "https://cdn-id.cloudfront.net/",
-  },
-  email: {
-    adminEmail: "noreply@alpacastack.com"
   },
   stripe: {
     plans: [
