@@ -17,8 +17,6 @@ import { signOut } from "next-auth/react"
 
 export function UserNav({user}: any) {
 
-
-
   if (!!user) {
     return (
       <DropdownMenu>
