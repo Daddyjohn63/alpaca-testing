@@ -4,7 +4,7 @@ export const siteConfig = {
   keywords: ['Next.js', 'React', 'JavaScript'],
   primaryDomain: 'staging.alpacastack.com',
   isUnderConstruction: false, //Options: true, false - Ads an under construction page to all but /admin route.  
-  isBlogPublic: false, //Options: true, false - Redirects /blog route to 404. Be sure to remove blog route from constants if false.
+  isBlogPublic: false, //Options: true, false - Redirects /blog route to 404. Be sure to remove blog route from constants/nav-routes.ts if false.
   themeColor: 'dark', //Options: light, dark - Colors adjusted in global.css
   email: {
     testEmail: "onboarding@resend.dev",
