@@ -7,8 +7,6 @@ import { siteConfig } from '@/site-config';
 
 export async function POST(req: NextRequest) {
 
-  console.log("Webhook hit")
-
   const payload = await req.text()
   // const response = JSON.parse(payload)
   const sig = req.headers.get("Stripe-Signature")

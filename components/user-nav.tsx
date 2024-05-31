@@ -11,11 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { logout } from "@/actions/logout";
 import { userNavItems } from "@/constants/nav-routes";
 import Link from "next/link";
+import { signOut } from "next-auth/react"
 
 export function UserNav({user}: any) {
+
 
 
   if (!!user) {
@@ -52,7 +53,6 @@ export function UserNav({user}: any) {
                     {item.text}
                   </DropdownMenuItem>
                   </Link>
-
               )
             })}
           </DropdownMenuGroup>
@@ -67,7 +67,7 @@ export function UserNav({user}: any) {
             </>
           )}
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => logout()}>
+          <DropdownMenuItem onClick={() => signOut()}>
             Log out
           </DropdownMenuItem>
         </DropdownMenuContent>

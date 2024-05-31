@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Logo } from "@/components/logo";
-import { logout } from "@/actions/logout";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { currentUser } from "@/lib/auth";
 
