@@ -7,6 +7,8 @@ import { getPublishedPosts } from '@/data/post'
 //Change Frequency: Advises on content update frequency, aids in crawl scheduling. Typically set to 'yearly' for stable pages.
 //Priority: Indicates page importance (0.0 to 1.0), influences crawl resource allocation. Typically set to 1.0 for homepages, 0.8 for main category pages, and lower for less critical pages.
 
+export const revalidate = 3600 //revalidates at most every hour
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const domain = process.env.NEXT_PUBLIC_PRIMARY_DOMAIN

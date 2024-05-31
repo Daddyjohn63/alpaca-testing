@@ -43,7 +43,8 @@ export const siteConfig = {
   stripe: {
     plans: [
       {
-        priceId: process.env.NODE_ENV === "development" ? "price_1PH9y7GVfP1i6nIpi9nBrtM7" : "price_456",
+        priceId: process.env.NODE_ENV === "development" ? "price_1PH9y7GVfP1i6nIpi9nBrtM7" : "price_1PMd7iGVfP1i6nIpL6Nn7ZyO",
+        mode: 'payment', //subscription | payment
         name: "Starter Stack",
         githubRepoName: 'alpaca-stack-ts-template-starter',
         isFeatured: false,
@@ -98,7 +99,8 @@ export const siteConfig = {
         ],
       },
       {
-        priceId: process.env.NODE_ENV === "development" ? "price_1PHV1iGVfP1i6nIpMpZJiXOo" : "price_456",
+        priceId: process.env.NODE_ENV === "development" ? "price_1PHV1iGVfP1i6nIpMpZJiXOo" : "price_1PMd82GVfP1i6nIpenRrEjPM",
+        mode: 'payment', //subscription | payment
         isFeatured: true,
         name: "Pro Stack",
         githubRepoName: 'alpaca-stack-ts-template-pro',

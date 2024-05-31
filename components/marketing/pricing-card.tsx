@@ -13,11 +13,12 @@ type Props = {
   features: Feature[];
   isFeatured?: boolean;
   priceId: string;
+  mode: string;
 }
 
 export function PricingCard(props: Props) {
 
-  const {name, price, features, isFeatured, priceId} = props
+  const {name, price, features, isFeatured, priceId, mode} = props
 
   return (
     <div className={`${isFeatured? "border-2 border-primary" : ""} relative w-[380px] bg-card rounded-md px-9 py-14`}>
@@ -36,7 +37,7 @@ export function PricingCard(props: Props) {
         })}
       </ul>
       <div className="space-y-4">
-          <BuyNowBtn btnText={name} priceId={priceId} />
+          <BuyNowBtn btnText={name} priceId={priceId} mode={mode} />
       </div>
     </div>
     </div>

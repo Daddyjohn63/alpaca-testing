@@ -23,6 +23,7 @@ export function PricingSection({className}: {className?: string}) {
                   <PricingCard
                     name={plan.name}
                     price={plan.price}
+                    mode={plan.mode}
                     features={plan.features}
                     priceId={plan.priceId}
                     isFeatured={plan.isFeatured}

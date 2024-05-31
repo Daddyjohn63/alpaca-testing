@@ -36,7 +36,11 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - [X] Add GPT API Lib
 - [X] Add Lead magnet
 - [X] Fix lightmode colors
-- [X] Add sitemap 
+- [X] Add sitemap / dynamic robots
+- [ ] Fix subscription flow
+- [ ] Add product confirmation redirect page
+- [ ] Add product confirmation email tempaltes
+- [ ] Add email tempaltes
 - [ ] Create Demo Site
 - [ ] Add Error Handling
 - [ ] Refactor clean up code

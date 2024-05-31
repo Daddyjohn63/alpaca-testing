@@ -18,6 +18,7 @@ import { useState } from "react";
 interface BuyNowBtnProps {
   btnText: string;
   priceId: string;
+  mode: string;
 }
 
 export const BuyNowBtn = (props: BuyNowBtnProps) => {
@@ -25,7 +26,7 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
   const user = useCurrentUser()
   const [showLoginForm, setShowLoginForm] = useState(false)
 
-  const {btnText, priceId} = props;
+  const {btnText, priceId, mode} = props;
 
   const createCheckout = async () => {
 
@@ -36,7 +37,7 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
       },
       body: JSON.stringify({
         priceId: priceId,
-        mode: 'payment',
+        mode: mode,
         successUrl: window.location.href,
         cancelUrl: window.location.href,
       })

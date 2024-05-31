@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import Stripe from "stripe";
 
 export const getUserByEmail = async (email: string) => {
   try {
@@ -55,3 +56,25 @@ export const getUserStripeCustomerId = async (id: string) => {
 
 }
 
+export const findUserByStripeCustomerId = async (id: string | Stripe.Customer | Stripe.DeletedCustomer) => {
+
+  if(!id) {
+    return null
+  }
+
+  try {
+
+    const data = await db.user.findFirst({
+      where: {
+        stripeCustomerId: id as string,
+      },
+    })
+
+    return data
+
+  } catch(e) {
+    console.log(e)
+    return null
+  }
+
+}

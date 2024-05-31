@@ -4,6 +4,7 @@ import { stripe } from '@/lib/stripe';
 import { db } from '@/lib/db';
 import { getCheckoutSession } from '@/lib/stripe';
 import { siteConfig } from '@/site-config';
+import { findUserByStripeCustomerId } from "@/data/user";
 
 export async function POST(req: NextRequest) {
 
@@ -33,10 +34,11 @@ export async function POST(req: NextRequest) {
     //This is where all the magic happens.
     // Handle the event
     switch (event.type) {
-      case 'checkout.session.completed':
+      case 'checkout.session.completed': {
 
-        const checkoutSessionCompleted = event.data.object;
-        const sessionId = checkoutSessionCompleted.id;
+
+        const checkoutObj = event.data.object;
+        const sessionId = checkoutObj.id;
         const session = await getCheckoutSession(sessionId);
 
         if(!session) {
@@ -47,6 +49,7 @@ export async function POST(req: NextRequest) {
         const customerId = session.customer;
         const clientReferenceId = session.client_reference_id;
         let priceId: string | undefined
+
         if (session.line_items?.data[0]?.price) {
           priceId = session?.line_items?.data[0]?.price.id;
         }
@@ -77,27 +80,86 @@ export async function POST(req: NextRequest) {
         //Send email after successful purchase. 
 
         break;
-      case 'checkout.session.expired':
+      }
+
+      case 'checkout.session.expired': {
         const checkoutSessionExpired = event.data.object;
         // Then define and call a function to handle the event checkout.session.expired
+        break;
+      }
+
+      case 'customer.subscription.deleted': {
+        // Then define and call a function to handle the event customer.subscription.deleted
+        const customerDeletedSubscriptionObj: Stripe.Subscription = event.data
+          .object as Stripe.Subscription;
+
+        //Verify the subscription customer id for database update
+        const subscription = await stripe.subscriptions.retrieve(
+          customerDeletedSubscriptionObj.id
+        );
+
+        const user = await findUserByStripeCustomerId(subscription.customer)
+
+        if(!user) {
+          console.log("User not found.");
+          break;
+        }
+
+        // Remove access from product. 
+        await db.user.update({
+          where: {
+            id: user.id
+          },
+          data: {
+            hasAccess: false,
+          }
+        }) 
 
         break;
-      case 'customer.subscription.deleted':
-        const customerSubscriptionDeleted = event.data.object;
-        // Then define and call a function to handle the event customer.subscription.deleted
-        break;
-      case 'customer.subscription.updated':
+      }
+
+      case 'customer.subscription.updated': {
+
         const customerSubscriptionUpdated = event.data.object;
         // Then define and call a function to handle the event customer.subscription.updated
         break;
-      case 'invoice.paid':
-        const invoicePaid = event.data.object;
-        // Then define and call a function to handle the event invoice.paid
+      }
+      case 'invoice.paid': {
+        // Customer paid subscription
+        const invoicePaidObj = event.data.object;
+        //Verify the subscription customer id for database update
+        const subscription = await stripe.subscriptions.retrieve(
+          invoicePaidObj.id
+        );
+
+        if(subscription.customer) {
+          console.log("Could not find customer")
+          break;
+        }
+
+        // Remove access from product
+        await db.user.update({
+          where: {
+            stripeCustomerId: subscription.customer
+          },
+          data: {
+            hasAccess: false,
+          }
+        }) 
+
         break;
-      case 'invoice.payment_failed':
+      }
+
+      case 'invoice.payment_failed': {
         const invoicePaymentFailed = event.data.object;
-        // Then define and call a function to handle the event invoice.payment_failed
+
+        // A payment failed (for instance the customer does not have a valid payment method)
+        // Revoke access to the product or wait for the customer to pay (more friendly):
+        //      - Stripe will automatically email the customer (Smart Retries)
+        //      - We will receive a "customer.subscription.deleted" when all retries were made and the subscription has expired
         break;
+      }
+      
       // ... handle other event types
       default:
     }
