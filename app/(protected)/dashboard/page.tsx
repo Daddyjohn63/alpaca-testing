@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CTAAlert } from "@/components/cta-alert";
 
-
 export default async function DashboardHome() {
 
   const hasAccess = await currentAccess()
+
 
   return (
       <div>

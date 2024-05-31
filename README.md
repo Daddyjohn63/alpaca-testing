@@ -43,6 +43,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - [X] Add Stripe Integration
 - [X] Add dashboard configurations
+- [ ] Fix session render on init load
 - [ ] Add Reviews Component
 - [ ] Add FAQ Component
 - [ ] Create Demo Site

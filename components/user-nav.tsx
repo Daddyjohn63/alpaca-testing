@@ -14,11 +14,9 @@ import {
 import { logout } from "@/actions/logout";
 import { userNavItems } from "@/constants/nav-routes";
 import Link from "next/link";
-import { useCurrentUser } from "@/hooks/use-current-user";
 
-export function UserNav() {
+export function UserNav({user}: any) {
 
-  const user = useCurrentUser()
 
   if (!!user) {
     return (

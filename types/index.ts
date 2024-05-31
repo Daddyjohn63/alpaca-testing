@@ -1,13 +1,20 @@
 import { Icons } from "@/components/icons";
 
-export type NavItems = {
+export interface SubMenu {
+  title: string;
+  text: string;
+  href: string;
+}
+
+export interface NavItems {
   icon?: keyof typeof Icons;
   text: string;
   href: string;
   upgrade?: boolean;
+  subMenu?: SubMenu[];
 }
 
-export type TablePost = {
+export interface TablePost {
   id: string;
   title: string;
   createdAt: string;
@@ -15,11 +22,11 @@ export type TablePost = {
   status: string;
   author: string;
 }
-export type TableCategories = {
+export interface TableCategories {
   id: string;
   name: string;
 }
-export type TableUsers = {
+export interface TableUsers {
   id: string;
   name: string | null;
   role: string;

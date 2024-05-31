@@ -21,7 +21,30 @@ export const marketingNavItems: NavItems[] = [
     },
     {
         text: "Demo",
-        href: "#demo",
+        href: "#",
+        subMenu: [
+            {
+                title: "Typography",
+                text: "this is some text for a subtitle. sf dsfdf",
+                href: "#"
+            },
+            {
+                title: "Homepage",
+                text: "this is some text for a subtitle. sf dsfdfdsfsd.",
+                href: "#"
+            },
+            {
+                title: "Contact Page",
+                text: "this is some text for a subtitle. sf dsfd",
+                href: "/contact-us"
+
+            },
+            {
+                title: "Admin Panel",
+                text: "this is some text for a subtitle. sf dsfd",
+                href: "#"
+            },
+        ]
     },
     {
         text: "Reviews",
