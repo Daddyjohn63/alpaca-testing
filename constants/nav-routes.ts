@@ -15,45 +15,50 @@ export const userNavItems: NavItems[] = [
 //MARKETING
 //Header & Mobile Header Navigation
 export const marketingNavItems: NavItems[] = [
+
+    {
+        text: "Home",
+        href: "/",
+    },
+    {
+        text: "Demo",
+        href: "/demo",
+        // subMenu: [
+        //     {
+        //         title: "Typography",
+        //         text: "this is some text for a subtitle. sf dsfdf",
+        //         href: "#"
+        //     },
+        //     {
+        //         title: "Homepage",
+        //         text: "this is some text for a subtitle. sf dsfdfdsfsd.",
+        //         href: "#"
+        //     },
+        //     {
+        //         title: "Contact Page",
+        //         text: "this is some text for a subtitle. sf dsfd",
+        //         href: "/contact-us"
+        //
+        //     },
+        //     {
+        //         title: "Admin Panel",
+        //         text: "this is some text for a subtitle. sf dsfd",
+        //         href: "#"
+        //     },
+        // ]
+    },
     {
         text: "Pricing",
         href: "/#pricing-section",
     },
-    {
-        text: "Demo",
-        href: "#",
-        subMenu: [
-            {
-                title: "Typography",
-                text: "this is some text for a subtitle. sf dsfdf",
-                href: "#"
-            },
-            {
-                title: "Homepage",
-                text: "this is some text for a subtitle. sf dsfdfdsfsd.",
-                href: "#"
-            },
-            {
-                title: "Contact Page",
-                text: "this is some text for a subtitle. sf dsfd",
-                href: "/contact-us"
-
-            },
-            {
-                title: "Admin Panel",
-                text: "this is some text for a subtitle. sf dsfd",
-                href: "#"
-            },
-        ]
-    },
-    {
-        text: "Reviews",
-        href: "/#reviews",
-    },
-    {
-        text: "Blog",
-        href: "/blog",
-    },
+    // {
+    //     text: "Reviews",
+    //     href: "/#reviews",
+    // },
+    // {
+    //     text: "Blog",
+    //     href: "/blog",
+    // },
 ];
 
 //FOOTER Component Navigation
