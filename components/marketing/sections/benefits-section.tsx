@@ -6,33 +6,33 @@ import { TimerReset, Megaphone, Coins } from "lucide-react"
 const benefits = [
   {
     icon: TimerReset,
-    title: 'Cost Effective',
-    excerpt: 'Save thousands by eliminating the need for expensive custom design and development.'
+    title: 'Enhanced Efficiency',
+    excerpt: 'Boost productivity with streamlined workflows designed to focus on whats important.'
   },
   {
     icon: Megaphone,
-    title: 'Quick to market',
-    excerpt: 'Save thousands by eliminating the need for expensive custom design and development.'
+    title: 'Cost Savings',
+    excerpt: 'Minimize expenses without sacrificing quality, enhancing resource efficiency and financial savings.'
   },
   {
     icon: Coins,
-    title: 'SEO Optomized',
-    excerpt: 'Save thousands by eliminating the need for expensive custom design and development.'
+    title: 'Superior Quality',
+    excerpt: 'Expect precision-crafted products that consistently exceed industry standards in quality.'
+  },
+  {
+    icon: Coins,
+    title: 'Innovative Features',
+    excerpt: 'Embrace cutting-edge technology with unique features that set industry benchmarks.'
+  },
+  {
+    icon: TimerReset,
+    title: 'Expert Support',
+    excerpt: 'Enjoy comprehensive support from industry experts every step of your journey.'
   },
   {
     icon: Megaphone,
-    title: 'Quick to market',
-    excerpt: 'Save thousands by eliminating the need for expensive custom design and development.'
-  },
-  {
-    icon: Coins,
-    title: 'SEO Optomized',
-    excerpt: 'Save thousands by eliminating the need for expensive custom design and development.'
-  },
-  {
-    icon: Coins,
-    title: 'SEO Optomized',
-    excerpt: 'Save thousands by eliminating the need for expensive custom design and development.'
+    title: 'Scalability',
+    excerpt: 'Grow effortlessly; our solutions scale with your evolving business needs seamlessly.'
   },
 ]
 
@@ -41,8 +41,8 @@ export function BenefitsSection({className}: {className?: string}) {
   <section className={cn(className)}>
       <div className="container">
       <SectionTitle 
-        title="Fast-Track Your Startup Success"
-        subtitle="The world is moving lighting fast. Don't get bogged down in tedious boilerplate coding, focus your energies on launching innovative products and achieving market fit."
+        title="Explore the Benefits of [Company/Product Name]"
+        subtitle="Why settle for less when you can have the best? Here are the key benefits that set [Company/Product Name] apart:"
         className="mx-auto text-center max-w-5xl"
       />
       <ul className="grid md:grid-cols-3 gap-7 py-4">

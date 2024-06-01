@@ -1,6 +1,6 @@
 export const siteConfig = {
   appName: "Alpacastack",
-  appDescription: "Launch your SaaS in minutes, not months!",
+  appDescription: "Founded in [Year], [Company Name] is dedicated to [briefly state your mission or core offering, such as 'delivering innovative tech solutions' or 'enhancing everyday experiences with advanced digital tools'].", //Shown in footer
   keywords: ['Next.js', 'React', 'JavaScript'],
   primaryDomain: 'alpacastack.com',
   isUnderConstruction: false, //Options: true, false - Ads an under construction page to all but /admin route.  
@@ -45,57 +45,48 @@ export const siteConfig = {
   stripe: {
     plans: [
       {
-        priceId: process.env.NODE_ENV === "development" ? "price_1PH9y7GVfP1i6nIpi9nBrtM7" : "price_1PMd7iGVfP1i6nIpL6Nn7ZyO",
+        priceId: process.env.NODE_ENV === "development" ? "price_1234" : "price_5678",
         mode: 'payment', //subscription | payment
-        name: "Starter Stack",
-        githubRepoName: 'alpaca-stack-ts-template-starter',
+        name: "Basic Package",
         isFeatured: false,
-        description: "Perfect for small projects",
-        price: 169,
-        priceAnchor: 269,
+        description: "Perfect for small teams",
+        price: 49,
+        priceAnchor: 99,
         features: [
           {
-            name: "Boilerplate source code",
+            name: "Feature 1 here",
             included: true
           },
           {
-            name: "Setup documentaion",
+            name: "Feature 2 Here",
             included: true
           },
           {
-            name: "Blog CMS",
+            name: "Feature 3 Here",
             included: true
           },
           {
-            name: "Stripe payments",
+            name: "Feature 4 Here",
             included: true
           },
           {
-            name: "PostgreSQL / Prisma",
+            name: "Feature 5 Here",
             included: true
           },
           {
-            name: "Full Auth & Oauth Integration",
-            included: true
-          },
-          {
-            name: "Custom Component Library",
-            included: true
-          },
-          {
-            name: "Figma design files",
+            name: "Feature 6 Here",
             included: false
           },
           {
-            name: "Chat GPT marketing prompts",
+            name: "Feature 7 Here",
             included: false
           },
           {
-            name: "Discord Community",
+            name: "Feature 8 Here",
             included: false
           },
           {
-            name: "Lifetime updates",
+            name: "Feature 9 Here",
             included: false
           },
         ],
@@ -104,54 +95,47 @@ export const siteConfig = {
         priceId: process.env.NODE_ENV === "development" ? "price_1PHV1iGVfP1i6nIpMpZJiXOo" : "price_1PMd82GVfP1i6nIpenRrEjPM",
         mode: 'payment', //subscription | payment
         isFeatured: true,
-        name: "Pro Stack",
+        name: "Pro Package",
         githubRepoName: 'alpaca-stack-ts-template-pro',
         description: "You need more power",
-        price: 199,
+        price: 99,
         priceAnchor: 299,
+
         features: [
           {
-            name: "Boilerplate source code",
+            name: "Feature 1 here",
             included: true
           },
           {
-            name: "Setup documentaion",
+            name: "Feature 2 Here",
             included: true
           },
           {
-            name: "Blog CMS",
+            name: "Feature 3 Here",
             included: true
           },
           {
-            name: "Stripe payments",
+            name: "Feature 4 Here",
             included: true
           },
           {
-            name: "PostgreSQL / Prisma",
+            name: "Feature 5 Here",
             included: true
           },
           {
-            name: "Full Auth & Oauth Integration",
+            name: "Feature 6 Here",
             included: true
           },
           {
-            name: "Custom Component Library",
+            name: "Feature 7 Here",
             included: true
           },
           {
-            name: "Figma design files",
+            name: "Feature 8 Here",
             included: true
           },
           {
-            name: "Chat GPT marketing prompts",
-            included: true
-          },
-          {
-            name: "Discord Community",
-            included: true
-          },
-          {
-            name: "Lifetime updates",
+            name: "Feature 9 Here",
             included: true
           },
         ],

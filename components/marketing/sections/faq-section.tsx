@@ -9,32 +9,24 @@ import {
 
 export const FAQs = [
     {
-        question: "What is included in the boilerplate template?",
-        answer: "The boilerplate includes a pre-configured Next.js 14 setup with NextAuth for authentication, Prisma as an ORM for PostgreSQL, Tailwind CSS for styling, and Shadcn for component design. This setup provides a robust foundation for building scalable and modern web applications."
+        question: "How do I get started with [Product/Service]?",
+        answer: "Getting started is easy! Simply sign up through our website, and you'll gain immediate access to all the features included in your chosen plan. If you need any guidance, our support team is available 24/7 to help you set up and make the most of [Product/Service]."
     },
     {
-        question: "How do I get started with the boilerplate template?",
-        answer: "To get started, simply clone the repository, install the dependencies using npm or yarn, and follow the README instructions to set up your environment variables and database configurations. This will set up the local development environment for you."
+        question: "How do I get started with [Product/Service]?",
+        answer: "Getting started is easy! Simply sign up through our website, and you'll gain immediate access to all the features included in your chosen plan. If you need any guidance, our support team is available 24/7 to help you set up and make the most of [Product/Service]."
     },
     {
-        question: "Can I use this boilerplate for commercial projects?",
-        answer: "Yes, the boilerplate is designed for both personal and commercial use. It provides a strong starting point to accelerate development of your Next.js applications, saving you time on configuration and setup."
+        question: "How do I get started with [Product/Service]?",
+        answer: "Getting started is easy! Simply sign up through our website, and you'll gain immediate access to all the features included in your chosen plan. If you need any guidance, our support team is available 24/7 to help you set up and make the most of [Product/Service]."
     },
     {
-        question: "Does the boilerplate support mobile-responsive designs?",
-        answer: "Absolutely! The integration of Tailwind CSS allows for responsive design out of the box. You can easily adjust styles for different screen sizes using Tailwind's utility classes."
+        question: "How do I get started with [Product/Service]?",
+        answer: "Getting started is easy! Simply sign up through our website, and you'll gain immediate access to all the features included in your chosen plan. If you need any guidance, our support team is available 24/7 to help you set up and make the most of [Product/Service]."
     },
     {
-        question: "How is authentication handled in the boilerplate?",
-        answer: "Authentication is managed through NextAuth, which supports various authentication providers and strategies. The setup includes examples of how to integrate popular providers like Google, Facebook, and GitHub."
-    },
-    {
-        question: "What database can I use with this boilerplate?",
-        answer: "This boilerplate is configured with Prisma ORM, which is set up to work with PostgreSQL. However, Prisma supports multiple databases, so you can configure it to work with others such as MySQL or SQLite if needed."
-    },
-    {
-        question: "Is there support available if I run into issues?",
-        answer: "For support, you can refer to the documentation provided with the boilerplate or submit issues directly on the GitHub repository. Community support may also be available through forums or community channels."
+        question: "How do I get started with [Product/Service]?",
+        answer: "Getting started is easy! Simply sign up through our website, and you'll gain immediate access to all the features included in your chosen plan. If you need any guidance, our support team is available 24/7 to help you set up and make the most of [Product/Service]."
     },
 ]
 
@@ -46,7 +38,7 @@ export function FAQSection({className}: {className?:string}) {
 
         <SectionTitle 
           title="Frequently Asked Questions"
-          subtitle="Find answers to your questions about using Alpacastack."
+          subtitle="Find answers to your questions about using [Product / Service]"
           className="text-center"
         />
         <Accordion type="single" collapsible className="max-w-[650px] mx-auto">

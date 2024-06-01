@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Caveat } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+
 const caveat = Caveat({ subsets: ["latin"] });
 
-export function HeroFullSection() {
+export function Hero1Section({className}: {className?: string}) {
   return (
-      <section>
+      <section className={className}>
         <div className="container">
           <div className="text-center space-y-5 max-w-5xl mx-auto py-10">
             <h3 className={`${caveat.className} text-3xl sm:text-5xl`}>Struggling to ship your online startup?</h3>
@@ -18,6 +21,7 @@ export function HeroFullSection() {
             </Button>
           </div>
         </div>
+      <Image alt="hero Image" src="/hero-img.jpg" width={1100} height={617} className="mx-auto rounded-md my-10 border border-muted-foreground shadow-2xl shadow-black/70" />
       </section>
   )
 }

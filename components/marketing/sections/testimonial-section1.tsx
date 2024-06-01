@@ -2,24 +2,24 @@ import { cn } from "@/lib/utils"
 
 const testimonials = [
   {
-    name: "John Smith",
-    handle: "@johnsmith",
-    image: "person1.jpg",
-    review: "Alpacastack has been one of the best stacks I have ever worked with. I cannot express in words how much I love this stack!",
+    name: "Marty McFly",
+    handle: "@martymcfly",
+    image: "testimonial-marty.jpg",
+    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
     stars: "⭐⭐⭐⭐⭐",
   },
-    {
-    name: "Sandy Lou",
-    handle: "@johnsmith",
-    image: "person2.jpg",
-    review: "Alpacastack has been one of the best stacks I have ever worked with. I cannot express in words how much I love this stack!",
+  {
+    name: "Marty McFly",
+    handle: "@martymcfly",
+    image: "testimonial-marty.jpg",
+    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
     stars: "⭐⭐⭐⭐⭐",
   },
-    {
-    name: "Breanna James",
-    handle: "@johnsmith",
-    image: "person1.jpg",
-    review: "This is awesome! Alpacastack for life!",
+  {
+    name: "Marty McFly",
+    handle: "@martymcfly",
+    image: "testimonial-marty.jpg",
+    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
     stars: "⭐⭐⭐⭐⭐",
   },
 ]

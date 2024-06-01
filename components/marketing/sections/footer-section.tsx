@@ -2,6 +2,7 @@ import { Logo } from "@/components/logo"
 import Link from "next/link"
 import { interestingNavItems, boringNavItems} from "@/constants/nav-routes"
 import { getYearStringFromDate } from "@/lib/utils"
+import { siteConfig } from "@/site-config"
 
 type LinkObj = {
   text: string;
@@ -43,7 +44,7 @@ export function MarketingFooter() {
         <div className="flex flex-col md:flex-row justify-between gap-10 mb-16">
         <div className="space-y-3 md:max-w-[300px]">
           <Logo size="sm" />
-          <p className="text-sm leading-6">Alpaca Stack is designed to get you started blazingly fast, allowing you to zero in on what truly matters: building your product and accelerating your path to profits.</p>
+          <p className="text-sm leading-6">{siteConfig.appDescription}</p>
         </div>
         <div>
           <ul className="flex flex-col md:flex-row gap-5 md:gap-10">

@@ -11,8 +11,8 @@ export function PricingSection({className}: {className?: string}) {
   <section id="pricing-section" className={cn(className)}>
       <div className="container">
       <SectionTitle 
-      title="Choose Your Plan"
-      subtitle="Select a package that fits your needs and budget"
+      title="Simple, Transparent Pricing"
+      subtitle="Choose the plan that best fits your needs with no hidden fees. Upgrade, downgrade, or cancel at any time."
         className="text-center"
     />
       <div className="flex justify-center">
