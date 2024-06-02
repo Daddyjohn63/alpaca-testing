@@ -41,8 +41,8 @@ export const marketingNavItems: NavItems[] = [
                 href: "/newsletter"
             },
             {
-                title: "Nothing Page",
-                text: "This is nothing, its just here to even things out.",
+                title: "Under Construction Page",
+                text: "Must change the setting in siteConfig to view this page.",
                 href: "#"
             },
         ]
@@ -131,8 +131,8 @@ export const dashboardNavItems: NavItems[] = [
     },
     {
         icon: "wand",
-        text: "Something",
-        href: "#",
+        text: "Example",
+        href: "/dashboard/example",
         upgrade: true,
     },
     {
