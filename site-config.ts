@@ -2,13 +2,13 @@ export const siteConfig = {
   appName: "Alpacastack",
   appDescription: "Founded in [Year], [Company Name] is dedicated to [briefly state your mission or core offering, such as 'delivering innovative tech solutions' or 'enhancing everyday experiences with advanced digital tools'].", //Shown in footer
   keywords: ['Next.js', 'React', 'JavaScript'],
-  primaryDomain: 'alpacastack.com',
+  primaryDomain: 'yourwebsite.com',
   isUnderConstruction: false, //Options: true, false - Ads an under construction page to all but /admin route.  
   isBlogPublic: true, //Options: true, false - Redirects /blog route to 404. Be sure to remove blog route from constants/nav-routes.ts if false.
   themeColor: 'dark', //Options: light, dark - Colors adjusted in global.css
   email: {
     testEmail: "onboarding@resend.dev",
-    authEmail: "noreply@alpacastack.com"
+    authEmail: "noreply@yourwebsite.com"
   },
   routes: {
     //Every route is prive by default, add a route here to make public. 
@@ -38,9 +38,8 @@ export const siteConfig = {
   },
   fileStorage: {
     // If you use AWS S3/Cloudfront, put values in here
-    bucket: "alpacastack-post-images",
-    bucketUrl: `https://f005.backblazeb2.com/file/alpacastack-post-images`,
-    cdn: "https://cdn-id.cloudfront.net/",
+    bucket: "your-bucket-name-here",
+    bucketUrl: `https://f005.backblazeb2.com/file/your-bucket-name-here`,
   },
   stripe: {
     plans: [
@@ -92,11 +91,10 @@ export const siteConfig = {
         ],
       },
       {
-        priceId: process.env.NODE_ENV === "development" ? "price_1PHV1iGVfP1i6nIpMpZJiXOo" : "price_1PMd82GVfP1i6nIpenRrEjPM",
+        priceId: process.env.NODE_ENV === "development" ? "price_1234" : "price_5678",
         mode: 'payment', //subscription | payment
         isFeatured: true,
         name: "Pro Package",
-        githubRepoName: 'alpaca-stack-ts-template-pro',
         description: "You need more power",
         price: 99,
         priceAnchor: 299,

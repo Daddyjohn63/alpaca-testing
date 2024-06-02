@@ -6,10 +6,10 @@ import { ContactUsForm } from "@/components/marketing/contact-us-form"
 import { getSEOMetadata } from "@/lib/seo"
 
 export const metadata = getSEOMetadata({
-  title: 'Contact Us | Alpaca Stack',
+  title: 'Contact Us',
   description: 'Get in touch with the Alpaca Stack team for any inquiries, support, or feedback. We are here to help you with your Next.js projects and provide the assistance you need.',
   openGraph: {
-    title: "Contact Us | Alpaca Stack",
+    title: "Contact Us",
     description: "Get in touch with the Alpaca Stack team for any inquiries, support, or feedback. We are here to help you with your Next.js projects and provide the assistance you need."
   }
 })
@@ -18,7 +18,7 @@ const ContactUsPage = async() => {
 
   return (
     <div>
-      <PageHeroSection title="Contact Us" subtitle="Checkout our amazing articles" />
+      <PageHeroSection title="Contact Us" />
       <section className="pt-14 pb-20">
         <div className="container grid md:grid-cols-2 gap-10 md:gap-20">
           <div className="space-y-3">

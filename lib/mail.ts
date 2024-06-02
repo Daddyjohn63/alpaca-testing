@@ -40,7 +40,7 @@ export const sendContactUsEmail = async (name: string, email: string, message: s
   await resend.emails.send({
     from: fromEmail,
     to: email,
-    subject: "New contact form submission from alpacastack.com",
+    subject: `New contact form submission from ${siteConfig.primaryDomain}`,
     html: `
         <p>Name: ${name}</p>
         <p>Email: ${email}</p>

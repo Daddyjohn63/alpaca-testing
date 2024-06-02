@@ -6,8 +6,6 @@ import { redirect } from "next/navigation";
 import { getUserStripeCustomerId } from "@/data/user";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Alert, AlertDescription, AlertTitle, } from "@/components/ui/alert"
-import { AlertTriangle } from "lucide-react"
 import { CTAAlert } from "@/components/cta-alert";
 
 

@@ -92,8 +92,8 @@ const PostPage = async({params}: Props) => {
         <aside className="md:col-span-2 self-start sticky top-2">
           <CTACard 
             image="cta-img.jpg"
-            title="Download AlpacaStack Now!" 
-            description="Download Alpaca Stack today and launch your knew SaaS startup blazingly fast!"
+            title="Download [Product] Now!" 
+            description="Download [Product] today and be awesome in every way!"
             btnText="Download Now!" 
             btnHref="/#pricing-section"/>
         </aside>

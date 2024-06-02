@@ -21,17 +21,17 @@ export const marketingNavItems: NavItems[] = [
         href: "/",
     },
     {
-        text: "Demo",
-        href: "/demo",
+        text: "Pages",
+        href: "#",
         subMenu: [
             {
-                title: "Typography",
-                text: "this is some text for a subtitle. sf dsfdf",
+                title: "Homepage 1",
+                text: "this is some text for a subtitle. sf dsfdfdsfsd.",
                 href: "#"
             },
             {
-                title: "Homepage",
-                text: "this is some text for a subtitle. sf dsfdfdsfsd.",
+                title: "Typography",
+                text: "this is some text for a subtitle. sf dsfdf",
                 href: "#"
             },
             {
@@ -41,7 +41,7 @@ export const marketingNavItems: NavItems[] = [
 
             },
             {
-                title: "Admin Panel",
+                title: "Newsletter Page",
                 text: "this is some text for a subtitle. sf dsfd",
                 href: "#"
             },
@@ -53,7 +53,7 @@ export const marketingNavItems: NavItems[] = [
     },
     {
         text: "Reviews",
-        href: "/#reviews",
+        href: "/#testimonials2-section",
     },
     {
         text: "Blog",
@@ -68,12 +68,8 @@ export const interestingNavItems: NavItems[] = [
         href: "/#pricing-section",
     },
     {
-        text: "Demo",
-        href: "#demo",
-    },
-    {
         text: "Reviews",
-        href: "#reviews",
+        href: "/#testimonials2-section",
     },
     {
         text: "Blog",
@@ -134,9 +130,9 @@ export const dashboardNavItems: NavItems[] = [
         upgrade: true,
     },
     {
-        icon: "documentation",
-        text: "Documentation",
-        href: "/dashboard/documentation",
+        icon: "wand",
+        text: "Something",
+        href: "#",
         upgrade: true,
     },
     {

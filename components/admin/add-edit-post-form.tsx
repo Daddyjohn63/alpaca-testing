@@ -1,4 +1,5 @@
 "use client";
+import { siteConfig } from "@/site-config";
 import Image from "next/image";
 import { getImageData } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
@@ -87,7 +88,7 @@ export const AddEditPostForm = (props: AddPostFormProps) => {
 
   const {categories, postData} = props
 
-  const bucketUrl = 'https://f005.backblazeb2.com/file/alpacastack-post-images'
+  const bucketUrl = siteConfig.fileStorage.bucketUrl
 
   //If postData exists and postData.id is not undefined, then its an edit post page. 
   const existingPost = postData && postData.id ? postData : undefined;

@@ -58,7 +58,7 @@ export function MarketingFooter() {
         </div>
       </div>
         <div className="text-center">
-          <p className="text-sm text-muted-foreground">Copyright © {currentYear} AlpacaStack.com. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">Copyright © {currentYear} {siteConfig.primaryDomain}. All rights reserved.</p>
         </div>
     </div>
     </section>

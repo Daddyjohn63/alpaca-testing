@@ -97,7 +97,7 @@ export function TestimonialSection2({className}: {className?:string}) {
 
         <SectionTitle 
           title="Testimonials"
-          subtitle="Hear from customer who have transformed their projects with Alpacastack."
+          subtitle="Hear from customer who have transformed their lives with [your product/busines]."
           className="text-center"
         />
         <ul className="sm:columns-2 md:columns-3 gap-5">

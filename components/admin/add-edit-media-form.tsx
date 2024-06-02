@@ -1,4 +1,5 @@
 "use client";
+import { siteConfig } from "@/site-config";
 import Link from "next/link";
 import Image from "next/image";
 import { Textarea } from "@/components/ui/textarea"
@@ -48,7 +49,7 @@ type AddMediaPayload = {
 export const AddEditMediaForm = (props: AddMediaFormProps) => {
   const {mediaData} = props
 
-  const bucketUrl = 'https://f005.backblazeb2.com/file/alpacastack-post-images'
+  const bucketUrl = siteConfig.fileStorage.bucketUrl
   const router = useRouter()
 
   //If postData exists and postData.id is not undefined, then its an edit post page. 

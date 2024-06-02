@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4} from "uuid"; 
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-
+import { siteConfig } from "@/site-config";
 // Create an S3 client
 // You must copy the endpoint from your B2 bucket details
 // and set the region to match.
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     // Sending to cloud storage
     await s3.send(new PutObjectCommand({
-      Bucket: 'alpacastack-post-images',
+      Bucket: siteConfig.fileStorage.bucket,
       Key: `${uuidFilename}`,
       Body: buffer
     }));

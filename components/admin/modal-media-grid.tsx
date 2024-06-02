@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { getSelectMedia } from "@/actions/media/get-media"
+import { siteConfig } from "@/site-config"
 
 type Media = {
   id: number;
@@ -14,7 +15,7 @@ type ModalMediaGridProps = {
   setMediaObj: (imageObj: Media) => void
 }
 
-const bucketUrl = 'https://f005.backblazeb2.com/file/alpacastack-post-images'
+const bucketUrl = siteConfig.fileStorage.bucketUrl;
 
 export const ModalMediaGrid = (props: ModalMediaGridProps) => {
 

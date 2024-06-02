@@ -4,9 +4,9 @@ import { Caveat } from "next/font/google";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export function Hero2Section({className}: {className?: string}) {
+export function HeroSection1({className}: {className?: string}) {
   return (
-      <section className={className}>
+      <section className={cn(className)}>
         <div className="container grid grid-cols-1 sm:grid-cols-2 items-center gap-10">
           <div className="space-y-5 mx-auto text-center sm:text-left">
             <h1 className="text-3xl sm:text-2xl md:text-4xl font-black">[Unlock/Create/Discover] [Your/Your Business’s] Full Potential with [Product/Service]!</h1>
