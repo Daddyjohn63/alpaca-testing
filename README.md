@@ -33,9 +33,9 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - [X] Add sitemap / dynamic robots
 - [X] Add features2 section
 - [ ] Fix purchase funnel
-- [ ] Add email tempaltes
+- [ ] Add email templates
 - [ ] Add product confirmation email tempaltes
-- [ ] Add Error Handling
+- [ ] Add Error Handling / logging
 - [ ] Refactor clean up code
 
 

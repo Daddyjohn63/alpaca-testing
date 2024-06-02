@@ -55,7 +55,6 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
       return
     }
 
-    console.log(data.success)
     window.location.href = data.url;
   }
 
