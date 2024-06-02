@@ -19,8 +19,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 
-
-
 ## References:
 - Next Auth V5: https://youtu.be/1MTyCvS05V4?si=nvNdJr2SFucy0YTS
 
@@ -37,7 +35,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - [X] Add Lead magnet
 - [X] Fix lightmode colors
 - [X] Add sitemap / dynamic robots
-- [ ] Add features2 section
+- [X] Add features2 section
 - [ ] Fix purchase funnel
 - [ ] Add product confirmation redirect page
 - [ ] Add product confirmation email tempaltes
