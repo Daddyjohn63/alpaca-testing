@@ -18,10 +18,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-
-## References:
-- Next Auth V5: https://youtu.be/1MTyCvS05V4?si=nvNdJr2SFucy0YTS
-
 ## TODOS
 
 - [X] Add Stripe Integration
@@ -37,15 +33,10 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - [X] Add sitemap / dynamic robots
 - [X] Add features2 section
 - [ ] Fix purchase funnel
-- [ ] Add product confirmation redirect page
-- [ ] Add product confirmation email tempaltes
 - [ ] Add email tempaltes
-- [ ] Create Demo Site
+- [ ] Add product confirmation email tempaltes
 - [ ] Add Error Handling
 - [ ] Refactor clean up code
-- [ ] Finish Documentation
-- [ ] Finish Training Course
-- [ ] Fix Github Access Token Automated Renewal
 
 
 
