@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Caveat } from "next/font/google";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export function HeroSection1({className}: {className?: string}) {
+export function HeroSection2({className}: {className?: string}) {
   return (
       <section className={cn(className)}>
         <div className="container grid grid-cols-1 sm:grid-cols-2 items-center gap-10">

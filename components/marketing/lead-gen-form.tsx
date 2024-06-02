@@ -111,7 +111,7 @@ export function LeadGenForm() {
           )}
         />
             */}
-            <div className="pt-3">
+            <div className="pt-7">
         <FormSuccess message={success}  />
         <FormError message={error} />
         <Button type="submit" className="w-full">Sign Up</Button>

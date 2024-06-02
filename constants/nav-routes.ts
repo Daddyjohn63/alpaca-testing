@@ -25,24 +25,24 @@ export const marketingNavItems: NavItems[] = [
         href: "#",
         subMenu: [
             {
-                title: "Homepage 1",
-                text: "this is some text for a subtitle. sf dsfdfdsfsd.",
-                href: "#"
-            },
-            {
-                title: "Typography",
-                text: "this is some text for a subtitle. sf dsfdf",
-                href: "#"
+                title: "404 Page",
+                text: "A custom designed page for bad routes.",
+                href: "/badpath"
             },
             {
                 title: "Contact Page",
-                text: "this is some text for a subtitle. sf dsfd",
+                text: "A page for users to email your team.",
                 href: "/contact-us"
 
             },
             {
                 title: "Newsletter Page",
-                text: "this is some text for a subtitle. sf dsfd",
+                text: "A page to help generate leads for a newsletter.",
+                href: "/newsletter"
+            },
+            {
+                title: "Nothing Page",
+                text: "This is nothing, its just here to even things out.",
                 href: "#"
             },
         ]

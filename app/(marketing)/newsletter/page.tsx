@@ -9,3 +9,4 @@ const NewsletterSignupPage = () => {
 }
 
 export default NewsletterSignupPage
+

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 
-export function HowToSection2({className}: {className?: string}) {
+export function HowToSection1({className}: {className?: string}) {
 
   return (
       <section className={cn(className)}>

@@ -85,18 +85,6 @@ export const columns: ColumnDef<TableUsers>[] = [
       )
     }
   },
-  {
-    accessorKey: "role",
-    header: "Role",
-    cell: ({row}) => {
-
-      return (
-        <div>
-          {row.getValue("role")}
-        </div>
-      )
-    }
-  },
 
   {
     id: "actions",

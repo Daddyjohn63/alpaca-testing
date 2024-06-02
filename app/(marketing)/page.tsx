@@ -1,5 +1,4 @@
 
-import { HeroSection1 } from "@/components/marketing/sections/hero-section1";
 import { HeroSection2 } from "@/components/marketing/sections/hero-section2";
 import { TrustLogosSection } from "@/components/marketing/sections/trust-logos-section";
 import { TestimonialSection1 } from "@/components/marketing/sections/testimonial-section1";
@@ -17,7 +16,7 @@ const Home = async () => {
 
   return (
     <main> 
-      <HeroSection1 className="bg-muted py-20" />
+      <HeroSection2 className="bg-muted py-20" />
       <TrustLogosSection className="bg-muted pb-10" />
       <TestimonialSection1 className="py-10" />
       <IntroSection className="py-10 pb-20" />
