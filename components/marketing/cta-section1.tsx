@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-interface HeroSection2Props {
+interface CTASectionProps {
   children?: React.ReactNode;
   className?: string;
   title: string;
@@ -16,7 +16,13 @@ interface HeroSection2Props {
   backgroundImageUrl?: string;
 }
 
-export function HeroSection2(props: HeroSection2Props) {
+export function CTATitle() {
+  return (
+  <>Some title here</>
+  )
+}
+
+export function CTASection1(props: CTASectionProps) {
 
   const {className, title, subTitle, btnText1, btnHref1, btnText2, btnHref2, imageUrl, backgroundImageUrl} = props;
 
