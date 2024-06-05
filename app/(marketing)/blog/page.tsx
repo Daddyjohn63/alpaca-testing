@@ -1,4 +1,4 @@
-import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
+import { PageHeroSection } from "@/components/marketing/page-hero-section"
 import { db } from "@/lib/db"
 import Link from "next/link"
 import Image from "next/image"

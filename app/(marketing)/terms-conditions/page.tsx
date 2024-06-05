@@ -1,4 +1,4 @@
-import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
+import { PageHeroSection } from "@/components/marketing/page-hero-section"
 
 // CHATGPT INSTRUCTIONS TO CREATE TERMS OF SERVICE DOCUMENT — make sure to customize with your specific details 👇
 

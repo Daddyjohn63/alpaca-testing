@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { SectionTitle } from "../section-title"
+import { SectionTitle } from "@/components/section-title"
 
 
 const testimonials = [

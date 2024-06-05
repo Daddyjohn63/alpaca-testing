@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
+import { PageHeroSection } from "@/components/marketing/page-hero-section"
 import { notFound } from "next/navigation";
 import { CTACard } from "@/components/cta-card";
 import { siteConfig } from "@/site-config";

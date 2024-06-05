@@ -1,14 +1,14 @@
 
-import { HeroSection2 } from "@/components/marketing/sections/hero-section2";
-import { TrustLogosSection } from "@/components/marketing/sections/trust-logos-section";
-import { TestimonialSection1 } from "@/components/marketing/sections/testimonial-section1";
-import { IntroSection } from "@/components/marketing/sections/intro-section";
-import { BenefitsSection } from "@/components/marketing/sections/benefits-section";
-import { FeaturesSection1 } from "@/components/marketing/sections/features-section1";
-import { FeaturesSection2 } from "@/components/marketing/sections/features-section2";
-import { TestimonialSection2 } from "@/components/marketing/sections/testimonial-section2";
-import { PricingSection } from "@/components/marketing/sections/pricing-section";
-import { FAQSection } from "@/components/marketing/sections/faq-section";
+import { HeroSection2 } from "@/components/marketing/hero-section2";
+import { TrustLogosSection } from "@/components/marketing/trust-logos-section";
+import { TestimonialSection1 } from "@/components/marketing/testimonial-section1";
+import { IntroSection } from "@/components/marketing/intro-section";
+import { BenefitsSection } from "@/components/marketing/benefits-section";
+import { FeaturesSection1 } from "@/components/marketing/features-section1";
+import { FeaturesSection2 } from "@/components/marketing/features-section2";
+import { TestimonialSection2 } from "@/components/marketing/testimonial-section2";
+import { PricingSection } from "@/components/marketing/pricing-section";
+import { FAQSection } from "@/components/marketing/faq-section";
 
 import Image from "next/image";
 

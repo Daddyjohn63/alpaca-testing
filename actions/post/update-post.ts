@@ -97,10 +97,10 @@ export const updatePost = async (values: Props) => {
       },
     })
 
-    return {success: "Post had been successfully added!", data}
+    return {success: "Post had been successfully updated!", data}
   }
   catch(e) {
     console.log(e)
-    return {error: "Something went wrong, could not add post!"}
+    return {error: "Something went wrong, could not update post!"}
   }
 }

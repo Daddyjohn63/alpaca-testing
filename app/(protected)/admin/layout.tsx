@@ -1,5 +1,5 @@
 import { AdminSidebar } from "@/components/admin/sidebar";
-import { AdminHeader } from "@/components/admin/sections/header-section";
+import { AdminHeader } from "@/components/admin/header-section";
 import { currentRole } from "@/lib/auth";
 import { redirect } from "next/navigation";
 

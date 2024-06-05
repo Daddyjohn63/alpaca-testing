@@ -38,8 +38,8 @@ export const siteConfig = {
   },
   fileStorage: {
     // If you use AWS S3/Cloudfront, put values in here
-    bucket: "your-bucket-name-here",
-    bucketUrl: `https://f005.backblazeb2.com/file/your-bucket-name-here`,
+    bucket: "alpacastack-template-post-images",
+    bucketUrl: "https://f005.backblazeb2.com/file/alpacastack-template-post-images",
   },
   stripe: {
     plans: [

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { MarketingHeader } from '@/components/marketing/sections/header-section'
-import { MarketingFooter } from '@/components/marketing/sections/footer-section'
+import { MarketingHeader } from '@/components/marketing/header-section'
+import { MarketingFooter } from '@/components/marketing/footer-section'
 import { Home, MessageCircle } from 'lucide-react'
 
 export default function NotFound() {

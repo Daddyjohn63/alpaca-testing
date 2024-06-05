@@ -32,6 +32,13 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - [X] Fix lightmode colors
 - [X] Add sitemap / dynamic robots
 - [X] Add features2 section
+- [X] Refactor categories add / edit forms
+- [X] Refactor update media pages / components
+- [X] Fix post add / edit forms
+- [ ] Refactor marketing components
+- [ ] Fix dynamic table data rendering
+- [ ] Add category titles to cat table
+- [ ] Add status to categories
 - [ ] Fix purchase funnel
 - [ ] Add email templates
 - [ ] Add product confirmation email tempaltes

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SectionTitle } from "../section-title";
+import { SectionTitle } from "@/components/section-title";
 import { cn } from "@/lib/utils";
 import { FileCode, Database, User, ShoppingCart, Mail, FileImage } from "lucide-react";
 

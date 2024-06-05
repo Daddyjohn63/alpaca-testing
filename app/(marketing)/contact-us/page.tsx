@@ -1,8 +1,8 @@
-import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
+import { PageHeroSection } from "@/components/marketing/page-hero-section"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Facebook, Instagram, Youtube, Linkedin} from "lucide-react"
-import { ContactUsForm } from "@/components/marketing/contact-us-form"
+import { ContactUsForm } from "@/components/contact-us-form"
 import { getSEOMetadata } from "@/lib/seo"
 
 export const metadata = getSEOMetadata({

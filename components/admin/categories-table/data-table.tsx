@@ -35,6 +35,7 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon, Edit } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -47,6 +48,8 @@ interface DataTableProps<TData, TValue> {
     [key: string]: string | string[] | undefined;
   };
 }
+
+
 
 export function DataTable<TData, TValue>({
   columns,

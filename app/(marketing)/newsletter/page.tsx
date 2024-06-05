@@ -1,4 +1,4 @@
-import { LeadGenForm } from "@/components/marketing/lead-gen-form"
+import { LeadGenForm } from "@/components/lead-gen-form"
 
 const NewsletterSignupPage = () => {
   return (

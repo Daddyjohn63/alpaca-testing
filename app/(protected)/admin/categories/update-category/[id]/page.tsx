@@ -1,17 +1,20 @@
 import { Heading } from "@/components/ui/heading";
 import BreadCrumb from "@/components/admin/breadcrumb";
-import { AddEditCategoryForm } from "@/components/admin/add-edit-category-form";
+import { UpdateCategoryForm } from "@/components/admin/update-category-form";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 
 type Params = {
   id: string;
 }
-const breadcrumbItems = [{ title: "Edit Category", link: "/admin/" }];
+const breadcrumbItems = [{ title: "Edit Category", link: "#" }];
 
-const PostDetailsPage = async({params}: {params: Params}) => {
+const EditCategoryPage = async({params, searchParams}: {params: Params, searchParams: any}) => {
 
   const {id} = params;
+  const {status} = searchParams;
+
+  console.log(status)
 
   if(!id) {
     return notFound()
@@ -31,14 +34,15 @@ const PostDetailsPage = async({params}: {params: Params}) => {
     <div>
       <BreadCrumb items={breadcrumbItems} />
       <Heading
-        title="Edit Category"
+        title="Update Category"
         description="Edit your category here"
       /> 
-      <AddEditCategoryForm 
+      <UpdateCategoryForm 
         categoryData={categoryData}
+        status={status}
       />
     </div>
   )
 }
 
-export default PostDetailsPage
+export default EditCategoryPage

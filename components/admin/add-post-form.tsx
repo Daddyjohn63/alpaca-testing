@@ -3,7 +3,6 @@ import { siteConfig } from "@/site-config";
 import Image from "next/image";
 import { getImageData } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
-import { updatePost } from "@/actions/post/update-post";
 import { addPost } from "@/actions/post/add-post";
 import { useState, useEffect, useTransition} from "react";
 import { ImageIcon } from "@radix-ui/react-icons";
@@ -68,11 +67,9 @@ type Post = {
 
 type AddPostFormProps = {
   categories: Category[];
-  postData?: Post
 }
 
 type AddPostPayload = {
-  postId: string | undefined;
   title: string;
   slug: string;
   excerpt: string | undefined | null;
@@ -84,16 +81,11 @@ type AddPostPayload = {
   deleteImage: boolean;
 }
 
-export const AddEditPostForm = (props: AddPostFormProps) => {
+export const AddPostForm = (props: AddPostFormProps) => {
 
-  const {categories, postData} = props
+  const {categories} = props
 
   const bucketUrl = siteConfig.fileStorage.bucketUrl
-
-  //If postData exists and postData.id is not undefined, then its an edit post page. 
-  const existingPost = postData && postData.id ? postData : undefined;
-
-  const { update } = useSession();
 
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -108,33 +100,17 @@ export const AddEditPostForm = (props: AddPostFormProps) => {
   const form = useForm<z.infer<typeof AddPostSchema>>({
     resolver: zodResolver(AddPostSchema),
     defaultValues: {
-      title: existingPost?.title ?? '',
+      title: '',
       slug: '',
-      excerpt: existingPost?.excerpt ?? '',
-      status: existingPost?.status ?? '',
-      category: existingPost?.categoryId ?? '',
-      content: existingPost?.content ?? ''
+      excerpt: '',
+      status: '',
+      category: '',
+      content: '', 
     },
   });
 
   //Watch title input to create url friendly slug
   const watchTitle = form.watch("title");
-
-  //Show image for post update
-  useEffect(() => {
-    //Update featured image
-    if(existingPost && existingPost.media) {
-      setImagePreview(`${bucketUrl}/${existingPost.media.imagePath}`)
-      setExistingImage(existingPost?.media)
-    }
-
-    //If post slug already exists, then set edit slug to false and disable auto creation. 
-    if(existingPost) {
-      setEditSlug(false)
-      form.setValue("slug", existingPost.slug)
-    }
-
-  },[form, existingPost])
 
   useEffect(() => {
     // Enable auto slug creation and editing if edit slug is turned on (true)
@@ -189,7 +165,6 @@ export const AddEditPostForm = (props: AddPostFormProps) => {
 
       //Craft payload data for database
       const payload: AddPostPayload = {
-        postId: existingPost?.id,
         title: values.title,
         slug: kebabCase(values.slug),
         excerpt: values.excerpt,
@@ -201,54 +176,20 @@ export const AddEditPostForm = (props: AddPostFormProps) => {
         deleteImage: deleteImage
       }
 
-      //Update existing post, else add new post.
-      if(!!existingPost) {
-        updatePost(payload)
-          .then((data) => {
+      addPost(payload)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+          }
 
-            if(data.error) {
-              setError(data.error)
-            }
-            if(data.success) {
-              update();
-              setSuccess(data.success)
+          if (data.success) {
+            window.location.href = `/admin/posts/update-post/${data.data.id}?status=added`;
 
-              //update slug in input form
-              if(data.data.slug) {
-                const updatedSlug = data.data.slug
-                form.setValue("slug", updatedSlug)
-              }
-
-            }
-
-          })
-          .catch((data) => {
-              setError(data.error)
-          })
-         
-      }
-      else {
-        addPost(payload)
-          .then((data) => {
-            if (data.error) {
-              setError(data.error);
-            }
-
-            if (data.success) {
-              update();
-              setSuccess(data.success);
-
-              //update slug in input form
-              if(data.data.slug) {
-                const updatedSlug = data.data.slug
-                form.setValue("slug", updatedSlug)
-              }
-            }
-          })
-          .catch((data) => {
-            setError(data.error)
-          });
-      }
+          }
+        })
+        .catch((data) => {
+          setError(data.error)
+        });
     });
   };
 
@@ -336,7 +277,7 @@ export const AddEditPostForm = (props: AddPostFormProps) => {
           </div>
           <div className="md:w-[350px] space-y-5">
             <Button disabled={isPending} type="submit" className="w-full py-7">
-              Submit Post
+              Add Post
             </Button>
             <FormField
               control={form.control}

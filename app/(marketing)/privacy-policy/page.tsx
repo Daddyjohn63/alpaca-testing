@@ -1,4 +1,4 @@
-import { PageHeroSection } from "@/components/marketing/sections/page-hero-section"
+import { PageHeroSection } from "@/components/marketing/page-hero-section"
 
 // CHATGPT INSTRUCTIONS FOR DRAFTING A PRIVACY POLICY — customize with your specific details 👇
 

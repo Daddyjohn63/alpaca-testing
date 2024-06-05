@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
-import { SectionTitle } from "../section-title"
-import { PricingCard } from "../pricing-card"
+import { SectionTitle } from "@/components/section-title"
+import { PricingCard } from "@/components/pricing-card"
 import { siteConfig } from "@/site-config"
 
 export function PricingSection({className}: {className?: string}) {

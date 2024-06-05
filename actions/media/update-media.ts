@@ -30,10 +30,10 @@ export const updateMediaData = async (values: Props) => {
       }
       })
 
-      return {success: "Media successfully added!", data}
+      return {success: "Media successfully updated!", data}
   }
   catch(e) {
     console.log(e)
-    return {error: "Something went wrong, could not add media"}
+    return {error: "Something went wrong, could not update media"}
   }
 }

@@ -3,7 +3,6 @@ import { db } from "@/lib/db"
 import { currentUser } from "@/lib/auth"
 
 type Props = {
-  postId: string | undefined;
   title: string;
   content: string;
   excerpt: string | undefined | null;
@@ -21,7 +20,7 @@ export const addPost = async (values: Props) => {
     return {error: "Unauthenticated User"}
   }
 
-  const {postId,title, slug, excerpt, content, status, category, imagePath, existingImageId} = values
+  const {title, slug, excerpt, content, status, category, imagePath, existingImageId} = values
 
   try {
 
@@ -37,11 +36,7 @@ export const addPost = async (values: Props) => {
     })
 
     if(!!slugCheck) {
-
-      //If its the same post as the one I am editing, then ignore the slug check. 
-      if(postId !== slugCheck.id){
-        return {error: "URL slug already taken, change it up!"}
-      }
+      return {error: "URL slug already taken, change it up!"}
     }
 
 
@@ -49,7 +44,7 @@ export const addPost = async (values: Props) => {
     let mediaId: number | undefined;
 
     //If user uploaded image
-    if(!!imagePath && !existingImageId) {
+    if(!!imagePath) {
       const imageData = await db.media.create({
         data: {
           imagePath: imagePath, 
@@ -83,7 +78,7 @@ export const addPost = async (values: Props) => {
     const data = await db.post.create({
       data: addPostPayload,
       select: {
-        slug: true
+        id: true
       },
     })
 

@@ -35,25 +35,22 @@ import {
 } from "@/components/ui/dialog"
 import { Expand, Link as LinkIcon } from "lucide-react";
 
-type AddMediaFormProps = {
-  mediaData?: Media
+type UpdateMediaFormProps = {
+  mediaData: Media
 }
 
-type AddMediaPayload = {
+type UpdateMediaPayload = {
   mediaId: string;
   altText: string;
   description: string;
 }
 
 
-export const AddEditMediaForm = (props: AddMediaFormProps) => {
+export const UpdateMediaForm = (props: UpdateMediaFormProps) => {
   const {mediaData} = props
 
   const bucketUrl = siteConfig.fileStorage.bucketUrl
   const router = useRouter()
-
-  //If postData exists and postData.id is not undefined, then its an edit post page. 
-  const editMedia = mediaData && mediaData.id ? mediaData : undefined;
 
   const { update } = useSession();
   const [error, setError] = useState<string | undefined>();
@@ -63,8 +60,8 @@ export const AddEditMediaForm = (props: AddMediaFormProps) => {
   const form = useForm<z.infer<typeof AddMediaSchema>>({
     resolver: zodResolver(AddMediaSchema),
     defaultValues: {
-      altText: editMedia?.altText ?? '',
-      description: editMedia?.description ?? ''
+      altText: mediaData.altText ?? '',
+      description: mediaData.description ?? ''
     },
   });
 
@@ -76,13 +73,10 @@ export const AddEditMediaForm = (props: AddMediaFormProps) => {
     startTransition(async () => {
 
       //Craft payload data for database
-      let payload: AddMediaPayload = {
+      let payload: UpdateMediaPayload = {
         mediaId: mediaData?.id.toString() || '',
         altText: values.altText || '',
         description: values.description || '',
-      }
-
-      if(editMedia) {
       }
 
       //Add payload data to action to create in database
@@ -106,12 +100,12 @@ export const AddEditMediaForm = (props: AddMediaFormProps) => {
 
   const deleteMedia = () => {
 
-    if(!editMedia) {
+    if(!mediaData) {
       return
     }
 
     startTransition(async() => {
-      deleteMediaById(editMedia.id)
+      deleteMediaById(mediaData.id)
         .then((data) => {
           if(data.error) {
             setError(data.error)
@@ -142,9 +136,9 @@ export const AddEditMediaForm = (props: AddMediaFormProps) => {
               <div className="space-y-4">
                 <FormLabel>Image Path</FormLabel>
                 <div className="flex gap-3">
-                  <Input disabled type="text" value={`${bucketUrl}/${editMedia?.imagePath}`}/>
+                  <Input disabled type="text" value={`${bucketUrl}/${mediaData.imagePath}`}/>
                   <Button asChild>
-                    <Link target="_blank" href={`${bucketUrl}/${editMedia?.imagePath}`}>
+                    <Link target="_blank" href={`${bucketUrl}/${mediaData.imagePath}`}>
                       <LinkIcon />
                     </Link>
                   </Button> 
@@ -194,12 +188,12 @@ export const AddEditMediaForm = (props: AddMediaFormProps) => {
             </Button>
 
             <Dialog>
-              {editMedia && (
+              {mediaData && (
                 <DialogTrigger className="relative">
                   <Expand className="absolute bg-primary text-primary-foreground w-8 h-8 p-2 rounded-sm right-2 top-2" />
                   <Image 
-                    alt={editMedia.altText || ''} 
-                    src={`${bucketUrl}/${editMedia.imagePath}`} 
+                    alt={mediaData.altText || ''} 
+                    src={`${bucketUrl}/${mediaData.imagePath}`} 
                     width="255"
                     height="175"
                   />
@@ -208,10 +202,10 @@ export const AddEditMediaForm = (props: AddMediaFormProps) => {
               <DialogContent>
                 <DialogHeader>
                   <DialogDescription>
-                    {editMedia && (
+                    {mediaData && (
                       <Image 
-                        alt={editMedia.altText || ''} 
-                        src={`${bucketUrl}/${editMedia.imagePath}`} 
+                        alt={mediaData.altText || ''} 
+                        src={`${bucketUrl}/${mediaData.imagePath}`} 
                         width="1000"
                         height="1000"
                       />
@@ -221,7 +215,7 @@ export const AddEditMediaForm = (props: AddMediaFormProps) => {
               </DialogContent>
             </Dialog>
 
-            {!!editMedia && (
+            {!!mediaData && (
               <div className="text-center">
                 <Button type="button" variant="link" className="text-destructive" onClick={deleteMedia} >Delete Media</Button>
               </div>

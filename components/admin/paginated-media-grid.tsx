@@ -24,7 +24,7 @@ const PaginatedMediaGrid = (props: MediaGridProps) => {
             <div key={media.id} className="space-y-4">
 
               <div className="w-full aspect-video rounded-md overflow-hidden flex items-center justify-center bg-muted border-2 border-transparent hover:border-primary">
-                <Link href={`/admin/media/edit-media/${media.id}`}>
+                <Link href={`/admin/media/update-media/${media.id}`}>
                 <Image
                   src={`${siteConfig.fileStorage.bucketUrl}/${media.imagePath}`}
                   className="w-full"

@@ -3,6 +3,8 @@ import BreadCrumb from "@/components/admin/breadcrumb";
 import { DataTable } from "@/components/admin/categories-table/data-table";
 import { db } from "@/lib/db";
 import { columns } from "@/components/admin/categories-table/columns";
+
+
 type ParamsProps = {
   searchParams: {
     [key: string]: string | string[] | undefined;

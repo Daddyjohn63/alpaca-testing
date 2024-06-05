@@ -1,5 +1,3 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { CheckCircle, XCircle } from "lucide-react"
 import { BuyNowBtn } from "@/components/buy-now-btn"
 

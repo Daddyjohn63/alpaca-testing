@@ -87,11 +87,11 @@ export const AddMediaButton = () => {
 
         })
         .catch((data) => {
-          setError("Something went wrong, could not add image data")
+          setError("Something went wrong, could not add media")
         })
 
     } catch(e) {
-      setError("Something went wrong, could not add image data")
+      setError("Something went wrong, could not add media")
 
     }
   }

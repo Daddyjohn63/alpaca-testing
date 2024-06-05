@@ -1,6 +1,6 @@
 "use client";
 import { Textarea } from "@/components/ui/textarea"
-import { addCategory} from "@/actions/category/add-category";
+import { updateCategory} from "@/actions/category/update-category";
 import { useState, useEffect, useTransition, ChangeEvent } from "react";
 import { Card } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
@@ -25,7 +25,8 @@ import {
 import { Edit } from "lucide-react";
 
 type AddCategoryFormProps = {
-  categoryData?: Category 
+  categoryData: Category 
+  status: string,
 }
 
 type AddCategoryPayload = {
@@ -35,11 +36,9 @@ type AddCategoryPayload = {
   description: string | undefined;
 }
 
-export const AddEditCategoryForm = (props: AddCategoryFormProps) => {
-  const {categoryData} = props
+export const UpdateCategoryForm = (props: AddCategoryFormProps) => {
 
-  //If postData exists and postData.id is not undefined, then its an edit post page. 
-  const editCategory = categoryData && categoryData.id ? categoryData : undefined;
+  const {categoryData, status} = props
 
   const { update } = useSession();
   const [error, setError] = useState<string | undefined>();
@@ -50,9 +49,9 @@ export const AddEditCategoryForm = (props: AddCategoryFormProps) => {
   const form = useForm<z.infer<typeof AddCategorySchema>>({
     resolver: zodResolver(AddCategorySchema),
     defaultValues: {
-      name: categoryData?.name ?? '',
+      name: categoryData.name,
       slug: '',
-      description: categoryData?.description ?? ''
+      description: categoryData.description || ''
     },
   });
 
@@ -62,6 +61,11 @@ export const AddEditCategoryForm = (props: AddCategoryFormProps) => {
 
   // Enable auto slug creation and editing if edit slug is turned on (true)
   useEffect(() => {
+
+    if(status === 'added'){
+      setSuccess("Category successfully added!");
+    }
+
     if(editSlug === true) {
       // Converts title to kebab case, a url friendly slug
       const urlFriendlySlug = kebabCase(watchName)
@@ -71,11 +75,9 @@ export const AddEditCategoryForm = (props: AddCategoryFormProps) => {
 
   //If post slug already exists, then set edit slug to false and disable auto creation. 
   useEffect(() => {
-    if(editCategory){
-      setEditSlug(false)
-      form.setValue("slug", editCategory.slug)
-    }
-  },[form, editCategory])
+    setEditSlug(false)
+    form.setValue("slug", categoryData.slug)
+  },[form, categoryData])
 
   const onSubmit = (values: z.infer<typeof AddCategorySchema>) => {
 
@@ -86,14 +88,14 @@ export const AddEditCategoryForm = (props: AddCategoryFormProps) => {
 
       //Craft payload data for database
       const payload: AddCategoryPayload = {
-        categoryId: categoryData?.id ?? '',
+        categoryId: categoryData.id,
         name: values.name,
         slug: values.slug,
         description: values.description,
       }
 
       //Add payload data to action to create in database
-       addCategory(payload)
+       updateCategory(payload)
          .then((data) => {
            if (data.error) {
              setError(data.error);
@@ -190,7 +192,7 @@ export const AddEditCategoryForm = (props: AddCategoryFormProps) => {
           </div>
           <div className="md:w-[350px] space-y-5">
             <Button disabled={isPending} type="submit" className="w-full py-7">
-              Submit Category
+              Update Category
             </Button>
           </div>
         </div>
