@@ -4,7 +4,7 @@ import { testimonialsData2 } from "@/constants/testimonials"
 
 export function TestimonialSection2() {
   return (
-    <Section id="testimonials-section" className="pt-5"> 
+    <Section id="testimonials2-section" className="pt-5"> 
       <SectionHeader>
         <SectionTitle2>Testimonials</SectionTitle2>
         <SectionDescription>Hear from customer who have transformed their lives with [your product/busines].</SectionDescription>

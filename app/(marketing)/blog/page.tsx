@@ -73,7 +73,7 @@ const BlogPage = async({searchParams}: ParamsProps) => {
 
   return (
     <div>
-      <PageHeroSection title="Blog" subtitle="Checkout our amazing articles" />
+      <PageHeroSection title="Blog" description="Checkout our amazing articles" />
       <section className="pt-14 pb-20">
         <div className="container">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-14">
