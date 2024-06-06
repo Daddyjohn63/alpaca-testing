@@ -1,5 +1,4 @@
-import { HeroSection2 } from "@/components/marketing/hero-section2";
-import { CTASection1 } from "@/components/marketing/cta-section1";
+import { HeroSection1 } from "@/components/marketing/hero-section1";
 import { TrustLogosSection } from "@/components/marketing/trust-logos-section";
 import { TestimonialSection1 } from "@/components/marketing/testimonial-section1";
 import { IntroSection } from "@/components/marketing/intro-section";
@@ -11,44 +10,39 @@ import { PricingSection } from "@/components/marketing/pricing-section";
 import { FAQSection } from "@/components/marketing/faq-section";
 import { trustLogos } from "@/constants/trust-logos";
 
+import { benefits } from "@/constants/benefits";
+
 const Home = async () => {
 
   return (
     <main> 
-      <HeroSection2 
-        className="bg-muted py-20" 
-        title="Unlock Your Business’s Full Potential with Our Product!"
-        subTitle="Experience innovation and creativity with our revolutionary product. Get started today and see your business transformed!"
-        imageUrl="https://place-hold.it/510x400"
-        backgroundImageUrl="https://images.pexels.com/photos/12220265/pexels-photo-12220265.jpeg"
-        btnText1="Buy Now!"
-        btnHref1="#pricing-section"
-        btnText2="Watch Video!"
-        btnHref2="#"
-      />
+
+      <HeroSection1 />
+
       <TrustLogosSection
-        className="bg-muted p-5"
+        heading="Featured on"
+        subHeading="This is an example"
         data={trustLogos}
       />
-      <TestimonialSection1 className="py-10" />
-      <IntroSection className="py-10 pb-20" />
-      <BenefitsSection className="pt-5 pb-28" />
+      <TestimonialSection1/>
+      <IntroSection
+        heading="Unlock Your Full Potential With Our Product"
+        content="Are you tired of [common problem]? At [Company/Product Name], we understand your challenges. Our [products/services] are crafted to offer effective solutions that streamline [processes, daily activities, etc.], enhancing your [related benefit]. Start with us today, and leverage our expertise to [achieve specific results or improvements]."
+        imageUrl="https://place-hold.it/500x400"
+      />
+
+      <BenefitsSection
+        heading="Benefits here"
+        subHeading="Beenfits go here this is subheader"
+        data={benefits}
+      />
+
       <FeaturesSection1 className="py-16 bg-muted" />
       <FeaturesSection2 className="py-16 bg-muted" />
       <TestimonialSection2 className="py-16" />
       <PricingSection className="py-16" />
       <FAQSection className="pt-10 pb-28"/>
-      <CTASection1 
-        className="bg-muted py-20" 
-        title="Unlock Your Business’s Full Potential with Our Product!"
-        subTitle="Experience innovation and creativity with our revolutionary product. Get started today and see your business transformed!"
-        imageUrl="https://place-hold.it/510x400"
-        backgroundImageUrl="https://images.pexels.com/photos/12220265/pexels-photo-12220265.jpeg"
-        btnText1="Buy Now!"
-        btnHref1="#pricing-section"
-        btnText2="Watch Video!"
-        btnHref2="#"
-      />
+
 
     </main>
   );

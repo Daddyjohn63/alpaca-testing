@@ -16,6 +16,9 @@ import {
   LogOut,
   DownloadIcon,
   Wand,
+  Megaphone,
+  TimerReset,
+  Coins,
   Cog
 } from "lucide-react";
 
@@ -23,6 +26,9 @@ export type Icon = LucideIcon;
 
 export const Icons = {
   home: Home,
+  coins: Coins,
+  megaphone: Megaphone,
+  timer: TimerReset,
   login: LogIn,
   design: Palette,
   training: MonitorPlay,

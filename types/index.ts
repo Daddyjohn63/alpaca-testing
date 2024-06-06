@@ -31,3 +31,9 @@ export interface TableUsers {
   name: string | null;
   role: string;
 }
+
+export interface BenefitsArray {
+  icon?: keyof typeof Icons;
+  title: string;
+  description: string;
+}

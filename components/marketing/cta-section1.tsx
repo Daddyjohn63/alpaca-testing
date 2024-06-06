@@ -3,53 +3,44 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-interface CTASectionProps {
-  children?: React.ReactNode;
-  className?: string;
-  title: string;
-  subTitle: string;
-  btnText1?: string;
-  btnHref1?: string;
-  btnText2?: string;
-  btnHref2?: string;
-  imageUrl?: string;
-  backgroundImageUrl?: string;
-}
+export function CTASection1({children, className, backgroundImg}: {children: React.ReactNode, className: string, backgroundImg?: string}) {
 
-export function CTATitle() {
   return (
-  <>Some title here</>
+    <section className={`${cn(className)} relative bg-cover bg-center bg-no-repeat`} style={{backgroundImage: backgroundImg ? `url('${backgroundImg}')` : undefined}}>
+      <div className="container">
+        {children}
+      </div>
+    </section>
   )
 }
 
-export function CTASection1(props: CTASectionProps) {
-
-  const {className, title, subTitle, btnText1, btnHref1, btnText2, btnHref2, imageUrl, backgroundImageUrl} = props;
-
+export function CTA2Cols({className, children}: {className?: string, children: React.ReactNode}) {
   return (
-      <section className={`${cn(className)} relative bg-cover bg-center bg-no-repeat`} style={{backgroundImage: `url('${backgroundImageUrl}')`}}>
-      <div className="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-85 z-10"></div>
-        <div className="container grid grid-cols-1 sm:grid-cols-2 items-center gap-10 relative z-20">
-          <div className="space-y-5 mx-auto text-center sm:text-left">
-            <h1 className="text-4xl md:text-5xl font-black">{title}</h1>
-            <p className="text-lg">{subTitle}</p>
-          <div className="flex justify-center sm:justify-start gap-4">
-          {!!btnHref1 && (
-            <Button size="lg" asChild>
-              <Link href={btnHref1}>{btnText1}</Link>
-            </Button>
-          )}
-          {!!btnHref2 && (
-            <Button variant="outline" size="lg" asChild className="border border-muted-foreground bg-transparent">
-              <Link href={btnHref2}>{btnText2}</Link>
-            </Button>
-          )}
-          </div>
-          </div>
-        <div>
-          {!!imageUrl && <Image alt="hero Image" src={imageUrl} width={510} height={400} className="w-full mx-auto rounded-md" />}
-        </div>
-        </div>
-      </section>
+    <div className={`relative z-50 grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-14 ${cn(className)}`}>{children}</div>
+  )
+}
+
+export function CTACol({className, children}: {className?: string, children: React.ReactNode}) {
+  return (
+    <div className={`space-y-5 flex flex-col items-center ${cn(className)}`}>{children}</div>
+  )
+}
+
+
+export function CTATitle({className, children}: {className?: string, children: React.ReactNode}) {
+  return (
+    <h1 className={`text-4xl md:text-5xl font-black ${cn(className)}`}>{children}</h1>
+  )
+}
+
+export function CTADescription({className, children}: {className?: string, children: React.ReactNode}) {
+  return (
+    <p className={`text-lg ${cn(className)}`}>{children}</p>
+  )
+}
+
+export function CTABtnGroup({className, children}: {className?: string, children: React.ReactNode}) {
+  return (
+    <div className={`w-full flex flex-wrap gap-4 ${cn(className)}`}>{children}</div>
   )
 }

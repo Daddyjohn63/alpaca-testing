@@ -1,24 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Caveat } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { SectionWrapper, SectionContainer, SectionColumn, SectionHeading1, SectionContent, SectionBtnGroup } from "@/components/uiAlpaca/section-wrapper";
 
-export function HeroSection1({className}: {className?: string}) {
+export function HeroSection1() {
   return (
-      <section className={cn(className)}>
-        <div className="container">
-          <div className="text-center space-y-5 max-w-5xl mx-auto pb-5">
-            <h1 className="text-4xl sm:text-5xl font-black">[Unlock/Create/Discover] [Your/Your Business’s] Full Potential with [Product/Service]!</h1>
-            <p className="text-xl">Experience [enhanced productivity, ease of use, innovation, etc.] with [specific features or aspects of your product/service]. [Learn more/Get started/Join us] today and see the difference!</p>
-            <Button size="lg" asChild>
-            <Link href="#pricing-section">
-            Buy Now!
-            </Link>
-            </Button>
-          </div>
-        </div>
-      <Image alt="hero Image" src="https://place-hold.it/1000x600" width={1100} height={617} className="mx-auto rounded-md my-10 border border-muted-foreground shadow-2xl shadow-black/70" />
-      </section>
+    <SectionWrapper className="pb-5">
+      <SectionContainer>
+        <SectionColumn className="text-center">
+          <SectionHeading1 className="md:text-6xl">Unlock Your Business Full Potential with Our Product</SectionHeading1>
+          <SectionContent>Experience innovation and creativity with our revolutionary product. Get started today and see your business transformed!</SectionContent>
+          <SectionBtnGroup className="justify-center pb-5">
+            <Button asChild><Link href="#pricing-section">Buy Now</Link></Button>
+            <Button asChild variant="outline"><Link href="#">Watch Video</Link></Button>
+          </SectionBtnGroup>
+          <Image alt="hero Image" src="https://place-hold.it/1100x618" width={1100} height={618} className="mx-auto rounded-md" />
+        </SectionColumn>
+      </SectionContainer>
+    </SectionWrapper>
   )
 }
