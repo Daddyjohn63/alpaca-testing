@@ -8,7 +8,7 @@ export function TrustLogosSection1({data}: {data?: TrustLogo[]}) {
   const logoData: TrustLogo[] = data || trustLogosData1
 
   return (
-    <Section className="bg-slate-900 py-5">
+    <Section className="pt-5 bg-muted/20">
         <SectionHeader className="pb-5">
           <h2 className="font-light text-center">Featured On:</h2>
         </SectionHeader>

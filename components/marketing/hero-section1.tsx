@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Section, SectionHeader, SectionTitle1, SectionDescription, SectionContent} from "@/components/uiAlpaca/section"
 
 export function HeroSection1() {
+
   return (
     <Section className="bg-muted text-center">
       <SectionHeader>
-        <SectionTitle1 className="md:text-6xl">Unlock Your Business' Full Potential With our Product!</SectionTitle1>
+        <SectionTitle1 className="text-5xl md:text-6xl">Unlock Your Business' Full Potential With our Product!</SectionTitle1>
         <SectionDescription className="text-xl pb-3">Experience innovation and creativity with AI-enhanced interior design. Get started today and see your home transformed!</SectionDescription>
         <div className="flex flex-col items-center space-y-3">
           <Button asChild size="lg"><Link href="/#pricing-section">Buy Now</Link></Button>

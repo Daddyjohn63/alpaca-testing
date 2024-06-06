@@ -2,12 +2,12 @@ import { PricingCard } from "@/components/pricing-card"
 import { siteConfig } from "@/site-config"
 import { Section, SectionHeader, SectionTitle2, SectionDescription, SectionContent, SectionFooter} from "@/components/uiAlpaca/section"
 
-export function PricingSection1() {
+export const PricingSection1 = () => {
 
   const plans = siteConfig.stripe.plans
 
   return (
-  <Section>
+  <Section id="pricing-section" className="bg-gradient-to-br from-muted/70 to-black/10">
       <SectionHeader>
       <SectionTitle2>Simple, Transparent Pricing</SectionTitle2>
         <SectionDescription>Choose the plan that best fits your needs with no hidden fees. Upgrade, downgrade, or cancel at any time.</SectionDescription>

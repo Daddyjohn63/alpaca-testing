@@ -15,11 +15,10 @@ const Home = async () => {
 
   return (
     <main> 
-      <HeroSection1/>
-      <HeroSection2/>
+      <HeroSection2 />
       <TrustLogosSection1 />
-      <IntroSection1 />
       <TestimonialSection1 />
+      <IntroSection1 />
       <BenefitsSection1 />
       <FeaturesSection1 /> 
       <TestimonialSection2 />

@@ -7,7 +7,7 @@ export function TestimonialSection1({data}: {data?: Testimonial[]}) {
 
   const testimonials: Testimonial[] = data || testimonialsData1
   return (
-    <Section className="bg-slate-400">
+    <Section>
         <SectionContent>
           <ul className="sm:grid md:grid-cols-3 md:gap-10">
             {!!testimonials && testimonials.map((testimonial, i) => {
