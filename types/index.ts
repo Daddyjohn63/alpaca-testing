@@ -32,8 +32,20 @@ export interface TableUsers {
   role: string;
 }
 
-export interface BenefitsArray {
+export interface Benefit {
   icon?: keyof typeof Icons;
   title: string;
   description: string;
+}
+export interface Testimonial {
+  review: string;
+  name?: string;
+  handle?: string;
+  image?: string;
+  stars?: string;
+}
+export interface Feature {
+  icon?: keyof typeof Icons;
+  title: string;
+  description?: string;
 }

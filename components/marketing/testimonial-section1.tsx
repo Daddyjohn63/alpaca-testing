@@ -1,20 +1,30 @@
 import { testimonials1 } from "@/constants/testimonials"
+import { type Testimonial } from "@/types";
 import { SectionWrapper, SectionContainer, SectionColumn} from "@/components/uiAlpaca/section-wrapper";
+import Image from "next/image";
 
-export function TestimonialSection1({className}: {className?:string}) {
+export function TestimonialSection1({data}: {data: Testimonial[]}) {
   return (
-    <SectionWrapper className="py-5">
+    <SectionWrapper className="pt-8 pb-5">
       <SectionContainer>
-        <SectionColumn className="text-center">
+        <SectionColumn>
           <ul className="sm:grid md:grid-cols-3 md:gap-10">
-            {!!testimonials1 && testimonials1.map((testimonial, i) => {
+            {!!data && data.map((testimonial, i) => {
               return (
                 <li key={i} className="flex gap-3 my-5 sm:my-3">
-                  <div>
-                    <div className="w-10 h-10 rounded-full border-2 border-foreground bg-muted bg-cover aspect-ratio" style={{backgroundImage: `url(/${testimonial.image})`}}></div>
+                  <div className="flex-shrink-0">
+                    {!!testimonial.image && (
+                      <Image 
+                        src={testimonial.image}
+                        alt={testimonial.name || 'testimonial'}
+                        className="rounded-full border-2 border-foreground bg-muted bg-cover aspect-ratio"
+                        width={50}
+                        height={50}
+                      />
+                    )}
                   </div>
                   <div>
-                    <div className="mb-2 italic">{testimonial.review}</div>
+                    <div className="mb-2 italic">"{testimonial.review}"</div>
                     <div className="text-sm"><strong>{testimonial.name}</strong> | {testimonial.handle}</div>
                     <div className="text-xs">{testimonial.stars}</div>
                   </div>

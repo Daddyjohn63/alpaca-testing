@@ -1,6 +1,6 @@
-import { type BenefitsArray } from "@/types"
+import { type Benefit } from "@/types"
 
-export const benefits: BenefitsArray[] = [
+export const benefits: Benefit[] = [
   {
     icon: "timer",
     title: 'Enhanced Efficiency',

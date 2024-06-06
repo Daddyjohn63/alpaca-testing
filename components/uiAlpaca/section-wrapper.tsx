@@ -18,13 +18,26 @@ export const SectionOverlay = ({className}: {className?: string}) => {
 
 export function SectionContainer({className, children}: {className?: string, children?: React.ReactNode}) {
   return (
-    <div className={`${cn("container relative z-50", className)}`}>{children}</div>
+    <div className={`${cn("container space-y-2 relative z-50", className)}`}>{children}</div>
+  )
+}
+
+export function SectionRow({className, children}: {className?: string, children: React.ReactNode}) {
+  return (
+    <div className={`${cn("flex flex-col sm:flex-row gap-10", className)}`}>{children}</div>
   )
 }
 
 export function SectionColumn({className, children}: {className?: string, children: React.ReactNode}) {
   return (
-    <div className={`${cn("space-y-5", className)}`}>{children}</div>
+    <div className={`${cn("space-y-5 sm:flex-1", className)}`}>{children}</div>
+  )
+}
+
+
+export function SectionHeader({className, children}: {className?: string, children: React.ReactNode}) {
+  return (
+    <div className={`${cn("pb-10 space-y-3", className)}`}>{children}</div>
   )
 }
 

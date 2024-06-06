@@ -1,5 +1,10 @@
 import {
   Home,
+  FileCode,
+  Database,
+  ShoppingCart,
+  Mail,
+  FileImage,
   LayoutDashboard,
   Check,
   Palette,
@@ -26,6 +31,11 @@ export type Icon = LucideIcon;
 
 export const Icons = {
   home: Home,
+  fileCode: FileCode,
+  database: Database,
+  shoppingCart: ShoppingCart,
+  mail: Mail,
+  fileImage: FileImage,
   coins: Coins,
   megaphone: Megaphone,
   timer: TimerReset,
