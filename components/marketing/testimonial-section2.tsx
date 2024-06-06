@@ -1,107 +1,17 @@
-import { cn } from "@/lib/utils"
 import { SectionTitle } from "@/components/section-title"
+import { Section, SectionHeader, SectionTitle2, SectionDescription, SectionContent} from "@/components/uiAlpaca/section"
+import { testimonialsData2 } from "@/constants/testimonials"
 
-
-const testimonials = [
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-  {
-    name: "Marty McFly",
-    handle: "@martymcfly",
-    image: "testimonial-marty.jpg",
-    review: "Since I started using [Product/Service], I've noticed a significant improvement in [specific problem area].",
-    stars: "⭐⭐⭐⭐⭐",
-  },
-]
-
-
-export function TestimonialSection2({className}: {className?:string}) {
+export function TestimonialSection2() {
   return (
-    <section id="testimonials2-section" className={cn(className)}>
-      <div className="container">
-
-        <SectionTitle 
-          title="Testimonials"
-          subtitle="Hear from customer who have transformed their lives with [your product/busines]."
-          className="text-center"
-        />
+    <Section> 
+      <SectionHeader>
+        <SectionTitle2>Testimonials</SectionTitle2>
+        <SectionDescription>Hear from customer who have transformed their lives with [your product/busines].</SectionDescription>
+        </SectionHeader>
+      <SectionContent>
         <ul className="sm:columns-2 md:columns-3 gap-5">
-          {!!testimonials && testimonials.map((testimonial, i) => {
+          {!!testimonialsData2 && testimonialsData2.map((testimonial, i) => {
             return (
               <li key={i} className="break-inside-avoid mb-5">
                 <div className="bg-muted p-5 rounded-sm">
@@ -119,7 +29,7 @@ export function TestimonialSection2({className}: {className?:string}) {
             )
           })} 
         </ul>
-      </div>
-    </section>
+        </SectionContent>
+    </Section>
   )
 }

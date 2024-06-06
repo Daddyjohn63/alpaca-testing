@@ -1,15 +1,16 @@
-import { testimonials1 } from "@/constants/testimonials"
+import { testimonialsData1 } from "@/constants/testimonials"
 import { type Testimonial } from "@/types";
-import { SectionWrapper, SectionContainer, SectionColumn} from "@/components/uiAlpaca/section-wrapper";
+import { Section, SectionContent} from "@/components/uiAlpaca/section"
 import Image from "next/image";
 
-export function TestimonialSection1({data}: {data: Testimonial[]}) {
+export function TestimonialSection1({data}: {data?: Testimonial[]}) {
+
+  const testimonials: Testimonial[] = data || testimonialsData1
   return (
-    <SectionWrapper className="pt-8 pb-5">
-      <SectionContainer>
-        <SectionColumn>
+    <Section className="bg-slate-400">
+        <SectionContent>
           <ul className="sm:grid md:grid-cols-3 md:gap-10">
-            {!!data && data.map((testimonial, i) => {
+            {!!testimonials && testimonials.map((testimonial, i) => {
               return (
                 <li key={i} className="flex gap-3 my-5 sm:my-3">
                   <div className="flex-shrink-0">
@@ -32,9 +33,8 @@ export function TestimonialSection1({data}: {data: Testimonial[]}) {
               )
             })} 
           </ul>
-        </SectionColumn>
-      </SectionContainer>
-    </SectionWrapper>
+        </SectionContent>
+    </Section>
 
   )
 }

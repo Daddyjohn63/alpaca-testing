@@ -1,5 +1,5 @@
 import { type Feature } from "@/types"
-export const featureSet1: Feature[] = [
+export const featuresData1: Feature[] = [
 
   {
     icon: "fileImage",
@@ -18,7 +18,7 @@ export const featureSet1: Feature[] = [
   },
 
 ]
-export const featureSet2: Feature[] = [
+export const featuresData2: Feature[] = [
 
   {
     icon: "shoppingCart",

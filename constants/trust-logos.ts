@@ -1,4 +1,4 @@
-export const trustLogos = [
+export const trustLogosData1 = [
   {
     name: 'Facebook',
     imageUrl: '/facebook-logo.svg',
