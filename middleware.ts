@@ -13,8 +13,6 @@ export default auth((req) => {
   const isUnderConstruction = siteConfig.isUnderConstruction;
   const defaultLoginRedirect = siteConfig.routes.defaultLoginRedirect;
 
-  const isStagingEnv = process.env.STAGING_ENV === 'true'
-
   const isApiAuthRoute = nextUrl.pathname.startsWith(siteConfig.routes.apiAuthPrefix);
   const isPublicRoute = siteConfig.routes.publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith('/blog');
   const isAuthRoute = siteConfig.routes.authRoutes.includes(nextUrl.pathname);
@@ -34,12 +32,6 @@ export default auth((req) => {
     return null
   }
 
-  // If staging environment and is NOT logged in. 
-  if(isStagingEnv){
-    if(!isLoggedIn){
-      return Response.redirect(new URL(`/login`, nextUrl));
-    }
-  }
 
   if(isUnderConstruction) {
       return null

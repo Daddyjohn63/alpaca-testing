@@ -3,23 +3,23 @@ import type { MetadataRoute } from 'next'
 export default function robots(): MetadataRoute.Robots {
 
   const domain = process.env.NEXT_PUBLIC_PRIMARY_DOMAIN
-  const isStagingSite = process.env.STAGING_ENV
+  const isProduction = process.env.NODE_ENV === "production"
 
   let rules = []
 
-  if(isStagingSite){
+  if(isProduction){
     rules = [
       {
         userAgent: '*',
-        disallow: ['/'],
+        allow: ['/'],
+        disallow: ['/dashboard', '/admin'],
       },
     ]
   } else {
     rules = [
       {
         userAgent: '*',
-        allow: ['/'],
-        disallow: ['/dashboard', '/admin'],
+        disallow: ['/'],
       },
     ]
   }

@@ -11,12 +11,7 @@ export const metadata = getSEOMetadata()
 const MarketingLayout = async ({ children }: { children: React.ReactNode }) => {
 
   const role = await currentRole()
-  const isStagingEnv = process.env.STAGING_ENV === 'true'
   const isUnderConstruction = siteConfig.isUnderConstruction
-
-  if(isStagingEnv && role !== 'ADMIN') {
-    return notFound()
-  }
 
   if(isUnderConstruction && role !== 'ADMIN') {
    redirect('/under-construction') 

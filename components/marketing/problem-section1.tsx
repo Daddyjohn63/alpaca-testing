@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Section, SectionTitle2, SectionDescription, SectionContent} from "@/components/uiAlpaca/section"
 
-export function IntroSection1() {
+export function ProblemSection1() {
   return (
     <Section className="text-center md:text-left">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
