@@ -35,7 +35,8 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - [X] Refactor categories add / edit forms
 - [X] Refactor update media pages / components
 - [X] Fix post add / edit forms
-- [ ] Refactor marketing components
+- [X] Refactor marketing components
+- [ ] Fix password reset form. 
 - [ ] Fix dynamic table data rendering
 - [ ] Add category titles to cat table
 - [ ] Add status to categories
