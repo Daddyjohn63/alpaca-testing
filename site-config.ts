@@ -43,10 +43,10 @@ export const siteConfig = {
   stripe: {
     plans: [
       {
-        priceId: process.env.NODE_ENV === "development" ? "price_1234" : "price_5678",
+        priceId: process.env.NODE_ENV === "production" ? "price_1234" : "price_5678",
         mode: 'payment', //subscription | payment
         name: "Basic Package",
-        successRedirect: "/order-confirmed",
+        successRedirect: `${process.env.NEXT_PUBLIC_PRIMARY_DOMAIN}/order-complete`,
         isFeatured: false,
         description: "Perfect for small teams",
         price: 49,
@@ -91,10 +91,10 @@ export const siteConfig = {
         ],
       },
       {
-        priceId: process.env.NODE_ENV === "development" ? "price_1234" : "price_5678",
+        priceId: process.env.NODE_ENV === "production" ? "price_1234" : "price_1PHV1iGVfP1i6nIpMpZJiXOo",
         mode: 'payment', //subscription | payment
         name: "Pro Package",
-        successRedirect: "/order-confirmed",
+        successRedirect: `${process.env.NEXT_PUBLIC_PRIMARY_DOMAIN}/order-complete`,
         isFeatured: true,
         description: "You need more power",
         price: 99,

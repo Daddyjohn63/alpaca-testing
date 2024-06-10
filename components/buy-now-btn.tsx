@@ -12,7 +12,6 @@ import {
 import { LoginForm } from "./auth/login-form"
 import { RegisterForm } from "./auth/register-form"
 import Social from "./auth/social";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { useState } from "react";
 import { FormError } from "./form-error"
 
@@ -21,15 +20,15 @@ interface BuyNowBtnProps {
   priceId: string;
   mode: string;
   successRedirect: string;
+  user: any;
 }
 
 export const BuyNowBtn = (props: BuyNowBtnProps) => {
 
-  const user = useCurrentUser()
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [error, setError] = useState<string | undefined>()
 
-  const {btnText, priceId, mode, successRedirect} = props;
+  const {user, btnText, priceId, mode, successRedirect} = props;
 
   const createCheckout = async () => {
 

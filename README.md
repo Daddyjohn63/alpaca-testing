@@ -38,8 +38,8 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - [X] Refactor marketing components
 - [X] Fix password reset form. 
 - [X] Fix purchase funnel
+- [X] Fix caching issue for stripe checkout buy now button
 - [ ] Fix dynamic table data rendering in Admin
-- [ ] Fix cashing for stripe checkout buy now button
 - [ ] Add category titles to cat table
 - [ ] Add status to categories
 - [ ] Add email templates

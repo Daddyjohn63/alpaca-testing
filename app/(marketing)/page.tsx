@@ -9,8 +9,6 @@ import { TestimonialSection2 } from "@/components/marketing/testimonial-section2
 import { PricingSection1 } from "@/components/marketing/pricing-section1";
 import { FAQSection1 } from "@/components/marketing/faq-section1";
 
-
-
 const Home = async () => {
 
   return (
@@ -24,8 +22,6 @@ const Home = async () => {
       <TestimonialSection2 />
       <PricingSection1 />
       <FAQSection1 />
-
-
     </main>
   );
 }
