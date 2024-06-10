@@ -51,12 +51,6 @@ export const NewPasswordForm = () => {
   };
 
   return (
-    <CardWrapper
-      title="Reset Password"
-      subtitle="Enter a new password"
-      backButtonLabel="Back to login"
-      backButtonHref="/login"
-    >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -85,6 +79,5 @@ export const NewPasswordForm = () => {
           </Button>
         </form>
       </Form>
-    </CardWrapper>
   );
 };

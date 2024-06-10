@@ -36,11 +36,12 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - [X] Refactor update media pages / components
 - [X] Fix post add / edit forms
 - [X] Refactor marketing components
-- [ ] Fix password reset form. 
-- [ ] Fix dynamic table data rendering
+- [X] Fix password reset form. 
+- [X] Fix purchase funnel
+- [ ] Fix dynamic table data rendering in Admin
+- [ ] Fix cashing for stripe checkout buy now button
 - [ ] Add category titles to cat table
 - [ ] Add status to categories
-- [ ] Fix purchase funnel
 - [ ] Add email templates
 - [ ] Add product confirmation email tempaltes
 - [ ] Add Error Handling / logging

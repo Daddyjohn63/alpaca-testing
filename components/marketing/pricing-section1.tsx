@@ -17,14 +17,7 @@ export const PricingSection1 = () => {
             {!!plans && plans.map((plan, i) => {
               return (
                 <li key={i}>
-                  <PricingCard
-                    name={plan.name}
-                    price={plan.price}
-                    mode={plan.mode}
-                    features={plan.features}
-                    priceId={plan.priceId}
-                    isFeatured={plan.isFeatured}
-                  />
+                  <PricingCard data={plan}/>
                 </li>
               )
             })}

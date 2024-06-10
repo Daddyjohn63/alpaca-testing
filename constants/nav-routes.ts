@@ -48,16 +48,16 @@ export const marketingNavItems: NavItems[] = [
         ]
     },
     {
-        text: "Pricing",
-        href: "/#pricing-section",
+        text: "Blog",
+        href: "/blog",
     },
     {
         text: "Reviews",
         href: "/#testimonials2-section",
     },
     {
-        text: "Blog",
-        href: "/blog",
+        text: "Pricing",
+        href: "/#pricing-section",
     },
 ];
 

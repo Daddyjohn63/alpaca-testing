@@ -46,6 +46,7 @@ export const siteConfig = {
         priceId: process.env.NODE_ENV === "development" ? "price_1234" : "price_5678",
         mode: 'payment', //subscription | payment
         name: "Basic Package",
+        successRedirect: "/order-confirmed",
         isFeatured: false,
         description: "Perfect for small teams",
         price: 49,
@@ -92,8 +93,9 @@ export const siteConfig = {
       {
         priceId: process.env.NODE_ENV === "development" ? "price_1234" : "price_5678",
         mode: 'payment', //subscription | payment
-        isFeatured: true,
         name: "Pro Package",
+        successRedirect: "/order-confirmed",
+        isFeatured: true,
         description: "You need more power",
         price: 99,
         priceAnchor: 299,

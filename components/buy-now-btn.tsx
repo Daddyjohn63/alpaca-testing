@@ -14,21 +14,26 @@ import { RegisterForm } from "./auth/register-form"
 import Social from "./auth/social";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useState } from "react";
+import { FormError } from "./form-error"
 
 interface BuyNowBtnProps {
   btnText: string;
   priceId: string;
   mode: string;
+  successRedirect: string;
 }
 
 export const BuyNowBtn = (props: BuyNowBtnProps) => {
 
   const user = useCurrentUser()
   const [showLoginForm, setShowLoginForm] = useState(false)
+  const [error, setError] = useState<string | undefined>()
 
-  const {btnText, priceId, mode} = props;
+  const {btnText, priceId, mode, successRedirect} = props;
 
   const createCheckout = async () => {
+
+    setError(undefined)
 
     const res = await fetch('/api/stripe/create-checkout', {
       method: 'POST',
@@ -38,7 +43,7 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
       body: JSON.stringify({
         priceId: priceId,
         mode: mode,
-        successUrl: window.location.href,
+        successUrl: successRedirect,
         cancelUrl: window.location.href,
       })
     })
@@ -51,6 +56,7 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
     const data = await res.json()
 
     if(data.error) {
+      setError("Something went wrong, contact support!")
       console.log(data.error)
       return
     }
@@ -61,12 +67,15 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
   return (
     <div>
       {!!user ? (
-        <Button 
-          className="w-full bg-primary text-primary-foreground"
-          onClick={createCheckout}
-        >
-          Get {btnText}
-        </Button>
+        <div>
+          <FormError message={error} />
+          <Button 
+            className="w-full bg-primary text-primary-foreground"
+            onClick={createCheckout}
+          >
+            Get {btnText}
+          </Button>
+        </div>
       ): (
           <Dialog>
             <DialogTrigger asChild>
