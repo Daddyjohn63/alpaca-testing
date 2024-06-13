@@ -13,7 +13,6 @@ const Home = async () => {
 
   return (
     <main> 
-      Hi
       <HeroSection2 />
       <TrustLogosSection1 />
       <TestimonialSection1 />
