@@ -49,3 +49,8 @@ export interface Feature {
   title: string;
   description?: string;
 }
+
+export interface TrustLogo {
+   name?: string; 
+  imageUrl: string;
+}

@@ -11,7 +11,7 @@ import { PageHeroSection } from "@/components/marketing/page-hero-section"
 // Scenario: You are an experienced legal consultant.
 
 // I need your assistance to create a clear privacy policy for my website. Please include the necessary information:
-// - Website URL: https://alpacastack.com
+// - Website URL: https://yourwebsite.com
 // - Business Name: Alpaca Stack
 // - Description: Alpaca Stack is a React/NextJs template designed to get you started blazingly fast, allowing you to zero in on what truly matters: building your product and accelerating your path to profits.
 // - Types of Personal Data Collected: User names, email addresses, and payment details
@@ -20,7 +20,7 @@ import { PageHeroSection } from "@/components/marketing/page-hero-section"
 // - Data Confidentiality: We ensure that personal data is not shared with third parties
 // - Policy Regarding Children’s Privacy: We do not knowingly collect data from persons under the age of 13
 // - Updates to the Privacy Policy: Changes will be communicated to users via email
-// - Contact for Privacy Concerns: privacy@mooremediallc.com
+// - Contact for Privacy Concerns: privacy@yourwebsite.com
 
 // Please draft a direct privacy policy with the above details, including the current date. Do not provide explanations. Response:
 

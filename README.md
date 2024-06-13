@@ -18,36 +18,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## TODOS
-
-- [X] Add Stripe Integration
-- [X] Add dashboard configurations
-- [X] Fix session render on init load
-- [X] Add Reviews Component
-- [X] Add FAQ Component
-- [X] Add SEO metadata
-- [X] Add dynamic robots.txt
-- [X] Add GPT API Lib
-- [X] Add Lead magnet
-- [X] Fix lightmode colors
-- [X] Add sitemap / dynamic robots
-- [X] Add features2 section
-- [X] Refactor categories add / edit forms
-- [X] Refactor update media pages / components
-- [X] Fix post add / edit forms
-- [X] Refactor marketing components
-- [X] Fix password reset form. 
-- [X] Fix purchase funnel
-- [X] Fix caching issue for stripe checkout buy now button
-- [ ] Fix dynamic table data rendering in Admin
-- [ ] Add category titles to cat table
-- [ ] Add status to categories
-- [ ] Add email templates
-- [ ] Add product confirmation email tempaltes
-- [ ] Add Error Handling / logging
-- [ ] Refactor clean up code
-
-
 
 
 

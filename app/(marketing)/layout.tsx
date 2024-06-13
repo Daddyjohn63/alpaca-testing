@@ -2,7 +2,6 @@ import { MarketingHeader } from "@/components/marketing/header-section";
 import { MarketingFooter } from "@/components/marketing/footer-section";
 import { redirect } from "next/navigation";
 import { currentRole } from "@/lib/auth";
-import { notFound } from "next/navigation";
 import { siteConfig } from "@/site-config";
 import { getSEOMetadata } from "@/lib/seo";
 

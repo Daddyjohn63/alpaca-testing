@@ -23,9 +23,9 @@ export const getSEOMetadata = ({
         keywords: keywords || siteConfig.keywords,
         applicationName: siteConfig.appName,
         metadataBase: new URL(
-            process.env.NODE_ENV === "development"
-                ? "http://localhost:3000/"
-                : `https://${siteConfig.primaryDomain}/`
+            process.env.NODE_ENV === "production"
+                ? `https://${siteConfig.primaryDomain}/`
+                : "http://localhost:3000/"
         ),
 
 

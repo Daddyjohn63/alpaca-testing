@@ -8,12 +8,12 @@ import { PageHeroSection } from "@/components/marketing/page-hero-section"
 // 3. Adjust the details to reflect your specific requirements
 // 4. Take the generated response from ChatGPT and place it into the <pre> tag shown below
 
-// You are an experienced legal professional.
+// Scenario: You are an experienced legal professional.
 
 // I require your expertise to draft straightforward Terms of Service for my website. Below is some essential information:
-// - Website: https://alpacastack.com
+// - Website: https://yourwebsite.com
 // - Name: Alpaca Stack
-// - Contact Email: support@mooremediallc.com
+// - Contact Email: support@yourwebsite.com
 // - Description: Alpaca Stack is a React/NextJs template designed to get you started blazingly fast, allowing you to zero in on what truly matters: building your product and accelerating your path to profits.
 // - Ownership Rights: Customers can download and use the modules for their projects. Reselling the modules is prohibited. Customers may receive a full refund within the first 7 days of purchase.
 // - Data Collected: User's name, email, and transaction details
