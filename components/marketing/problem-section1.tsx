@@ -10,7 +10,7 @@ export function ProblemSection1() {
         </SectionContent>
         <SectionContent className="my-auto">
             <SectionTitle2>Unlock Efficiency: Streamline Your Workflow with [Product Name]</SectionTitle2>
-            <SectionDescription className="pb-3">The intro section of your landing page should quickly outline your product's core value and its target audience. It expands on the hero section by highlighting key differentiators and how the product solves specific problems. Engaging language and a compelling graphic can effectively draw the reader in to explore more details in subsequent sections.</SectionDescription>
+            <SectionDescription className="pb-3">The intro section of your landing page should quickly outline your product&apos;s core value and its target audience. It expands on the hero section by highlighting key differentiators and how the product solves specific problems. Engaging language and a compelling graphic can effectively draw the reader in to explore more details in subsequent sections.</SectionDescription>
         </SectionContent>
       </div>
     </Section>

@@ -1,7 +1,7 @@
 "use client";
 import { Textarea } from "@/components/ui/textarea"
 import { updateCategory} from "@/actions/category/update-category";
-import { useState, useEffect, useTransition, ChangeEvent } from "react";
+import { useState, useEffect, useTransition} from "react";
 import { Card } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
 import * as z from "zod";
@@ -71,7 +71,7 @@ export const UpdateCategoryForm = (props: AddCategoryFormProps) => {
       const urlFriendlySlug = kebabCase(watchName)
       form.setValue("slug", urlFriendlySlug)
     }
-  }, [watchName, form, editSlug]);
+  }, [watchName, form, editSlug, status]);
 
   //If post slug already exists, then set edit slug to false and disable auto creation. 
   useEffect(() => {

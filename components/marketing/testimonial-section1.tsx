@@ -25,7 +25,7 @@ export function TestimonialSection1({data}: {data?: Testimonial[]}) {
                     )}
                   </div>
                   <div>
-                    <div className="mb-2 italic">"{testimonial.review}"</div>
+                    <div className="mb-2 italic">&quot;{testimonial.review}&quot;</div>
                     <div className="text-sm"><strong>{testimonial.name}</strong> | {testimonial.handle}</div>
                     <div className="text-xs">{testimonial.stars}</div>
                   </div>

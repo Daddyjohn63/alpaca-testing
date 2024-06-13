@@ -135,7 +135,7 @@ export const UpdatePostForm = (props: UpdatePostFormProps) => {
       form.setValue("slug", postData.slug)
     }
 
-  },[form, postData])
+  },[form, postData, bucketUrl, status])
 
   useEffect(() => {
     // Enable auto slug creation and editing if edit slug is turned on (true)
