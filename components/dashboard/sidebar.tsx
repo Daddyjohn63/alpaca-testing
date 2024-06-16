@@ -1,6 +1,6 @@
 import { Logo } from "@/components/logo";
 import { dashboardNavItems } from "@/constants/nav-routes";
-import { CTACard } from "@/components/cta-card";
+import { CTACard } from "@/components/marketing/cta-card";
 import { currentAccess } from "@/lib/auth";
 import { DashboardSidebarNav } from "./sidebar-nav";
 
@@ -17,7 +17,7 @@ export async function DashboardSidebar() {
         <DashboardSidebarNav data={dashboardNavItems} hasAccess={hasAccess}  />
         {!hasAccess && (
           <CTACard 
-            image="cta-img.jpg"
+            image="https://place-hold.it/300x200"
             title="Upgrade Right Now!" 
             description="Upgrade to a premium account and get full access to all features."
             btnText="Upgrade Now!" 

@@ -1,46 +1,21 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
+import Image from "next/image"
+import { Section, SectionTitle2, SectionDescription, SectionContent} from "@/components/uiAlpaca/section"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-export function CTASection1({children, className, backgroundImg}: {children: React.ReactNode, className: string, backgroundImg?: string}) {
-
+export function CTASection1() {
   return (
-    <section className={`${cn(className)} relative bg-cover bg-center bg-no-repeat`} style={{backgroundImage: backgroundImg ? `url('${backgroundImg}')` : undefined}}>
-      <div className="container">
-        {children}
+    <Section className="bg-foreground text-background text-center md:text-left">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-y-5 md:gap-20">
+        <SectionContent className="col-span-2 my-auto">
+          <Image src="https://place-hold.it/500x500" alt="hero image" width={500} height={500} className="rounded-md mx-auto" />
+        </SectionContent>
+        <SectionContent className="col-span-3 my-auto">
+            <SectionTitle2>Streamline Your Workflow with Our Product Today!</SectionTitle2>
+            <SectionDescription className="pb-3">Unlock exclusive savings with your purchase today. Act now—this special offer ends soon!</SectionDescription>
+          <Button variant="outline" className="border-background bg-foreground hover:bg-background hover:text-foreground" asChild><Link href="/#pricing-section">Get Access Now!</Link></Button>
+        </SectionContent>
       </div>
-    </section>
-  )
-}
-
-export function CTA2Cols({className, children}: {className?: string, children: React.ReactNode}) {
-  return (
-    <div className={`relative z-50 grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-14 ${cn(className)}`}>{children}</div>
-  )
-}
-
-export function CTACol({className, children}: {className?: string, children: React.ReactNode}) {
-  return (
-    <div className={`space-y-5 flex flex-col items-center ${cn(className)}`}>{children}</div>
-  )
-}
-
-
-export function CTATitle({className, children}: {className?: string, children: React.ReactNode}) {
-  return (
-    <h1 className={`text-4xl md:text-5xl font-black ${cn(className)}`}>{children}</h1>
-  )
-}
-
-export function CTADescription({className, children}: {className?: string, children: React.ReactNode}) {
-  return (
-    <p className={`text-lg ${cn(className)}`}>{children}</p>
-  )
-}
-
-export function CTABtnGroup({className, children}: {className?: string, children: React.ReactNode}) {
-  return (
-    <div className={`w-full flex flex-wrap gap-4 ${cn(className)}`}>{children}</div>
+    </Section>
   )
 }

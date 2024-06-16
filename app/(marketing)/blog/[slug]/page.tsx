@@ -1,10 +1,11 @@
 import { db } from "@/lib/db"
 import { PageHeroSection } from "@/components/marketing/page-hero-section"
 import { notFound } from "next/navigation";
-import { CTACard } from "@/components/cta-card";
+import { CTACard } from "@/components/marketing/cta-card";
 import { siteConfig } from "@/site-config";
 import { getSEOMetadata } from "@/lib/seo";
 import { Metadata } from "next";
+import { CTASection1 } from "@/components/marketing/cta-section1";
 
 type Props = {
   params: {slug: string};
@@ -91,13 +92,14 @@ const PostPage = async({params}: Props) => {
         </article>
         <aside className="md:col-span-2 self-start sticky top-2">
           <CTACard 
-            image="cta-img.jpg"
+            image="https://place-hold.it/300x200"
             title="Download [Product] Now!" 
             description="Download [Product] today and be awesome in every way!"
-            btnText="Download Now!" 
+            btnText="Get Access Now!" 
             btnHref="/#pricing-section"/>
         </aside>
       </div>
+      <CTASection1 />
     </div>
   )
 }
