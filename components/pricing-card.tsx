@@ -1,24 +1,11 @@
 import { CheckCircle, XCircle } from "lucide-react"
 import { BuyNowBtn } from "@/components/buy-now-btn"
 import { currentUser } from "@/lib/auth"
+import { Plan } from "@/types"
 
-type Feature = {
-  name: string,
-  included: boolean    
-}
-type Plan = {
-  name: string;
-  price: number;
-  features: Feature[];
-  isFeatured?: boolean;
-  priceId: string;
-  mode: string;
-  successRedirect: string;
-}
+export async function PricingCard({plan}: {plan: Plan}) {
 
-export async function PricingCard({data}: {data: Plan}) {
-
-  const {name, price, features, isFeatured, priceId, mode, successRedirect} = data
+  const {name, price, features, isFeatured} = plan;
 
   const user = await currentUser()
 
@@ -39,7 +26,7 @@ export async function PricingCard({data}: {data: Plan}) {
         })}
       </ul>
       <div className="space-y-4">
-          <BuyNowBtn user={user} plan={data} /> 
+          <BuyNowBtn user={user} plan={plan} /> 
       </div>
     </div>
     </div>

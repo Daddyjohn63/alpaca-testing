@@ -19,7 +19,7 @@ export const featuresData1: FeatureData[] = [
   },
 
 ]
-export const featuresData2: Feature[] = [
+export const featuresData2: FeatureData[] = [
 
   {
     icon: "shoppingCart",

@@ -77,7 +77,6 @@ export async function POST(req: NextRequest) {
         })
         
         //Send email after successful purchase. 
-        console.log("Purchase Successful!")
 
         break;
       }
@@ -164,7 +163,7 @@ export async function POST(req: NextRequest) {
       default:
     }
 
-    // return NextResponse.json({status: "Success", event: event.type});
+    return NextResponse.json({status: "Success", event: event.type});
 
   }
   catch(e) {

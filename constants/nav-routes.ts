@@ -1,6 +1,9 @@
 import { NavItems } from "@/types";
 
 //User Nav component navigation items
+//
+//The /admin route is baked into the component and only availabe to users with admin role
+//which can be changed in the database
 export const userNavItems: NavItems[] = [
     {
         text: "Dashboard",
@@ -43,8 +46,14 @@ export const marketingNavItems: NavItems[] = [
             {
                 title: "Under Construction Page",
                 text: "Must change the setting in siteConfig to view this page.",
-                href: "#"
+                href: "/under-construction"
             },
+            {
+                title: "Order Completed",
+                text: "This page shows after a user has purchased. With no id in searchParams it will show not found page",
+                href: "/order-completed"
+            },
+
         ]
     },
     {

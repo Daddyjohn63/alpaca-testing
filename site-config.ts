@@ -1,4 +1,6 @@
-export const siteConfig = {
+import { SiteConfig } from "./types"
+
+export const siteConfig: SiteConfig = {
   appName: "Alpacastack",
   appDescription: "Founded in [Year], [Company Name] is dedicated to [briefly state your mission or core offering, such as 'delivering innovative tech solutions' or 'enhancing everyday experiences with advanced digital tools'].", //Shown in footer
   keywords: ['Next.js', 'React', 'JavaScript'],
@@ -14,6 +16,8 @@ export const siteConfig = {
     //Every route is prive by default, add a route here to make public. 
     publicRoutes: [
       "/api/webhook/stripe",
+      "/api/stripe/create-checkout",
+      "/order-complete",
       "/new-verification",
       "/contact-us",
       "/demo",
@@ -39,6 +43,7 @@ export const siteConfig = {
     // If you use AWS S3/Cloudfront, put values in here
     bucket: "alpacastack-template-post-images",
     bucketUrl: "https://f005.backblazeb2.com/file/alpacastack-template-post-images",
+    cdn: "",
   },
   stripe: {
     plans: [

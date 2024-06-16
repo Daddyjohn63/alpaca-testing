@@ -26,13 +26,11 @@ interface Feature {
   included: boolean;
 }
 
-
 export interface Plan {
   priceId: string;
   mode: 'payment' | 'subscription';
   isFeatured: boolean;
   name: string;
-  githubRepoName: string;
   successRedirect: string;
   description: string;
   price: number;
@@ -101,6 +99,12 @@ export interface Testimonial {
   handle?: string;
   image?: string;
   stars?: string;
+}
+
+export interface FeatureData {
+  icon?: keyof typeof Icons;
+  title: string;
+  description?: string;
 }
 
 export interface TrustLogo {
