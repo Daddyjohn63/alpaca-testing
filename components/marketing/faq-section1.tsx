@@ -10,7 +10,7 @@ import { faqData1 } from "@/constants/faqs"
 
 export function FAQSection1() {
   return (
-    <Section>
+    <Section id="faq-section">
       <SectionHeader>
         <SectionTitle2>Fequently Asked Questions</SectionTitle2>
         <SectionDescription>Find answers to your questions about using [Product / Service]</SectionDescription>
