@@ -63,7 +63,7 @@ export const updateCategory = async (values: Props) => {
 
   }
   catch(e) {
-    console.log(e)
+    console.error(e)
     return {error: "Something went wrong, could not add post!"}
   }
 }

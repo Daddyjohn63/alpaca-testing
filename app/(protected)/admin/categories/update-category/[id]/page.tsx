@@ -14,8 +14,6 @@ const EditCategoryPage = async({params, searchParams}: {params: Params, searchPa
   const {id} = params;
   const {status} = searchParams;
 
-  console.log(status)
-
   if(!id) {
     return notFound()
   }

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Icons } from "@/components/icons";
-import { type Feature } from "@/types";
 import { Section, SectionHeader, SectionTitle2, SectionDescription, SectionContent} from "@/components/uiAlpaca/section"
 import { featuresData1 } from "@/constants/features";
 

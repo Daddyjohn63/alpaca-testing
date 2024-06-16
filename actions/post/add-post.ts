@@ -85,7 +85,7 @@ export const addPost = async (values: Props) => {
     return {success: "Post had been successfully added!", data}
   }
   catch(e) {
-    console.log(e)
+    console.error(e)
     return {error: "Something went wrong, could not add post!"}
   }
 }

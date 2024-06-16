@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { stripe, createStripeCustomer } from "@/lib/stripe";
 import { getUserStripeCustomerId } from "@/data/user";
@@ -8,73 +7,101 @@ import { getUserStripeCustomerId } from "@/data/user";
 export async function POST(req: NextRequest) {
 
   const body = await req.json();
-  const {priceId, mode, successUrl, cancelUrl} = body;
-  const user = await currentUser()
+  const {userId, userName, userEmail, priceId, mode, successUrl, cancelUrl} = body;
 
-  if(!user) {
+  if(!userId){
+    console.error("Not Authorized")
     return NextResponse.json({error: "Not Authorized!"})
   }
   if(!priceId){
+
+    console.error("Price ID is required")
     return NextResponse.json({error: "Price ID is required"})
   }
   if(!mode) {
+    console.error("Mode is required")
     return NextResponse.json({error: "Mode is required"})
   }
   if(!successUrl) {
+    console.error("Success URL is required")
     return NextResponse.json({error: "Success URL is required"})
   }
   if(!cancelUrl) {
+    console.error("Cancel URL is required")
     return NextResponse.json({error: "Cancel URL is required"})
   } 
 
   try {
 
-    //Get stripeCustomerId from user table;
-    let stripeCustomerId = await getUserStripeCustomerId(user.id)
-    
-    //if user does not have a stripe customer Id. then we create one. 
-    if(!stripeCustomerId) {
+    if(!!userId) {
+      
+      //Get stripeCustomerId from user table;
+      let stripeCustomerId = await getUserStripeCustomerId(userId)
 
-      stripeCustomerId = await createStripeCustomer(user.name, user.email)
-
+      //if user does not have a stripe customer Id. then we create one. 
       if(!stripeCustomerId) {
-        throw new Error("Could not create stripe customer Id")
-      }
 
-      //Add stripe customerId to user in database
-      const userData = await db.user.update({
-        where: {
-          id: user.id
-        },
-        data: {
-          stripeCustomerId: stripeCustomerId
+        stripeCustomerId = await createStripeCustomer(userName, userEmail)
+
+        if(!stripeCustomerId) {
+          throw new Error("Could not create stripe customer Id")
         }
-      })
 
-      if(!userData || !userData.stripeCustomerId) {
-        throw Error()
+        //Add stripe customerId to user in database
+        const userData = await db.user.update({
+          where: {
+            id: userId
+          },
+          data: {
+            stripeCustomerId: stripeCustomerId
+          }
+        })
+
+        if(!userData || !userData.stripeCustomerId) {
+          throw Error()
+        }
+
       }
+
+      //This creates the stripe checkout url.
+      const stripeSession = await stripe.checkout.sessions.create({
+        customer: stripeCustomerId,
+        client_reference_id: userId,
+        mode: mode,
+        allow_promotion_codes: true,
+        line_items: [{price: priceId, quantity: 1,}],
+        customer_update: {address: "auto", name: "auto"},
+        billing_address_collection: 'auto',
+        payment_method_types: ['card'],
+        success_url: successUrl + `?id=${userId}`, //Passing id to determin if use has verified registration. 
+        cancel_url: cancelUrl,
+      });
+
+      return NextResponse.json({status: 200, url: stripeSession.url})
+
+    } else {
+
+      //This creates the checkout url where customer is created on checkout.
+      const stripeSession = await stripe.checkout.sessions.create({
+        customer_creation: "always",
+        customer_email: userEmail || '',
+        client_reference_id: userId,
+        mode: mode,
+        allow_promotion_codes: true,
+        line_items: [{price: priceId, quantity: 1,}],
+        billing_address_collection: 'auto',
+        payment_method_types: ['card'],
+        success_url: successUrl + `?id=${userId}`, //Passing id to determin if use has verified registration. 
+        cancel_url: cancelUrl,
+      });
+
+      return NextResponse.json({status: 200, url: stripeSession.url})
 
     }
 
-    //This creates the checkout url
-    const stripeSession = await stripe.checkout.sessions.create({
-      customer: stripeCustomerId,
-      client_reference_id: user.id,
-      mode: mode,
-      allow_promotion_codes: true,
-      line_items: [{price: priceId, quantity: 1,}],
-      customer_update: {address: "auto", name: "auto"},
-      billing_address_collection: 'auto',
-      payment_method_types: ['card'],
-      success_url: successUrl, //`${domainUrl}/payment/success`,
-      cancel_url: cancelUrl, //`${domainUrl}/payment/canceled`,
-    });
-
-    return NextResponse.json({status: 200, url: stripeSession.url})
   }
   catch(e) {
-    console.log(e)
+    console.error(e)
     return NextResponse.json({status: 500, error: e})
   }
 }

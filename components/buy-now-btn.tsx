@@ -15,20 +15,14 @@ import Social from "./auth/social";
 import { useState } from "react";
 import { FormError } from "./form-error"
 
-interface BuyNowBtnProps {
-  btnText: string;
-  priceId: string;
-  mode: string;
-  successRedirect: string;
-  user: any;
-}
+import { Plan } from "@/types"
 
-export const BuyNowBtn = (props: BuyNowBtnProps) => {
+export const BuyNowBtn = ({user, plan}: {user: any, plan: Plan}) => {
 
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [error, setError] = useState<string | undefined>()
 
-  const {user, btnText, priceId, mode, successRedirect} = props;
+  const {name, priceId, mode, successRedirect} = plan;
 
   const createCheckout = async () => {
 
@@ -40,15 +34,18 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
         'Content-type': 'json/application',
       },
       body: JSON.stringify({
+        userId: user.id,
+        userEmail: user.email || '',
+        userName: user.name,
         priceId: priceId,
         mode: mode,
-        successUrl: successRedirect,
+        successUrl: successRedirect || window.location.href,
         cancelUrl: window.location.href,
       })
     })
 
     if(!res.ok) {
-      console.log("something went wrong")
+      console.error("something went wrong")
       return
     }
 
@@ -56,7 +53,7 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
 
     if(data.error) {
       setError("Something went wrong, contact support!")
-      console.log(data.error)
+      console.error(data.error)
       return
     }
 
@@ -72,14 +69,14 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
             className="w-full bg-primary text-primary-foreground"
             onClick={createCheckout}
           >
-            Get {btnText}
+            Get {name}
           </Button>
         </div>
       ): (
           <Dialog>
             <DialogTrigger asChild>
               <Button className="w-full bg-primary text-primary-foreground" >
-                {btnText}
+                {name}
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] p-10">
@@ -89,7 +86,7 @@ export const BuyNowBtn = (props: BuyNowBtnProps) => {
                     <DialogTitle className="text-center text-2xl">Register Account First</DialogTitle>
                     <DialogDescription className="text-center text-foreground">Must be signed in first before purchasing product!</DialogDescription>
                   </DialogHeader>
-                  <RegisterForm />
+                  <RegisterForm plan={plan} />
                   <div className="flex items-center justify-center p-3">
                     <div className="flex-grow border-t border-muted-foreground"></div>
                     <span className="px-4 text-muted-foreground">or</span>

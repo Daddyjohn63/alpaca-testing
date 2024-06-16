@@ -19,6 +19,7 @@ type Plan = {
 export async function PricingCard({data}: {data: Plan}) {
 
   const {name, price, features, isFeatured, priceId, mode, successRedirect} = data
+
   const user = await currentUser()
 
   return (
@@ -38,7 +39,7 @@ export async function PricingCard({data}: {data: Plan}) {
         })}
       </ul>
       <div className="space-y-4">
-          <BuyNowBtn user={user} btnText={name} priceId={priceId} mode={mode} successRedirect={successRedirect} />
+          <BuyNowBtn user={user} plan={data} /> 
       </div>
     </div>
     </div>

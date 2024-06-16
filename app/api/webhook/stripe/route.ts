@@ -36,7 +36,6 @@ export async function POST(req: NextRequest) {
     switch (event.type) {
       case 'checkout.session.completed': {
 
-
         const checkoutObj = event.data.object;
         const sessionId = checkoutObj.id;
         const session = await getCheckoutSession(sessionId);
@@ -60,10 +59,10 @@ export async function POST(req: NextRequest) {
           break;
         }
 
-        //Get customer data to update email in database.
-        const stripeCustomerData = (await stripe.customers.retrieve(
-          customerId as string
-        )) as Stripe.Customer;
+        // // Incase you need more data. Get customer data to update email in database.
+        // const stripeCustomerData = (await stripe.customers.retrieve(
+        //   customerId as string
+        // )) as Stripe.Customer;
 
         //Update user in database and Allow access to product
         await db.user.update({
@@ -71,13 +70,14 @@ export async function POST(req: NextRequest) {
             id: clientReferenceId,
           },
           data: {
-            email: stripeCustomerData.email,
+            stripeCustomerId: customerId as string,
             stripePriceId: priceId,
             hasAccess: true,
           }
         })
-
+        
         //Send email after successful purchase. 
+        console.log("Purchase Successful!")
 
         break;
       }
@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
         const user = await findUserByStripeCustomerId(subscription.customer)
 
         if(!user) {
-          console.log("User not found.");
+          console.error("User not found.");
           break;
         }
 
@@ -133,7 +133,7 @@ export async function POST(req: NextRequest) {
         );
 
         if(subscription.customer) {
-          console.log("Could not find customer")
+          console.error("Could not find customer")
           break;
         }
 
@@ -164,11 +164,11 @@ export async function POST(req: NextRequest) {
       default:
     }
 
-    return NextResponse.json({status: "Success", event: event.type});
+    // return NextResponse.json({status: "Success", event: event.type});
 
   }
   catch(e) {
-    console.log(e)
+    console.error(e)
     return NextResponse.json({status: "Failed", e})
   }
 

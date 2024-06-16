@@ -50,7 +50,7 @@ export const getUserStripeCustomerId = async (id: string) => {
     return stripeCustomerId
 
   } catch(e) {
-    console.log(e)
+    console.error(e)
     return null
   }
 
@@ -73,7 +73,7 @@ export const findUserByStripeCustomerId = async (id: string | Stripe.Customer | 
     return data
 
   } catch(e) {
-    console.log(e)
+    console.error(e)
     return null
   }
 

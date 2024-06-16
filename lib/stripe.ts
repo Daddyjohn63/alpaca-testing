@@ -23,7 +23,7 @@ export const createStripeCustomer = async(name: string | null | undefined, email
         return stripeCustomerId
     } 
     catch(e) {
-        console.log(e)
+        console.error(e)
         return null
     }
 
@@ -40,7 +40,7 @@ export const getCheckoutSession = async(sessionId: string) => {
         return session;
 
     } catch(e) {
-        console.log(e)
+        console.error(e)
         return null
     }
 }

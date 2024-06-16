@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({success: "File uploaded to cloud storage!", uuidFilename})
 
   } catch(e) {
-    console.log(e)
+    console.error(e)
     return NextResponse.json({error: "File not upload, something went wrong!"})
   }
 }

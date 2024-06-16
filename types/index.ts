@@ -1,5 +1,63 @@
 import { Icons } from "@/components/icons";
 
+type ThemeOptions = 'light' | 'dark';
+type ConstructionOptions = boolean;
+
+interface EmailConfig {
+  testEmail: string;
+  authEmail: string;
+}
+
+interface RoutesConfig {
+  publicRoutes: string[];
+  authRoutes: string[];
+  apiAuthPrefix: string;
+  defaultLoginRedirect: string;
+}
+
+interface FileStorageConfig {
+  bucket: string;
+  bucketUrl: string;
+  cdn: string;
+}
+
+interface Feature {
+  name: string;
+  included: boolean;
+}
+
+
+export interface Plan {
+  priceId: string;
+  mode: 'payment' | 'subscription';
+  isFeatured: boolean;
+  name: string;
+  githubRepoName: string;
+  successRedirect: string;
+  description: string;
+  price: number;
+  priceAnchor: number;
+  features: Feature[];
+}
+
+interface StripeConfig {
+  plans: Plan[];
+}
+
+export interface SiteConfig {
+  appName: string;
+  appDescription: string;
+  keywords: string[];
+  primaryDomain: string;
+  isUnderConstruction: ConstructionOptions;
+  isBlogPublic: boolean;
+  themeColor: ThemeOptions;
+  email: EmailConfig;
+  routes: RoutesConfig;
+  fileStorage: FileStorageConfig;
+  stripe: StripeConfig;
+}
+
 export interface SubMenu {
   title: string;
   text: string;
@@ -43,11 +101,6 @@ export interface Testimonial {
   handle?: string;
   image?: string;
   stars?: string;
-}
-export interface Feature {
-  icon?: keyof typeof Icons;
-  title: string;
-  description?: string;
 }
 
 export interface TrustLogo {
