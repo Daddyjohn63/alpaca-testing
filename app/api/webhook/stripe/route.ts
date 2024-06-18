@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
           },
           data: {
             stripeCustomerId: customerId as string,
-            // stripePriceId: priceId,
+            stripePriceId: priceId,
             hasAccess: true
           }
         });
