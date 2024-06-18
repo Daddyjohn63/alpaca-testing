@@ -1,61 +1,60 @@
-import Stripe from "stripe";
-import { NextResponse, NextRequest} from 'next/server';
+import Stripe from 'stripe';
+import { NextResponse, NextRequest } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { db } from '@/lib/db';
 import { getCheckoutSession } from '@/lib/stripe';
 import { siteConfig } from '@/site-config';
-import { findUserByStripeCustomerId } from "@/data/user";
+import { findUserByStripeCustomerId } from '@/data/user';
 
 export async function POST(req: NextRequest) {
-
-  const payload = await req.text()
+  const payload = await req.text();
   // const response = JSON.parse(payload)
-  const sig = req.headers.get("Stripe-Signature")
+  const sig = req.headers.get('Stripe-Signature');
 
   // const dateTime = new Date(response?.created * 1000).toLocaleDateString()
   // const timeString = new Date(response?.created * 1000).toLocaleDateString()
 
   let event;
 
-  // Verify Stripe webhook. 
+  // Verify Stripe webhook.
   try {
     event = stripe.webhooks.constructEvent(
       payload,
       sig!,
       process.env.STRIPE_WEBHOOK_SECRET!
-    )
-  }
-  catch(error) {
-    return NextResponse.json({status: "Error"});
+    );
+  } catch (error) {
+    return NextResponse.json({ status: 'Error' });
   }
 
   try {
-
     //This is where all the magic happens.
     // Handle the event
     switch (event.type) {
       case 'checkout.session.completed': {
-
         const checkoutObj = event.data.object;
         const sessionId = checkoutObj.id;
         const session = await getCheckoutSession(sessionId);
+        //  console.log('checkout session:', session);
 
-        if(!session) {
+        if (!session) {
           break;
         }
 
         //Grab important data from customer session
         const customerId = session.customer;
         const clientReferenceId = session.client_reference_id;
-        let priceId: string | undefined
+        let priceId: string | undefined;
 
         if (session.line_items?.data[0]?.price) {
           priceId = session?.line_items?.data[0]?.price.id;
+          //  console.log('priceId:', priceId);
         }
 
-        const plan = siteConfig.stripe.plans.some((plan) => plan.priceId === priceId) 
+        const plan = siteConfig.stripe.plans.some(plan => plan.priceId === priceId);
+        // console.log('plan:', plan);
 
-        if(!plan || !clientReferenceId || !priceId) {
+        if (!plan || !clientReferenceId || !priceId) {
           break;
         }
 
@@ -67,16 +66,16 @@ export async function POST(req: NextRequest) {
         //Update user in database and Allow access to product
         await db.user.update({
           where: {
-            id: clientReferenceId,
+            id: clientReferenceId
           },
           data: {
             stripeCustomerId: customerId as string,
             stripePriceId: priceId,
-            hasAccess: true,
+            hasAccess: true
           }
-        })
-        
-        //Send email after successful purchase. 
+        });
+
+        //Send email after successful purchase.
 
         break;
       }
@@ -97,28 +96,27 @@ export async function POST(req: NextRequest) {
           customerDeletedSubscriptionObj.id
         );
 
-        const user = await findUserByStripeCustomerId(subscription.customer)
+        const user = await findUserByStripeCustomerId(subscription.customer);
 
-        if(!user) {
-          console.error("User not found.");
+        if (!user) {
+          console.error('User not found.');
           break;
         }
 
-        // Remove access from product. 
+        // Remove access from product.
         await db.user.update({
           where: {
             id: user.id
           },
           data: {
-            hasAccess: false,
+            hasAccess: false
           }
-        }) 
+        });
 
         break;
       }
 
       case 'customer.subscription.updated': {
-
         const customerSubscriptionUpdated = event.data.object;
         // Then define and call a function to handle the event customer.subscription.updated
         break;
@@ -127,12 +125,10 @@ export async function POST(req: NextRequest) {
         // Customer paid subscription
         const invoicePaidObj = event.data.object;
         //Verify the subscription customer id for database update
-        const subscription = await stripe.subscriptions.retrieve(
-          invoicePaidObj.id
-        );
+        const subscription = await stripe.subscriptions.retrieve(invoicePaidObj.id);
 
-        if(subscription.customer) {
-          console.error("Could not find customer")
+        if (subscription.customer) {
+          console.error('Could not find customer');
           break;
         }
 
@@ -142,9 +138,9 @@ export async function POST(req: NextRequest) {
             stripeCustomerId: subscription.customer
           },
           data: {
-            hasAccess: false,
+            hasAccess: false
           }
-        }) 
+        });
 
         break;
       }
@@ -158,18 +154,14 @@ export async function POST(req: NextRequest) {
         //      - We will receive a "customer.subscription.deleted" when all retries were made and the subscription has expired
         break;
       }
-      
+
       // ... handle other event types
       default:
     }
 
-    return NextResponse.json({status: "Success", event: event.type});
-
+    return NextResponse.json({ status: 'Success', event: event.type });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ status: 'Failed', e });
   }
-  catch(e) {
-    console.error(e)
-    return NextResponse.json({status: "Failed", e})
-  }
-
-
 }

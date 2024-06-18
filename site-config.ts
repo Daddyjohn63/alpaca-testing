@@ -16,6 +16,7 @@ export const siteConfig: SiteConfig = {
   routes: {
     //Every route is prive by default, add a route here to make public.
     publicRoutes: [
+      '/api/webhook',
       '/api/webhook/stripe',
       '/api/stripe/create-checkout',
       '/order-complete',
@@ -43,13 +44,16 @@ export const siteConfig: SiteConfig = {
   stripe: {
     plans: [
       {
-        priceId: process.env.NODE_ENV === 'production' ? 'price_1234' : 'price_5678',
+        priceId:
+          process.env.NODE_ENV === 'production'
+            ? 'price_1234'
+            : 'price_1PT1XbACnAdu4HEX6dU9wXNK',
         mode: 'payment', //subscription | payment
         name: 'Basic Package',
         successRedirect: `${process.env.NEXT_PUBLIC_PRIMARY_DOMAIN}/order-complete`,
         isFeatured: false,
         description: 'Perfect for small teams',
-        price: 49,
+        price: 2,
         priceAnchor: 99,
         features: [
           {
@@ -100,7 +104,7 @@ export const siteConfig: SiteConfig = {
         successRedirect: `${process.env.NEXT_PUBLIC_PRIMARY_DOMAIN}/order-complete`,
         isFeatured: true,
         description: 'You need more power',
-        price: 99,
+        price: 3,
         priceAnchor: 299,
 
         features: [
