@@ -8,18 +8,18 @@ import { Session } from 'next-auth/types';
 
 export async function DashboardSidebar() {
   const hasAccess = await currentAccess();
-  //console.log('AccessSidebar:', hasAccess);
+  console.log('AccessSidebar:', hasAccess);
 
   const session: Session | null = await auth();
 
   if (!session?.user) {
-    //  console.log('Session:', session);
-    //  console.log('Session user:', 'No user session found');
+    console.log('Session:', session);
+    console.log('Session user:', 'No user session found');
     return null;
   }
 
-  // console.log('SessionSidebar:', session);
-  // console.log('SessionSidebar user:', session.user);
+  console.log('SessionSidebar:', session);
+  console.log('SessionSidebar user:', session.user);
 
   return (
     <aside className="hidden border-r bg-muted/40 md:flex py-3 px-5 md:flex-col md:gap-10 w-80">
