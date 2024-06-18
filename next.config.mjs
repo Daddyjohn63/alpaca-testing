@@ -5,30 +5,30 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'f005.backblazeb2.com',
+        hostname: 'f003.backblazeb2.com',
         port: '',
-        pathname: '/**',
+        pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
         port: '',
-        pathname: '/**',
+        pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
         port: '',
-        pathname: '/**',
+        pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: 'place-hold.it',
         port: '',
-        pathname: '/**',
-      },
-    ],
-  },
+        pathname: '/**'
+      }
+    ]
+  }
 };
 
 export default nextConfig;
